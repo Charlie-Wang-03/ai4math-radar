@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import {
   parseRelationGoldJsonl,
   relationMetrics,
@@ -107,4 +108,14 @@ test("story-level threshold metrics match the production tie semantics", () => {
   assert.deepEqual(storyTieMetrics(predictions, 0.8), {
     threshold: 0.8, tp: 1, fp: 1, fn: 1, tn: 1, precision: 0.5, recall: 0.5, f1: 0.5, accuracy: 0.5,
   });
+});
+
+
+test("committed AI4Math relation examples satisfy the gold schema", () => {
+  const text = readFileSync(new URL("../industry/relation-gold.example.jsonl", import.meta.url), "utf8");
+  const rows = parseRelationGoldJsonl(text);
+  assert.equal(rows.length, 8);
+  assert.deepEqual(new Set(rows.map((row) => row.gold.relation)), new Set(["SAME_OCCURRENCE", "SAME_STORY", "UNRELATED", "ROUNDUP"]));
+  assert.ok(rows.some((row) => row.samplingContext?.benchmarkSplit === "development"));
+  assert.ok(rows.some((row) => row.samplingContext?.benchmarkSplit === "holdout"));
 });
