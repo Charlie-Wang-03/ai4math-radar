@@ -21,9 +21,9 @@ const provider = await stub((_hit, req) => {
   seen.push({ model: body.model, system });
   const content =
     system.includes("宽召回") ? { label: "PASS", reason: "测试" }
-    : system.includes("事件注意力评分器") ? { attentionScore: 80 }
-    : system.includes("内容理解编辑") ? { itemType: "product_launch", authorRole: "principal", tags: ["产品更新"], editorialJudgment: "理由", titleZh: "一个模型的标题", summaryZh: "一个模型写的摘要。第二句。" }
-    : system.includes("资料结构化助手") ? { category: "ai-products", tags: ["产品更新"], subjects: [], fact: null }
+    : system.includes("研究注意力评分器") ? { attentionScore: 80 }
+    : system.includes("内容理解编辑") ? { itemType: "product_launch", authorRole: "principal", tags: ["工具/开源", "自动定理证明"], editorialJudgment: "理由", titleZh: "一个证明工具的标题", summaryZh: "一个证明工具的摘要。第二句。" }
+    : system.includes("资料结构化助手") ? { category: "theorem-proving", tags: ["工具/开源", "自动定理证明"], subjects: [], fact: null }
     : user.includes("title_zh") ? "title_zh: 标题\nsummary_zh: 摘要。"
     : null;
   if (content === null) throw new Error("unexpected request");
