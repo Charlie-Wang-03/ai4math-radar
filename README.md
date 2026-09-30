@@ -12,7 +12,7 @@ The first development milestone is deliberately narrow:
 
 - establish an independent public project identity and collaboration surface;
 - design an AI4Math-specific taxonomy, source policy and selection rubric;
-- replace the template sources with AI4Math sources;
+- maintain a small, high-precision AI4Math source pack and expand it only with evidence;
 - calibrate selection and event-relation judgments with user-supplied gold data;
 - preserve AIHOT's existing production infrastructure unless a concrete AI4Math requirement proves a change is necessary.
 
@@ -56,7 +56,7 @@ The stable architectural rules are documented in [docs/architecture.md](docs/arc
 | Independent project identity | In progress |
 | Core AIHOT infrastructure | Inherited |
 | AI4Math taxonomy | Planned |
-| AI4Math sources | Planned |
+| AI4Math sources | Initial V1 source pack complete |
 | AI4Math prompts / scoring rubric | Planned |
 | Selection calibration set | Planned |
 | Event-relation evaluation | Infrastructure available; AI4Math data planned |
