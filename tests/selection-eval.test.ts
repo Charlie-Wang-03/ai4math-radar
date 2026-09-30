@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { parseSelectionGoldJsonl, sampleSelectionGold } from "../scripts/eval-selection-core.ts";
 
 const row = (caseId: string, decision: "select" | "reject" | "either", split = "development", stratum = "boundary") => ({
@@ -60,4 +61,14 @@ test("selection gold sampling is deterministic and split-aware", () => {
   assert.equal(one.length, 5);
   assert.equal(holdout.length, 4);
   assert.ok(holdout.every((x) => x.samplingContext?.benchmarkSplit === "holdout"));
+});
+
+
+test("committed AI4Math selection examples satisfy the gold schema", () => {
+  const text = readFileSync(new URL("../industry/gold.example.jsonl", import.meta.url), "utf8");
+  const rows = parseSelectionGoldJsonl(text);
+  assert.equal(rows.length, 6);
+  assert.ok(rows.some((row) => row.samplingContext?.benchmarkSplit === "development"));
+  assert.ok(rows.some((row) => row.samplingContext?.benchmarkSplit === "holdout"));
+  assert.ok(rows.some((row) => row.gold.decision === "either"));
 });
