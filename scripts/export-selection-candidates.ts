@@ -8,7 +8,7 @@ import path from "node:path";
 import { parseArgs } from "node:util";
 import { REPO_ROOT } from "@aihot/backend/config";
 import { closeDb, sql } from "@aihot/backend/db";
-import { balancedCandidateSample, splitFor } from "./export-selection-candidates-core.ts";
+import { balancedCandidateSample, candidateToGoldRow, splitFor } from "./export-selection-candidates-core.ts";
 
 const { values } = parseArgs({
   options: {
@@ -80,30 +80,19 @@ try {
   );
   if (!sampled.length) throw new Error("no eligible real articles found; collect content before exporting calibration candidates");
 
-  const lines = sampled.map((row) => JSON.stringify({
-    caseId: `real-${row.article_id}`,
-    material: {
-      title: row.title,
-      originalTitle: null,
-      publishedAt: row.published_at?.toISOString() ?? null,
-      sourceName: row.source_name,
-      bodyZh: null,
-      bodyOriginal: row.body_text?.trim() || row.excerpt?.trim() || null,
-    },
-    sourceFacts: {
-      sourceKind: row.source_kind,
-      sourceTier: row.tier,
-      firstParty: row.first_party,
-      language: row.language,
-    },
-    samplingContext: {
-      benchmarkSplit: splitFor(row.article_id, seed, holdout),
-      samplingStratum: `source:${row.source_id}`,
-    },
-    gold: {
-      decision: "either",
-    },
-  }));
+  const lines = sampled.map((row) => JSON.stringify(candidateToGoldRow({
+    articleId: row.article_id,
+    sourceId: row.source_id,
+    title: row.title,
+    publishedAt: row.published_at,
+    bodyText: row.body_text,
+    excerpt: row.excerpt,
+    language: row.language,
+    sourceName: row.source_name,
+    sourceKind: row.source_kind,
+    tier: row.tier,
+    firstParty: row.first_party,
+  }, seed, holdout)));
 
   const out = path.resolve(REPO_ROOT, values.out!);
   mkdirSync(path.dirname(out), { recursive: true });
