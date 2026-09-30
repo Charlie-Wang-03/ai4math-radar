@@ -1,5 +1,8 @@
 # 部署
 
+AI4Math Radar 保留多种运行方式。先阅读 [Deployment profiles](deployment-profiles.md)：`static-chatgpt`、`github-automation` 与 `native-aihot` 共享同一 AI4Math domain/evaluation 层，并通过 Public API v1 portable contract 保持数据可迁移。
+
+
 ## Railway
 
 - 先积累真实 corpus：见 [collection-only 校准冷启动](railway-calibration-bootstrap.md)。
