@@ -9,6 +9,7 @@ on:
       - "industry/pages/**"
       - "scripts/build-static-chatgpt.ts"
       - "scripts/portable-v1-core.ts"
+      - "static/**"
       - "deployment/active.json"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -47,6 +48,10 @@ jobs:
           test -f static-dist/robots.txt
           test -f static-dist/sitemap.xml
           grep -q "AI4Math Radar" static-dist/index.html
+          grep -q 'class="sidebar"' static-dist/index.html
+          grep -q 'class="timeline"' static-dist/index.html || grep -q "这个筛选下还没有精选内容" static-dist/index.html
+          test -f static-dist/assets/aihot.css
+          test -f static-dist/assets/aihot.js
           grep -q '"count": 0' static-dist/data/selected.json
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
