@@ -53,14 +53,14 @@ The stable architectural rules are documented in [docs/architecture.md](docs/arc
 
 | Area | Status |
 |---|---|
-| Independent project identity | In progress |
+| Independent project identity | Complete |
 | Core AIHOT infrastructure | Inherited |
-| AI4Math taxonomy | Planned |
+| AI4Math taxonomy | Initial V1 complete |
 | AI4Math sources | Initial V1 source pack complete |
-| AI4Math prompts / scoring rubric | Planned |
+| AI4Math prompts / scoring rubric | Initial V1 complete; real calibration pending |
 | Selection calibration set | Export tooling ready; real labels pending |
-| Event-relation evaluation | Infrastructure available; AI4Math data planned |
-| Production deployment | Not yet started |
+| Event-relation evaluation | Harness + AI4Math synthetic examples complete; real gold pending |
+| Production deployment | Deployment-ready docs; runtime not yet provisioned |
 
 ## Contributing
 
@@ -88,7 +88,7 @@ Requirements:
 - PostgreSQL 17
 - Docker / Docker Compose for the containerized path
 
-The inherited development and deployment documentation remains under [docs/](docs/). Until the AI4Math industry package is complete, running the repository will still expose some template-era domain data.
+Development and deployment documentation lives under [docs/](docs/). The current runtime still intentionally retains internal `@aihot/*`, Docker and database technical names to minimize unnecessary divergence from the upstream framework; these are implementation details, not product branding.
 
 ## License and provenance
 

@@ -46,6 +46,17 @@ node --env-file=.env scripts/export-selection-candidates.ts \
 
 如果数据库还没有足够真实文章，先完成实际采集；不要用 synthetic examples 或模板数据替代真实 baseline。
 
+#### 低成本 collection-only 冷启动
+
+如果目标只是先积累真实 corpus、尚未准备开始付费模型调用，可以临时设置：
+
+```env
+COLLECT_ENABLED=true
+MODEL_CALLS_ENABLED=false
+```
+
+然后正常启动 worker。RSS/Atom 信源仍会抓取并落库，正文抽取也可以继续进入处理队列；模型判断被安全阀关闭。积累到足够文章后运行上面的 exporter，再恢复正式模型配置。这个模式只用于构建 calibration corpus，不代表生产站已经完成内容处理。
+
 ### 2. 准备 gold set
 
 从 AI4Math Radar 的实际信源里挑 120–200 条资料，一条一条标“该选 / 不该选”，存成 `.data/gold.jsonl`（`.data/` 不进 Git）。每行一条：
