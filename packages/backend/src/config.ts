@@ -55,6 +55,8 @@ export const config = {
   environmentName: str("AIHOT_ENVIRONMENT", isProduction ? "production" : "development"),
   // Model calls are live unless explicitly disabled (tests, replays).
   modelCallsEnabled: bool("MODEL_CALLS_ENABLED", true),
+  // Calibration cold-start mode: collect and extract article bodies, but do not enqueue editorial analysis.
+  collectionOnly: bool("COLLECTION_ONLY", false),
   devAdmin: env.DEV_AUTH_ROLE === "admin" ? { displayName: env.DEV_AUTH_DISPLAY_NAME || "Dev Admin" } : null,
   /** The admin password (at least 12 characters). Feishu sign-in below is optional. */
   adminPassword: env.ADMIN_PASSWORD || null,

@@ -1,5 +1,9 @@
 # 部署
 
+## 校准冷启动（Railway）
+
+如果目标是先积累真实 AI4Math corpus、暂不启用模型调用，优先使用 [Railway collection-only 校准冷启动](railway-calibration-bootstrap.md)。该模式只部署 PostgreSQL + worker，抓取与正文抽取照常，editorial analysis 暂停。
+
 ## 用 Docker（推荐）
 
 需要一台装了 Docker（带 Compose）的机器。云服务器建议至少 2 核、4 GB 内存，构建镜像时要用到。

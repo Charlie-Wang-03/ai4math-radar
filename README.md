@@ -60,7 +60,7 @@ The stable architectural rules are documented in [docs/architecture.md](docs/arc
 | AI4Math prompts / scoring rubric | Initial V1 complete; real calibration pending |
 | Selection calibration set | Export tooling ready; real labels pending |
 | Event-relation evaluation | Harness + AI4Math synthetic examples complete; real gold pending |
-| Production deployment | Deployment-ready docs; runtime not yet provisioned |
+| Production deployment | Collection-only Railway bootstrap ready; runtime not yet provisioned |
 
 ## Contributing
 
