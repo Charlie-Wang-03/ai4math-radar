@@ -17,6 +17,5 @@ This repository also contains third-party material under its own terms:
 - assets/leaderboard-sources/: the published marks of each evaluation operator, used only to identify
   them (assets/leaderboard-sources/NOTICE.md).
 
-The template sources currently present in industry/sources.json are public feeds of their publishers.
-Their content belongs to them; by default the site shows only a summary and a link to the original.
-They are temporary template data and will be replaced during AI4Math domain adaptation.
+The sources configured in industry/sources.json are public feeds of their publishers or public research platforms.
+Their content belongs to the respective publishers and authors; by default the site shows only a summary and a link to the original.
