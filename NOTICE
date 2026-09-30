@@ -1,8 +1,13 @@
+AI4Math Radar
+
+This project is an independent project derived from the AIHOT open-source framework:
+https://github.com/KKKKhazix/AIHOT
+
 AIHOT
 Copyright (c) 2026 数字生命卡兹克. The code is licensed under the MIT License (LICENSE).
 
-The name "AIHOT" and the AIHOT logo are not licensed under the MIT License. Please use your own name
-and logo for your site.
+The name "AIHOT" and the AIHOT logo are not licensed under the MIT License. AI4Math Radar uses its
+own project name and does not represent an official AIHOT project.
 
 This repository also contains third-party material under its own terms:
 
@@ -12,5 +17,6 @@ This repository also contains third-party material under its own terms:
 - assets/leaderboard-sources/: the published marks of each evaluation operator, used only to identify
   them (assets/leaderboard-sources/NOTICE.md).
 
-The demo sources in industry/sources.json are public feeds of their publishers. Their content belongs
-to them; by default the site shows only a summary and a link to the original.
+The template sources currently present in industry/sources.json are public feeds of their publishers.
+Their content belongs to them; by default the site shows only a summary and a link to the original.
+They are temporary template data and will be replaced during AI4Math domain adaptation.

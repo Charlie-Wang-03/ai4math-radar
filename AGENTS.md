@@ -1,41 +1,91 @@
 # 给 Agent 的说明
 
-这是一个行业热点网站的框架：采集信源、用模型筛选和写作、归组事件、出日报，并通过网站、RSS、公开 API 和 MCP 对外提供。默认配置是一个 AI 行业的示例站。先读 README，再按任务读 `docs/` 里对应的文档。
+这是 **AI4Math Radar**：一个面向 AI for Mathematics / Mathematical AI 的开源研究情报项目，基于 AIHOT 开源框架派生。当前处于早期领域适配阶段。
 
-## 最常见的任务：改成另一个行业
+## 当前优先级
 
-按 `docs/customize.md` 的顺序做。行业相关的一切都在 `industry/`：站名文案（`site.ts`）、分类标签（`taxonomy.ts`）、主题（`topics.json`）、示范信源（`sources.json`）、提示词（`prompts/`）、门槛（`selection.ts`）、模块开关（`features.ts`）、品牌（`brand/`）、条款页（`pages/`）。通常不需要改 `apps/` 和 `packages/`。
+当前工作重点是把通用 AIHOT pipeline 适配为可审计的 AI4Math domain package，而不是扩张功能。
 
-这些事要问使用者本人，不要替他决定：站名；要盯哪些信源；什么消息重要、什么是噪声；分类怎么分；条款和隐私说明的内容（`industry/pages/` 是模板，上线前需要他本人确认）。
+优先顺序：
 
-改评分标准时保留原有结构（内容类型、五个维度加权、噪声压制、安全边界），替换的是“什么算重要”“什么算噪声”的例子。门槛要用使用者标注的样本重新校准（`docs/selection.md`），不要凭感觉改数字。
+1. 项目身份、公开协作面和 provenance 保持清晰；
+2. 在 `industry/` 中建立 AI4Math taxonomy、sources、prompts 与 selection policy；
+3. 用明确标注的 gold data 校准 selection 与 event relation；
+4. 只有出现真实产品需求时，才修改通用核心代码。
 
-## 运行与检查
+## 默认不要做
 
-- Node.js 24 直接运行 TypeScript，后端没有构建步骤。npm workspaces：`apps/*`、`packages/*`、`industry`。
-- 本机运行和 Docker 见 `docs/deploy.md`。
-- 改完至少跑：
-  ```bash
-  npm run typecheck
-  DATABASE_URL=postgres://127.0.0.1:5432/<名字>_test npm test   # 空库，名字必须以 _test 或 _ci 结尾，先 node scripts/migrate.ts
-  npm run build -w @aihot/web && node --test apps/web/tests/*.test.ts
-  node scripts/smoke.ts --base http://localhost:3000             # 站点跑起来以后
-  ```
-- `tests/` 里部分测试用的是示例行业的分类、标签和公司，改了 `industry/taxonomy.ts` 后把这些例子换成新行业的对应项。
+除非 Issue 已经证明必要性，不要主动加入或重构：
 
-## 要守住的规则
+- Agent orchestration；
+- RAG / PDF ingestion；
+- citation graph / knowledge graph；
+- theorem prover / Lean integration；
+- 新的外部数据服务；
+- 新 API；
+- database schema；
+- grouping algorithm；
+- UI 大改；
+- `@aihot/*` workspace namespace；
+- Docker / database 内部的 AIHOT 技术命名。
 
-- 前端（`apps/web`）只通过 HTTP 读 `apps/api`，数据库、模型调用和密钥只在后端。
-- 所有公开出口都从 `packages/backend/src/publication/` 这一个读取层读，新增公开出口也一样。
-- 读者打开页面不触发模型调用；模型只在 worker 的任务里调用。
-- 付费请求都经过回执（`providers/receipts.ts`）和预算熔断，不要绕开。
-- 开发和测试时保持安全阀关闭：`COLLECT_ENABLED`、`MODEL_CALLS_ENABLED`、`FEISHU_*_ENABLED`、`INDEXNOW_SUBMIT_ENABLED`。测试不访问任何外部服务。
-- 信源默认只展示摘要和原文链接（`site_fulltext` 关）；只有来源明确允许时才打开全文。
-- 公开内容匿名，管理员和访客看到的一样；后台只允许管理员。
-- 数据库迁移只做向后兼容的增量，新迁移按编号加在 `database/migrations/` 末尾。
-- 不要提交 `.env`、密钥和 `.data/`。
-- 不要使用 AIHOT 的名字和 Logo。
+这些内部命名属于继承实现，不是 AI4Math Radar 的公开品牌。
 
-## 写代码
+## 行业适配面
 
-匹配周围代码的写法、命名和注释密度。选能清楚解决问题的简单方案，只定义正在使用的抽象。验证改动涉及的重要行为，不为简单的样式改动写测试。
+AI4Math 相关改动优先限制在：
+
+- `industry/site.ts`
+- `industry/taxonomy.ts`
+- `industry/topics.json`
+- `industry/sources.json`
+- `industry/selection.ts`
+- `industry/features.ts`
+- `industry/prompts/`
+- `industry/brand/`
+- `industry/pages/`
+
+修改 taxonomy 后，若测试中仍使用 AI 示例分类、标签或实体，只替换对应 fixture；不要为了让测试通过而删掉行为测试。
+
+## 架构不变量
+
+继续遵守上游框架的核心约束：
+
+- 前端只通过 HTTP 读取 API，不直接访问数据库或密钥；
+- 页面读取不触发模型调用，模型调用只发生在 worker；
+- 所有公开出口统一从 `packages/backend/src/publication/` 读取；
+- 付费请求必须经过 receipt 与 budget breaker；
+- 开发和测试时保持外部采集、模型调用和推送安全阀关闭；
+- 测试不得依赖真实外部付费服务；
+- 数据库迁移只允许向后兼容的增量；
+- 不提交 `.env`、密钥、Cookie、生产数据或 `.data/`。
+
+## 领域原则
+
+AI4Math Radar 的目标是 AI 与数学的交叉研究情报，不是普通 AI 新闻站，也不是通用数学新闻站。
+
+领域标准应通过具体样本和 evaluation 资产表达。不要凭直觉直接修改 selection threshold；先建立或更新 gold set，再运行相应评测。
+
+## 验证
+
+代码改动至少执行与改动范围对应的检查：
+
+```bash
+npm run typecheck
+DATABASE_URL=postgres://127.0.0.1:5432/ai4math_ci node scripts/migrate.ts
+DATABASE_URL=postgres://127.0.0.1:5432/ai4math_ci npm test
+npm run build -w @aihot/web
+node --test apps/web/tests/*.test.ts
+```
+
+运行中的站点再执行：
+
+```bash
+node scripts/smoke.ts --base http://localhost:3000
+```
+
+若只修改文档或静态配置，按实际影响选择验证，不为了形式增加无关测试。
+
+## 开源协作
+
+一次改动解决一个清楚的问题。大幅修改架构、产品行为、domain ontology 或引入新的长期依赖前先开 Issue。所有提交应能解释、验证和维护。
