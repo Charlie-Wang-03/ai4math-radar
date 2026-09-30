@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { balancedCandidateSample, deterministicKey, splitFor } from "../scripts/export-selection-candidates-core.ts";
+import { balancedCandidateSample, candidateToGoldRow, deterministicKey, splitFor } from "../scripts/export-selection-candidates-core.ts";
+import { parseSelectionGoldJsonl } from "../scripts/eval-selection-core.ts";
 
 const rows = [
   { articleId: "a1", sourceId: "a" },
@@ -41,4 +42,24 @@ test("hash keys and split percentages validate inputs", () => {
   assert.throws(() => balancedCandidateSample(rows, 0, 7), /positive integer/);
   assert.throws(() => splitFor("x", 7, -1), /0 to 100/);
   assert.throws(() => splitFor("x", 7, 101), /0 to 100/);
+});
+
+test("exported candidate rows are valid selection-gold rows and remain explicitly unlabeled", () => {
+  const gold = candidateToGoldRow({
+    articleId: "real-1",
+    sourceId: "rss-openai-news",
+    title: "Example theorem-proving result",
+    publishedAt: new Date("2026-09-30T00:00:00Z"),
+    bodyText: "A real collected article body.",
+    excerpt: null,
+    language: "en",
+    sourceName: "OpenAI News",
+    sourceKind: "rss",
+    tier: "T1",
+    firstParty: true,
+  }, 7, 20);
+  const [parsed] = parseSelectionGoldJsonl(JSON.stringify(gold));
+  assert.equal(parsed!.caseId, "real-real-1");
+  assert.equal(parsed!.gold.decision, "either");
+  assert.match(parsed!.samplingContext!.samplingStratum!, /^source:/);
 });
