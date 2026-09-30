@@ -47,3 +47,18 @@ test("deployment profiles remain explicit and ordered from lightest to native", 
   assert.equal(data.profiles[2]!.canonicalStore, "postgres");
   assert.equal(data.profiles[2]!.persistentServer, true);
 });
+
+
+test("static-chatgpt is the explicit active deployment profile", () => {
+  const active = JSON.parse(readFileSync(new URL("../deployment/active.json", import.meta.url), "utf8")) as {
+    schemaVersion: number;
+    activeProfile: string;
+    canonicalContent: string;
+  };
+  assert.equal(active.schemaVersion, 1);
+  assert.equal(active.activeProfile, "static-chatgpt");
+  assert.equal(active.canonicalContent, "portable/content/selected.jsonl");
+
+  const canonical = readFileSync(new URL("../portable/content/selected.jsonl", import.meta.url), "utf8");
+  assert.deepEqual(parsePortableJsonl(canonical), []);
+});

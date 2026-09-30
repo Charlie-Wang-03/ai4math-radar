@@ -12,7 +12,7 @@ One item per line:
 portable/content/selected.jsonl
 ```
 
-The repository does not currently commit real production snapshots. Real exports belong in `.data/portable/` unless a future GitHub-native profile deliberately promotes Git to the canonical content store.
+`static-chatgpt` is currently active, so `portable/content/selected.jsonl` is the canonical selected-content store. It may legitimately be empty before the first evidence-reviewed item is published. `.data/portable/` remains the scratch/export location for non-canonical snapshots.
 
 ## Native → portable
 

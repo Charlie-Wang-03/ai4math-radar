@@ -1,6 +1,6 @@
 # AI4Math Radar
 
-> **Status: early development.** The repository is public from the beginning, but the AI4Math domain package is still being designed and calibrated. Do not treat the current template sources, taxonomy, prompts, or thresholds as production-ready AI4Math policy.
+> **Current profile: `static-chatgpt`.** GitHub is the canonical content store, ChatGPT performs evidence review and editorial maintenance, and GitHub Pages publishes the static site. The full native AIHOT runtime remains preserved but inactive.
 
 AI4Math Radar is an open-source research-intelligence project for **AI for Mathematics / Mathematical AI**. It aims to continuously collect public research signals, filter and structure them with language models, group multiple reports about the same event, and expose the resulting research feed through a website, RSS, API and MCP.
 
@@ -60,7 +60,7 @@ The stable architectural rules are documented in [docs/architecture.md](docs/arc
 | AI4Math prompts / scoring rubric | Initial V1 complete; real calibration pending |
 | Selection calibration set | Export tooling ready; real labels pending |
 | Event-relation evaluation | Harness + AI4Math synthetic examples complete; real gold pending |
-| Production deployment | Railway production runbook ready; runtime not yet provisioned |
+| Active deployment | `static-chatgpt` — GitHub canonical data + GitHub Pages |
 
 ## Contributing
 

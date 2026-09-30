@@ -48,6 +48,14 @@ jobs:
         run: npm run typecheck
       - name: Build web
         run: npm run build -w @aihot/web
+      - name: Build static-chatgpt site
+        env:
+          STATIC_BASE_URL: https://charlie-wang-03.github.io/ai4math-radar/
+        run: |
+          npm run build:static
+          test -f static-dist/index.html
+          test -f static-dist/data/selected.json
+          grep -q "AI4Math Radar" static-dist/index.html
       - name: Web tests
         run: node --test apps/web/tests/*.test.ts
 
