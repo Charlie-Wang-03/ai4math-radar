@@ -7,6 +7,7 @@ import {
   ENTITY_TAGS,
   ITEM_TYPES,
   TOPIC_TAGS,
+  ENTITIES,
 } from "@aihot/industry/taxonomy";
 
 test("AI4Math domain model keeps the intended stable surface", () => {
@@ -42,5 +43,28 @@ test("every AI4Math topic reference resolves and every tag belongs to the vocabu
       if (tag.startsWith("entity:")) continue;
       assert.ok(allowed.has(tag), `unknown topic tag: ${topic.slug} -> ${tag}`);
     }
+  }
+});
+
+
+test("AI4Math V1 source pack stays small, unique, and compatible with the domain vocabulary", () => {
+  const data = JSON.parse(readFileSync(new URL("../industry/sources.json", import.meta.url), "utf8")) as {
+    sources: Array<{
+      id: string;
+      kind: string;
+      tier: string;
+      owner_entity_id: string | null;
+      participation_mode: string;
+      config: { feedUrl?: string };
+    }>;
+  };
+  assert.equal(data.sources.length, 9, "V1 source pack is intentionally small");
+  assert.equal(new Set(data.sources.map((s) => s.id)).size, data.sources.length, "source ids are unique");
+  for (const source of data.sources) {
+    assert.equal(source.kind, "rss", `${source.id} should remain a dependency-free feed in V1`);
+    assert.equal(source.participation_mode, "editorial");
+    assert.ok(["T1", "T1_5", "T2"].includes(source.tier), `unexpected tier: ${source.id}`);
+    assert.ok(source.config.feedUrl?.startsWith("https://"), `feed URL must be HTTPS: ${source.id}`);
+    if (source.owner_entity_id) assert.ok(source.owner_entity_id in ENTITIES, `unknown owner entity: ${source.id}`);
   }
 });
