@@ -56,6 +56,9 @@ jobs:
           test -f static-dist/index.html
           test -f static-dist/data/selected.json
           grep -q "AI4Math Radar" static-dist/index.html
+          grep -q 'class="sidebar"' static-dist/index.html
+          test -f static-dist/assets/aihot.css
+          test -f static-dist/assets/aihot.js
       - name: Web tests
         run: node --test apps/web/tests/*.test.ts
 
