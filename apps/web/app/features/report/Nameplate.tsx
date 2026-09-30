@@ -1,24 +1,22 @@
-// The report nameplates (industry/brand/nameplates/, made by scripts/nameplates.ts from the pack's
-// subject word). Each logotype is cached on its own; the two paths take the theme's ink and accent.
-import daily from "@aihot/industry/brand/nameplates/daily.svg?url&no-inline";
-import weekly from "@aihot/industry/brand/nameplates/weekly.svg?url&no-inline";
-import monthly from "@aihot/industry/brand/nameplates/monthly.svg?url&no-inline";
-import archive from "@aihot/industry/brand/nameplates/archive.svg?url&no-inline";
-import viewBoxes from "@aihot/industry/brand/nameplates/index.json";
+import { SITE } from "@aihot/industry/site";
 
-const NAMEPLATES = {
-  daily: { url: daily, viewBox: viewBoxes.daily },
-  weekly: { url: weekly, viewBox: viewBoxes.weekly },
-  monthly: { url: monthly, viewBox: viewBoxes.monthly },
-  archive: { url: archive, viewBox: viewBoxes.archive },
+const LABELS = {
+  daily: "日报",
+  weekly: "周报",
+  monthly: "月报",
+  archive: "合订本",
 } as const;
 
-export function Nameplate({ which, className = "" }: { which: keyof typeof NAMEPLATES; className?: string }) {
-  const n = NAMEPLATES[which];
+/**
+ * Report nameplates are rendered from SITE.subject at runtime instead of pre-generated SVG paths.
+ * This keeps derived sites from shipping a stale template-era subject after domain rebranding.
+ */
+export function Nameplate({ which, className = "" }: { which: keyof typeof LABELS; className?: string }) {
+  const archive = which === "archive";
   return (
-    <svg viewBox={n.viewBox} className={className} aria-hidden="true" focusable="false">
-      <use href={`${n.url}#accent`} className="fill-accent" />
-      <use href={`${n.url}#ink`} className="fill-ink" />
-    </svg>
+    <span className={`inline-flex items-baseline whitespace-nowrap font-black leading-none tracking-[-0.04em] ${className}`} aria-hidden="true">
+      <span className="text-accent">{archive ? "日报" : SITE.subject}</span>
+      <span className="text-ink">{LABELS[which]}</span>
+    </span>
   );
 }
