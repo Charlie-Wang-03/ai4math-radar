@@ -41,7 +41,7 @@ function Masthead({ report, index }: { report: ReportDetail; index: ReportNaviga
             <span className="sr-only">
               AI {KIND_LABEL[report.kind]} · {dateLine(report.kind, report.key)}
             </span>
-            <Nameplate which={report.kind} className="block h-[54px] w-auto @[520px]:h-[74px] @[880px]:h-[98px] @[1040px]:h-[112px]" />
+            <Nameplate which={report.kind} className="text-[54px] @[520px]:text-[74px] @[880px]:text-[98px] @[1040px]:text-[112px]" />
           </h1>
           <p className="mt-3 text-[11.5px] tracking-[0.36em] text-ink-4 @[880px]:mt-4 @[880px]:text-[12.5px]">{SITE.name.toUpperCase()}</p>
         </div>

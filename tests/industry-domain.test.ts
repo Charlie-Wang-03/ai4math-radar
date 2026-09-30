@@ -68,3 +68,13 @@ test("AI4Math V1 source pack stays small, unique, and compatible with the domain
     if (source.owner_entity_id) assert.ok(source.owner_entity_id in ENTITIES, `unknown owner entity: ${source.id}`);
   }
 });
+
+
+test("public legal pages contain no template placeholders", () => {
+  for (const file of ["terms.md", "privacy.md"]) {
+    const text = readFileSync(new URL(`../industry/pages/${file}`, import.meta.url), "utf8");
+    assert.doesNotMatch(text, /请填写|0\.1（模板）|开源框架自带的模板/);
+    assert.match(text, /AI4Math Radar/);
+    assert.match(text, /2026-09-30/);
+  }
+});

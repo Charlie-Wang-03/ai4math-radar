@@ -1,5 +1,10 @@
 # 部署
 
+## Railway
+
+- 先积累真实 corpus：见 [collection-only 校准冷启动](railway-calibration-bootstrap.md)。
+- 部署完整 web / api / worker / Postgres 拓扑：见 [Railway 正式平台部署](railway-production.md)。
+
 ## 校准冷启动（Railway）
 
 如果目标是先积累真实 AI4Math corpus、暂不启用模型调用，优先使用 [Railway collection-only 校准冷启动](railway-calibration-bootstrap.md)。该模式只部署 PostgreSQL + worker，抓取与正文抽取照常，editorial analysis 暂停。
