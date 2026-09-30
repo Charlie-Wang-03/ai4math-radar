@@ -62,3 +62,16 @@ test("static-chatgpt is the explicit active deployment profile", () => {
   const canonical = readFileSync(new URL("../portable/content/selected.jsonl", import.meta.url), "utf8");
   assert.deepEqual(parsePortableJsonl(canonical), []);
 });
+
+
+test("static AIHOT parity assets and generator are committed", () => {
+  const css = readFileSync(new URL("../static/aihot.css", import.meta.url), "utf8");
+  const js = readFileSync(new URL("../static/aihot.js", import.meta.url), "utf8");
+  const generator = readFileSync(new URL("../scripts/build-static-chatgpt.ts", import.meta.url), "utf8");
+  assert.match(css, /\.sidebar/);
+  assert.match(css, /\.timeline/);
+  assert.match(css, /\.feed-card/);
+  assert.match(js, /ai4math-static-starred/);
+  assert.match(generator, /AI4Math 日报/);
+  assert.match(generator, /当前 static-chatgpt profile 暂未提供此动态能力/);
+});
