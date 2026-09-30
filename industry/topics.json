@@ -2,17 +2,17 @@
   "exportedAt": "2026-09-30",
   "groups": [
     {
-      "key": "actor",
+      "key": "company",
       "name": "机构与项目",
       "blurb": "按主要研究机构、proof assistant 与开放平台追踪 AI4Math 进展"
     },
     {
-      "key": "area",
+      "key": "field",
       "name": "研究方向",
       "blurb": "按数学推理、定理证明、形式化、数学发现与评测浏览"
     },
     {
-      "key": "format",
+      "key": "genre",
       "name": "内容形态",
       "blurb": "按论文、系统、工具、评测与研究生态浏览"
     }
@@ -21,7 +21,7 @@
     {
       "slug": "openai",
       "name": "OpenAI",
-      "group": "actor",
+      "group": "company",
       "entityId": "openai",
       "tags": [
         "OpenAI",
@@ -37,7 +37,7 @@
     {
       "slug": "deepmind",
       "name": "Google DeepMind",
-      "group": "actor",
+      "group": "company",
       "entityId": "deepmind",
       "tags": [
         "Google DeepMind",
@@ -53,7 +53,7 @@
     {
       "slug": "lean",
       "name": "Lean",
-      "group": "actor",
+      "group": "company",
       "entityId": "lean",
       "tags": [
         "Lean",
@@ -69,7 +69,7 @@
     {
       "slug": "mathlib",
       "name": "Mathlib",
-      "group": "actor",
+      "group": "company",
       "entityId": "mathlib",
       "tags": [
         "Mathlib",
@@ -85,7 +85,7 @@
     {
       "slug": "math-reasoning",
       "name": "数学推理",
-      "group": "area",
+      "group": "field",
       "tags": [
         "数学推理"
       ],
@@ -99,7 +99,7 @@
     {
       "slug": "theorem-proving",
       "name": "自动定理证明",
-      "group": "area",
+      "group": "field",
       "tags": [
         "自动定理证明",
         "证明搜索"
@@ -114,7 +114,7 @@
     {
       "slug": "formal-math",
       "name": "形式化数学",
-      "group": "area",
+      "group": "field",
       "tags": [
         "形式化",
         "自动形式化"
@@ -129,7 +129,7 @@
     {
       "slug": "math-discovery",
       "name": "数学发现",
-      "group": "area",
+      "group": "field",
       "tags": [
         "数学发现",
         "猜想生成",
@@ -145,7 +145,7 @@
     {
       "slug": "evaluation",
       "name": "评测与验证",
-      "group": "area",
+      "group": "field",
       "tags": [
         "验证",
         "评测/数据"
@@ -160,7 +160,7 @@
     {
       "slug": "systems",
       "name": "模型与系统",
-      "group": "format",
+      "group": "genre",
       "tags": [
         "模型/系统"
       ],
@@ -174,7 +174,7 @@
     {
       "slug": "papers",
       "name": "论文与研究",
-      "group": "format",
+      "group": "genre",
       "tags": [
         "论文/研究"
       ],
@@ -188,7 +188,7 @@
     {
       "slug": "tools",
       "name": "工具与开源",
-      "group": "format",
+      "group": "genre",
       "tags": [
         "工具/开源"
       ],
@@ -202,7 +202,7 @@
     {
       "slug": "benchmarks",
       "name": "评测与数据",
-      "group": "format",
+      "group": "genre",
       "tags": [
         "评测/数据"
       ],
@@ -216,7 +216,7 @@
     {
       "slug": "ecosystem",
       "name": "研究生态",
-      "group": "format",
+      "group": "genre",
       "tags": [
         "研究生态"
       ],
