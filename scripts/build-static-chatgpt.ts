@@ -44,7 +44,7 @@ function navLink(route:string,label:string,iconName:string,active=false,disabled
 }
 function sidebar(active:string){
   return `<aside class="sidebar">
-<a class="brand" href="${href("")}"><span class="brand-dot"></span><span>AI4Math Radar</span></a>
+<a class="brand" href="${href("")}"><span class="brand-dot"></span><span>AI4Math&nbsp;Radar</span></a>
 <div class="side-scroll">
 <section class="nav-section"><div class="nav-title">内容</div>
 ${navLink("", "精选","bolt",active==="home")}
