@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "activeProfile": "static-chatgpt",
+  "activatedAt": "2026-09-30",
+  "canonicalContent": "portable/content/selected.jsonl",
+  "note": "Git and ChatGPT are the active editorial/runtime path. Native AIHOT remains preserved but inactive."
+}
