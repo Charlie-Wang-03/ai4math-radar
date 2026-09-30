@@ -29,7 +29,7 @@ export const SELECTION = {
 
 ### 1. 准备样本集
 
-从你自己的信源里挑 100–200 条资料，一条一条标“该选 / 不该选”，存成 `.data/gold.jsonl`（`.data/` 不进 Git）。每行一条：
+从 AI4Math Radar 的实际信源里挑 120–200 条资料，一条一条标“该选 / 不该选”，存成 `.data/gold.jsonl`（`.data/` 不进 Git）。每行一条：
 
 ```json
 {"caseId":"law-001","material":{"title":"原文标题","originalTitle":null,"publishedAt":"2026-10-01T09:00:00+08:00","sourceName":"信源名称","bodyZh":null,"bodyOriginal":"正文……"},"sourceFacts":{"sourceKind":"rss","sourceTier":"T1","firstParty":true,"language":"zh"},"samplingContext":{"benchmarkSplit":"development","samplingStratum":"regulation"},"gold":{"decision":"select"}}
@@ -43,13 +43,13 @@ export const SELECTION = {
 | `samplingContext` | 可选。`benchmarkSplit` 分开发集和留出集，`samplingStratum` 是你自己的分组（比如“新规”“判决”“营销”），看错在哪一类 |
 | `gold.decision` | `select` 该选，`reject` 不该选，`either` 两可（不计入准确率） |
 
-`industry/gold.example.jsonl` 有两条示例。
+`industry/gold.example.jsonl` 提供 AI4Math 领域的 synthetic 示例，只用于说明 schema 和边界类型，不能作为真实模型性能证据。
 
 几条建议：
 
-- 多放**难例**：差一点就该选、差一点就不该选的。一眼就能判断的放太多，准确率会虚高。
-- 分出一部分做**留出集**（`benchmarkSplit: "holdout"`），调提示词只看开发集，最后再用留出集检查一遍，免得把提示词调成只会做这几道题。
-- 标注的人最好就是以后读这个站的人，或者和他们口味一致的人。
+- 多放**难例**：差一点就该选、差一点就不该选的。一眼就能判断的放太多，准确率会虚高。AI4Math 至少覆盖 `verified-result`、`benchmark-noise`、`math-discovery`、`pure-math`、`formal-infrastructure`、`evaluation-failure` 等边界。
+- 建议约 70%–80% 做 `development`、20%–30% 做 `holdout`。分出一部分做**留出集**（`benchmarkSplit: "holdout"`），调提示词只看开发集，最后再用留出集检查一遍，免得把提示词调成只会做这几道题。
+- 标注的人最好就是以后读这个站的人，或者和他们口味一致的人。真实校准集保存在 `.data/`，默认不提交仓库；公开仓库只保留 synthetic schema examples。
 
 ### 2. 跑评测
 
