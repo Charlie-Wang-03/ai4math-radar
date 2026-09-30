@@ -10,6 +10,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { parseArgs } from "node:util";
 import { REPO_ROOT } from "@aihot/backend/config";
+import { parseSelectionGoldJsonl, sampleSelectionGold, type SelectionSelectionGoldRow } from "./eval-selection-core.ts";
 import { closeDb, sql } from "@aihot/backend/db";
 import { ANALYZE_PROMPT_VERSION, normalizeAnalysis, runAnalysis, type AnalyzeInputArticle } from "@aihot/backend/editorial/analyze";
 import { importSelectBenchRun } from "@aihot/backend/admin/selectbench";
@@ -27,29 +28,10 @@ const { values } = parseArgs({
   },
 });
 
-interface GoldRow {
-  caseId: string;
-  material: { title: string; originalTitle: string | null; publishedAt: string | null; sourceName: string; bodyZh: string | null; bodyOriginal: string | null };
-  sourceFacts: { sourceKind: string; sourceTier?: string; firstParty?: boolean; language?: string | null };
-  /** Optional: a split (e.g. development / holdout) and a stratum for reading the mistakes. */
-  samplingContext?: { benchmarkSplit?: string; samplingStratum?: string };
-  gold: { decision: "select" | "reject" | "either" };
-}
+const rows = parseSelectionGoldJsonl(readFileSync(path.resolve(REPO_ROOT, values.gold!), "utf8"));
+const sample = sampleSelectionGold(rows, { split: values.split, n: Number(values.n), seed: Number(values.seed) });
 
-const rows: GoldRow[] = readFileSync(path.resolve(REPO_ROOT, values.gold!), "utf8")
-  .split("\n").filter((l) => l.trim() && !l.trim().startsWith("//")).map((l) => JSON.parse(l));
-
-// Deterministic stratified sample.
-function rng(seed: number) {
-  let s = seed >>> 0;
-  return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32);
-}
-const rand = rng(Number(values.seed));
-const pool = values.split === "all" ? rows : rows.filter((r) => r.samplingContext?.benchmarkSplit === values.split);
-const shuffled = pool.map((r) => ({ r, k: rand() })).sort((a, b) => a.k - b.k).map((x) => x.r);
-const sample = shuffled.slice(0, Number(values.n));
-
-function toInput(r: GoldRow): AnalyzeInputArticle {
+function toInput(r: SelectionGoldRow): AnalyzeInputArticle {
   const m = r.material;
   const isX = r.sourceFacts.sourceKind === "x_search";
   const body = m.bodyOriginal || m.bodyZh || null;

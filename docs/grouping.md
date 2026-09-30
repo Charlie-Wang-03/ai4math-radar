@@ -13,7 +13,7 @@ AIHOT 先用标题和摘要召回最近的候选事实，再让模型判断报�
 
 `scripts/eval-relations.ts` 只评测两篇报道之间的 pairwise relation judgement。它直接复用生产环境的 `PAIR_SYSTEM`、`pairUser()`、`PairSchema` 和 prompt version，因此提示词发生变化时，评测也会随之变化。它不重新跑候选召回，也不把结果写回事件归组。
 
-把自己的标注数据放在 `.data/` 下（该目录不会提交到 Git）。`industry/relation-gold.example.jsonl` 给了四条虚构示例。每行一条：
+把自己的标注数据放在 `.data/` 下（该目录不会提交到 Git）。`industry/relation-gold.example.jsonl` 给出 AI4Math synthetic 示例，覆盖四类关系以及 development / holdout 边界；这些示例用于验证 schema，不代表模型真实性能。每行一条：
 
 ```json
 {"caseId":"release-001","a":{"title":"...","source":"...","firstParty":true,"publishedAt":"2026-09-01T09:00:00+08:00","summary":"..."},"b":{"title":"...","source":"...","firstParty":false,"publishedAt":"2026-09-01T09:20:00+08:00","summary":"..."},"samplingContext":{"benchmarkSplit":"development","samplingStratum":"same-release"},"gold":{"relation":"SAME_OCCURRENCE"}}
@@ -25,7 +25,7 @@ AIHOT 先用标题和摘要召回最近的候选事实，再让模型判断报�
 {"subject":"Acme","action":"发布","object":"Acme-2","occurredAt":"2026-09-01"}
 ```
 
-建议把容易混淆的边界样本放进开发集，再留一部分 `benchmarkSplit: "holdout"` 最后检查。`samplingStratum` 是可选的错误分析标签，不影响模型输入。
+建议把容易混淆的边界样本放进开发集，再留一部分 `benchmarkSplit: "holdout"` 最后检查。AI4Math 应重点覆盖同一 paper/blog/repo 发布、后续 expert verification、同机构不同项目、同主题不同系统、artifact follow-up 和 roundup 等边界。`samplingStratum` 是可选的错误分析标签，不影响模型输入。
 
 ### 运行
 
