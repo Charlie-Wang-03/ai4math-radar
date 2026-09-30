@@ -88,7 +88,7 @@ Requirements:
 - PostgreSQL 17
 - Docker / Docker Compose for the containerized path
 
-Development and deployment documentation lives under [docs/](docs/). For Railway, see the [collection-only calibration bootstrap](docs/railway-calibration-bootstrap.md) and the [formal production runbook](docs/railway-production.md). The current runtime still intentionally retains internal `@aihot/*`, Docker and database technical names to minimize unnecessary divergence from the upstream framework; these are implementation details, not product branding.
+Development and deployment documentation lives under [docs/](docs/). Deployment is deliberately profile-based: see [deployment profiles](docs/deployment-profiles.md). For the full native Railway runtime, see the [collection-only calibration bootstrap](docs/railway-calibration-bootstrap.md) and the [formal production runbook](docs/railway-production.md). The current runtime still intentionally retains internal `@aihot/*`, Docker and database technical names to minimize unnecessary divergence from the upstream framework; these are implementation details, not product branding.
 
 ## License and provenance
 
