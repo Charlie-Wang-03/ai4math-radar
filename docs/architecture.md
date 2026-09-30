@@ -11,6 +11,12 @@ flowchart LR
   P --> O["网页 · RSS · API v1 · MCP · llms.txt · 站点地图 · 分享图"]
 ```
 
+## 部署无关层与运行时层
+
+AI4Math Radar 把 `industry/`、evaluation assets 与 portable Public API v1 contract 视为部署无关层。当前完整 AIHOT runtime 只是 `native-aihot` profile；GitHub-native profile 可以复用同一内容 contract 而不运行 PostgreSQL / pg-boss。
+
+详见 [Deployment profiles](deployment-profiles.md) 与 `portable/README.md`。
+
 ## 三个进程
 
 | 进程 | 位置 | 做什么 |
