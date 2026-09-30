@@ -51,3 +51,42 @@ export function balancedCandidateSample<T extends GoldCandidateSourceRow>(rows: 
   }
   return out;
 }
+
+export interface GoldCandidateRecord extends GoldCandidateSourceRow {
+  title: string;
+  publishedAt: Date | null;
+  bodyText: string | null;
+  excerpt: string | null;
+  language: string | null;
+  sourceName: string;
+  sourceKind: string;
+  tier: string;
+  firstParty: boolean;
+}
+
+export function candidateToGoldRow(row: GoldCandidateRecord, seed: number, holdoutPercent = 20) {
+  return {
+    caseId: `real-${row.articleId}`,
+    material: {
+      title: row.title,
+      originalTitle: null,
+      publishedAt: row.publishedAt?.toISOString() ?? null,
+      sourceName: row.sourceName,
+      bodyZh: null,
+      bodyOriginal: row.bodyText?.trim() || row.excerpt?.trim() || null,
+    },
+    sourceFacts: {
+      sourceKind: row.sourceKind,
+      sourceTier: row.tier,
+      firstParty: row.firstParty,
+      language: row.language,
+    },
+    samplingContext: {
+      benchmarkSplit: splitFor(row.articleId, seed, holdoutPercent),
+      samplingStratum: `source:${row.sourceId}`,
+    },
+    gold: {
+      decision: "either" as const,
+    },
+  };
+}
