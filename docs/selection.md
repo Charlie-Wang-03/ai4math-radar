@@ -53,9 +53,10 @@ node --env-file=.env scripts/export-selection-candidates.ts \
 ```env
 COLLECT_ENABLED=true
 MODEL_CALLS_ENABLED=false
+COLLECTION_ONLY=true
 ```
 
-然后正常启动 worker。RSS/Atom 信源仍会抓取并落库，正文抽取也可以继续进入处理队列；模型判断被安全阀关闭。积累到足够文章后运行上面的 exporter，再恢复正式模型配置。这个模式只用于构建 calibration corpus，不代表生产站已经完成内容处理。
+然后正常启动 worker。RSS/Atom 信源仍会抓取并落库，正文抽取会继续运行；`COLLECTION_ONLY=true` 会阻止 editorial analysis 入队并暂停未处理文章 sweeper，避免 `MODEL_CALLS_ENABLED=false` 导致重复失败/重试。积累到足够文章后运行上面的 exporter。准备正式 baseline 时先设 `COLLECTION_ONLY=false`、配置模型，再运行 `node --env-file=.env scripts/enqueue-analysis.ts --all`。这个模式只用于构建 calibration corpus，不代表生产站已经完成内容处理。
 
 ### 2. 准备 gold set
 
