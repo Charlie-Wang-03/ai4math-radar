@@ -58,7 +58,7 @@ The stable architectural rules are documented in [docs/architecture.md](docs/arc
 | AI4Math taxonomy | Planned |
 | AI4Math sources | Initial V1 source pack complete |
 | AI4Math prompts / scoring rubric | Planned |
-| Selection calibration set | Planned |
+| Selection calibration set | Export tooling ready; real labels pending |
 | Event-relation evaluation | Infrastructure available; AI4Math data planned |
 | Production deployment | Not yet started |
 
