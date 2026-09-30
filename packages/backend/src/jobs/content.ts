@@ -4,6 +4,7 @@
 // extraction first. A provider outage makes an article wait and retry with backoff; only a permanent
 // refusal or exhausted retries end in "failed", which the admin re-queues in bulk.
 import type { PgBoss } from "pg-boss";
+import { config } from "../config.ts";
 import { sql, type Db } from "../db.ts";
 import { extractArticleBody, pageFetchable } from "../content/extract.ts";
 import { analyzeArticle, AnalysisInterruptedError } from "../editorial/analyze.ts";
@@ -74,6 +75,10 @@ export async function queueProcessing(articleId: string, opts: { step?: Step; at
   if (r.signal && !opts.attemptTag) {
     return enqueue(QUEUES.group, { articleId, signalOnly: true }, { singletonKey: articleId, priority: r.historical ? PRIORITY.history : PRIORITY.liveSignal }, opts.db);
   }
+  if (config.collectionOnly) {
+    await db`UPDATE articles SET processing_queued_at = NULL, processing_retry_at = NULL, processing_error = NULL WHERE id = ${articleId}`;
+    return null;
+  }
   const tagged = !!opts.attemptTag;
   return enqueue(QUEUES.analyze, tagged ? { articleId, attemptTag: opts.attemptTag } : { articleId },
     { singletonKey: tagged ? `manual:analyze:${articleId}:${opts.attemptTag}` : articleId, priority: r.historical ? PRIORITY.history : PRIORITY.live }, opts.db);
@@ -95,6 +100,7 @@ export async function settleNonEditorial(articleId: string): Promise<{ group: bo
 
 /** attemptTag makes an explicit re-evaluation a new (paid) request; the same tag reuses its receipt. */
 export async function processArticle(articleId: string, opts: { attemptTag?: string } = {}): Promise<{ state: string }> {
+  if (config.collectionOnly) return { state: "collection-only" };
   const [found] = await sql<{ participation_mode: string; processing_state: string; revision: number; backfill: boolean; published_at: Date | null; discovered_at: Date }[]>`
     SELECT s.participation_mode, a.processing_state, a.revision, a.backfill, a.published_at, a.discovered_at FROM articles a JOIN sources s ON s.id = a.source_id WHERE a.id = ${articleId}`;
   if (!found) return { state: "missing" };
@@ -206,6 +212,7 @@ export async function registerExtractionJobs(boss: PgBoss) {
  * a lost job, a retry that came due). Articles already queued or running are left alone.
  */
 export async function sweepUnprocessed(): Promise<{ enqueued: number }> {
+  if (config.collectionOnly) return { enqueued: 0 };
   const rows = await sql<{ id: string }[]>`
     SELECT id FROM articles
     WHERE processing_state = 'new' AND created_at < now() - interval '3 minutes'
