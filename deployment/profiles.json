@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "interchangeContract": "public-api-v1",
+  "profiles": [
+    {
+      "id": "static-chatgpt",
+      "canonicalStore": "git",
+      "compute": "chatgpt",
+      "hosting": "github-pages",
+      "persistentServer": false,
+      "postgres": false,
+      "llmApiKeyRequired": false,
+      "supports": [
+        "website",
+        "static-json",
+        "rss-build",
+        "llms-txt",
+        "audit-by-git"
+      ],
+      "omits": [
+        "live-api",
+        "remote-mcp-server",
+        "admin-console",
+        "continuous-worker",
+        "pg-boss"
+      ]
+    },
+    {
+      "id": "github-automation",
+      "canonicalStore": "git",
+      "compute": "github-actions",
+      "hosting": "github-pages",
+      "persistentServer": false,
+      "postgres": false,
+      "llmApiKeyRequired": false,
+      "supports": [
+        "website",
+        "static-json",
+        "rss-build",
+        "llms-txt",
+        "scheduled-validation",
+        "optional-scheduled-collection"
+      ],
+      "omits": [
+        "live-api",
+        "remote-mcp-server",
+        "admin-console",
+        "continuous-worker"
+      ]
+    },
+    {
+      "id": "native-aihot",
+      "canonicalStore": "postgres",
+      "compute": "worker",
+      "hosting": "container-platform",
+      "persistentServer": true,
+      "postgres": true,
+      "llmApiKeyRequired": false,
+      "supports": [
+        "website",
+        "rss",
+        "live-api",
+        "remote-mcp-server",
+        "admin-console",
+        "continuous-worker",
+        "receipts",
+        "budget-breaker",
+        "event-grouping"
+      ],
+      "omits": []
+    }
+  ]
+}
