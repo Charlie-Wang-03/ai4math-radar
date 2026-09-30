@@ -27,7 +27,26 @@ export const SELECTION = {
 
 ## 校准
 
-### 1. 准备样本集
+### 1. 从真实 collected corpus 导出候选
+
+部署并实际采集一段时间后，先从数据库导出 source-balanced 的真实候选：
+
+```bash
+node --env-file=.env scripts/export-selection-candidates.ts \
+  --out .data/gold-candidates.jsonl \
+  --n 160 \
+  --days 90 \
+  --seed 7 \
+  --holdout 20
+```
+
+导出器只读取 `editorial` 信源中已有正文的真实文章，不修改生产数据库；同一个 seed 会稳定得到同样的 source 内排序和 development / holdout 分配。为了避免高频源淹没样本，它按 source round-robin 抽样。
+
+导出文件初始把所有 `gold.decision` 标成 `either`，明确表示**尚未标注**。这不是一个可用于报告模型性能的 gold set。逐条人工或受控标注后，把明确案例改成 `select` / `reject`，真正两可的案例才保留 `either`。同时把初始的 `samplingStratum: "source:..."` 按内容边界改成更有分析价值的 strata。
+
+如果数据库还没有足够真实文章，先完成实际采集；不要用 synthetic examples 或模板数据替代真实 baseline。
+
+### 2. 准备 gold set
 
 从 AI4Math Radar 的实际信源里挑 120–200 条资料，一条一条标“该选 / 不该选”，存成 `.data/gold.jsonl`（`.data/` 不进 Git）。每行一条：
 
@@ -51,7 +70,7 @@ export const SELECTION = {
 - 建议约 70%–80% 做 `development`、20%–30% 做 `holdout`。分出一部分做**留出集**（`benchmarkSplit: "holdout"`），调提示词只看开发集，最后再用留出集检查一遍，免得把提示词调成只会做这几道题。
 - 标注的人最好就是以后读这个站的人，或者和他们口味一致的人。真实校准集保存在 `.data/`，默认不提交仓库；公开仓库只保留 synthetic schema examples。
 
-### 2. 跑评测
+### 3. 跑评测
 
 ```bash
 node --env-file=.env scripts/eval-selection.ts --gold .data/gold.jsonl --split development --label "第一版评分标准"
@@ -65,7 +84,7 @@ node --env-file=.env scripts/eval-selection.ts --gold .data/gold.jsonl --split d
 
 常用参数：`--models default,deepseek-flash` 同批比较几个模型，`--n 200` 最多抽多少条，`--split holdout` 只跑留出集。同样的输入和提示词再跑不会重复调用模型（有回执复用），只有改过的部分才会产生新调用。
 
-### 3. 看错例，改标准，再跑
+### 4. 看错例，改标准，再跑
 
 在后台 SelectBench 里逐条看判错的资料和模型给的理由：
 
