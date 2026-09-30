@@ -128,6 +128,8 @@ static-dist/
 └── privacy/
 ```
 
+当前静态 presentation layer 以仓库现存 Native AIHOT Web 为 UI specification：保留 sidebar、category pills、search、日期时间轴、精选卡片、深浅主题与浏览器本地收藏；没有真实 hot/story contract 时不伪造热度榜或事件聚合。
+
 构建过程：
 
 - 只读取 Git 中的 canonical data；
