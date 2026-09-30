@@ -20,7 +20,7 @@ const provider = await stub((_hit, req) => {
   const user = String(body.messages.at(-1)!.content);
   seen.push({ model: body.model, system });
   const content =
-    system.includes("宽召回") ? { label: "PASS", reason: "测试" }
+    system.includes("AI × Mathematics 相关性预筛") ? { label: "PASS", reason: "测试" }
     : system.includes("研究注意力评分器") ? { attentionScore: 80 }
     : system.includes("内容理解编辑") ? { itemType: "product_launch", authorRole: "principal", tags: ["工具/开源", "自动定理证明"], editorialJudgment: "理由", titleZh: "一个证明工具的标题", summaryZh: "一个证明工具的摘要。第二句。" }
     : system.includes("资料结构化助手") ? { category: "theorem-proving", tags: ["工具/开源", "自动定理证明"], subjects: [], fact: null }
