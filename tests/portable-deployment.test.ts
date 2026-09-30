@@ -60,7 +60,12 @@ test("static-chatgpt is the explicit active deployment profile", () => {
   assert.equal(active.canonicalContent, "portable/content/selected.jsonl");
 
   const canonical = readFileSync(new URL("../portable/content/selected.jsonl", import.meta.url), "utf8");
-  assert.deepEqual(parsePortableJsonl(canonical), []);
+  const items = parsePortableJsonl(canonical);
+  assert.ok(items.length > 0, "active static profile must publish at least one evidence-reviewed canonical item after initial backfill");
+  assert.ok(items.every((item) => item.selected));
+  assert.ok(items.some((item) => item.id === "2026-09-08-openai-navier-stokes"));
+  assert.ok(items.some((item) => item.id === "2026-09-04-anthropic-flt"));
+  assert.ok(items.some((item) => item.id === "2026-09-17-formalflow-mipstar"));
 });
 
 
