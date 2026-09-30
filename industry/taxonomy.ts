@@ -105,6 +105,7 @@ export const TAG_SYNONYMS: Readonly<Record<string, string>> = {
   verifier: "验证",
   "mathematical discovery": "数学发现",
   reasoning: "数学推理",
+  推理: "数学推理",
 };
 
 export const CATEGORY_BY_ITEM_TYPE: Readonly<Record<string, string>> = {
