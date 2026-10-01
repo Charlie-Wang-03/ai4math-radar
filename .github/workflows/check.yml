@@ -153,6 +153,7 @@ jobs:
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             base="${{ github.event.pull_request.base.sha }}"
             head="${{ github.event.pull_request.head.sha }}"
+            base="$(git merge-base "$base" "$head")"
           elif [[ "${{ github.event_name }}" == "push" ]]; then
             base="${{ github.event.before }}"
             head="${{ github.sha }}"
