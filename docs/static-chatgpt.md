@@ -80,6 +80,25 @@ ChatGPT 默认负责：
 
 日常编辑判断的长期规则见 [Editorial maintenance contract](editorial-maintenance.md)。该文档固定事件日期、重复/后续事件、证据强度与历史回填规则；普通内容 PR 不应临时改写这些规则。
 
+### Content-only CI fast path
+
+当一个 PR **只修改**：
+
+```text
+portable/content/selected.jsonl
+```
+
+`Check` workflow 保留既有 `check` / `docker` job 名称，但走轻量路径：
+
+- 运行 `npm run content:check`；
+- 构建 static-chatgpt；
+- 执行静态 smoke checks；
+- 跳过 native typecheck、Web/backend tests、PostgreSQL runtime smoke 与 Docker Compose build。
+
+只要 PR 同时修改任何其他文件，就自动回落到完整 CI。手工 `workflow_dispatch` 也始终运行完整 CI。
+
+这个 fast path 只优化验证成本，不降低 canonical content 的 integrity gate，也不改变 GitHub Pages 在 merge 后的独立部署检查。
+
 ## 4. 每条记录最低证据要求
 
 至少保存：
