@@ -1,5 +1,7 @@
 # AI4Math Radar
 
+[简体中文](README.zh-CN.md)
+
 > **Current profile: `static-chatgpt`.** GitHub is the canonical content store, ChatGPT performs evidence review and editorial maintenance, and GitHub Pages publishes the static site. The full native AIHOT runtime remains preserved but inactive.
 
 AI4Math Radar is an open-source research-intelligence project for **AI for Mathematics / Mathematical AI**. It aims to continuously collect public research signals, filter and structure them with language models, group multiple reports about the same event, and expose the resulting research feed through a website, RSS, API and MCP.
