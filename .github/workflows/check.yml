@@ -1,5 +1,11 @@
-# Checks on GitHub-hosted runners: install, typecheck, web build, the web and backend tests on a fresh
-# PostgreSQL, the built site's smoke check, and the Docker image brought up with docker compose.
+# Checks on GitHub-hosted runners.
+#
+# Pure canonical-content changes (only portable/content/selected.jsonl) use a fast path:
+# deterministic content validation + static build/smoke, while preserving the existing
+# "check" and "docker" job names for status-check compatibility.
+#
+# Any other change runs the full native CI: install, typecheck, web build/tests,
+# PostgreSQL-backed backend tests, runtime smoke, and Docker Compose smoke.
 # Only GitHub-owned actions, pinned to a full commit SHA.
 name: Check
 
@@ -37,17 +43,58 @@ jobs:
       IMG_PROXY_SIGN_SECRET: ci-img-secret-0123456789abcdef
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24
           package-manager-cache: false
 
+      - name: Classify changed files
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            base="${{ github.event.pull_request.base.sha }}"
+            head="${{ github.event.pull_request.head.sha }}"
+            base="$(git merge-base "$base" "$head")"
+          elif [[ "${{ github.event_name }}" == "push" ]]; then
+            base="${{ github.event.before }}"
+            head="${{ github.sha }}"
+          else
+            echo "content_only=false" >> "$GITHUB_OUTPUT"
+            echo "workflow_dispatch: full CI"
+            exit 0
+          fi
+
+          mapfile -t changed < <(git diff --name-only "$base" "$head")
+          printf 'changed: %s\n' "${changed[@]:-<none>}"
+
+          content_only=false
+          if (( ${#changed[@]} > 0 )); then
+            content_only=true
+            for path in "${changed[@]}"; do
+              if [[ "$path" != "portable/content/selected.jsonl" ]]; then
+                content_only=false
+                break
+              fi
+            done
+          fi
+
+          echo "content_only=$content_only" >> "$GITHUB_OUTPUT"
+          echo "content_only=$content_only"
+
       - name: Install
+        if: steps.changes.outputs.content_only != 'true'
         run: npm ci --no-audit --no-fund
       - name: Typecheck
+        if: steps.changes.outputs.content_only != 'true'
         run: npm run typecheck
       - name: Build web
+        if: steps.changes.outputs.content_only != 'true'
         run: npm run build -w @aihot/web
+
       - name: Check selected content integrity
         run: npm run content:check
       - name: Build static-chatgpt site
@@ -61,14 +108,18 @@ jobs:
           grep -q 'class="sidebar"' static-dist/index.html
           test -f static-dist/assets/aihot.css
           test -f static-dist/assets/aihot.js
+
       - name: Web tests
+        if: steps.changes.outputs.content_only != 'true'
         run: node --test apps/web/tests/*.test.ts
 
       - name: Migrate and seed topics
+        if: steps.changes.outputs.content_only != 'true'
         run: |
           node scripts/migrate.ts
           node scripts/seed.ts --topics-only
       - name: Smoke check of the built site
+        if: steps.changes.outputs.content_only != 'true'
         # The site itself runs with collection and model calls off (the tests below use local stubs).
         env:
           COLLECT_ENABLED: "false"
@@ -80,9 +131,10 @@ jobs:
           node scripts/smoke.ts --base http://127.0.0.1:3000
       # After the smoke check, which reads an empty database: these write their own rows.
       - name: Backend tests
+        if: steps.changes.outputs.content_only != 'true'
         run: npm test
       - name: Server logs
-        if: failure()
+        if: failure() && steps.changes.outputs.content_only != 'true'
         run: tail -n 60 "$RUNNER_TEMP/api.log" "$RUNNER_TEMP/web.log" 2>/dev/null || true
 
   docker:
@@ -90,11 +142,55 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Classify changed files
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            base="${{ github.event.pull_request.base.sha }}"
+            head="${{ github.event.pull_request.head.sha }}"
+            base="$(git merge-base "$base" "$head")"
+          elif [[ "${{ github.event_name }}" == "push" ]]; then
+            base="${{ github.event.before }}"
+            head="${{ github.sha }}"
+          else
+            echo "content_only=false" >> "$GITHUB_OUTPUT"
+            echo "workflow_dispatch: full CI"
+            exit 0
+          fi
+
+          mapfile -t changed < <(git diff --name-only "$base" "$head")
+          printf 'changed: %s\n' "${changed[@]:-<none>}"
+
+          content_only=false
+          if (( ${#changed[@]} > 0 )); then
+            content_only=true
+            for path in "${changed[@]}"; do
+              if [[ "$path" != "portable/content/selected.jsonl" ]]; then
+                content_only=false
+                break
+              fi
+            done
+          fi
+
+          echo "content_only=$content_only" >> "$GITHUB_OUTPUT"
+          echo "content_only=$content_only"
+
+      - name: Content-only fast path
+        if: steps.changes.outputs.content_only == 'true'
+        run: echo "Docker/native runtime checks are not relevant to a canonical-content-only change."
+
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        if: steps.changes.outputs.content_only != 'true'
         with:
           node-version: 24
           package-manager-cache: false
       - name: Configure a throwaway site
+        if: steps.changes.outputs.content_only != 'true'
         run: |
           node scripts/init-env.ts --llm-key ci-not-a-real-key
           # No outside calls in CI: nothing is collected and no model is asked.
@@ -102,16 +198,18 @@ jobs:
           # The smoke check reaches the site by its compose service name.
           echo "MCP_ALLOWED_HOSTS=web" >> .env
       - name: Build and start with docker compose
+        if: steps.changes.outputs.content_only != 'true'
         run: docker compose up -d --build
       - name: Smoke check
+        if: steps.changes.outputs.content_only != 'true'
         run: |
           for i in $(seq 1 90); do curl -fsS -o /dev/null http://127.0.0.1:3000/api/health 2>/dev/null && break; sleep 2; done
           docker compose ps
           docker compose run --rm --no-deps --entrypoint node setup scripts/smoke.ts --base http://web:3000
           docker compose exec -T db psql -U aihot -d aihot -Atc "select count(*) from sources" | grep -q '^9$'
       - name: Logs
-        if: failure()
+        if: failure() && steps.changes.outputs.content_only != 'true'
         run: docker compose logs --tail 80
       - name: Stop
-        if: always()
+        if: always() && steps.changes.outputs.content_only != 'true'
         run: docker compose down -v
