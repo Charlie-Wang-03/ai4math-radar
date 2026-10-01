@@ -86,6 +86,12 @@ node scripts/smoke.ts --base http://localhost:3000
 
 若只修改文档或静态配置，按实际影响选择验证，不为了形式增加无关测试。
 
+## 双语公开文档
+
+`README.md` 与 `README.zh-CN.md` 是一等公开入口；修改项目定位、当前 profile、公开能力边界或使用方式时，应在同一 PR 中检查两者事实一致。
+
+`docs/editorial-maintenance.md` / `docs/editorial-maintenance.zh-CN.md` 与 `docs/deployment-profiles.md` / `docs/deployment-profiles.zh-CN.md` 也应保持规则层面的语义一致。不要机械逐句翻译，但不得让两个语言版本形成不同政策。
+
 ## 开源协作
 
 一次改动解决一个清楚的问题。大幅修改架构、产品行为、domain ontology 或引入新的长期依赖前先开 Issue。所有提交应能解释、验证和维护。
