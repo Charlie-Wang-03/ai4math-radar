@@ -1,5 +1,7 @@
 # Deployment profiles
 
+[简体中文](deployment-profiles.zh-CN.md)
+
 AI4Math Radar deliberately keeps deployment as a replaceable runtime concern.
 
 The AI4Math domain pack, prompts, taxonomy, evaluation assets and portable public-content contract should remain usable across all profiles.
