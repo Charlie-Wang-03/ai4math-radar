@@ -48,6 +48,8 @@ jobs:
         run: npm run typecheck
       - name: Build web
         run: npm run build -w @aihot/web
+      - name: Check selected content integrity
+        run: npm run content:check
       - name: Build static-chatgpt site
         env:
           STATIC_BASE_URL: https://charlie-wang-03.github.io/ai4math-radar/

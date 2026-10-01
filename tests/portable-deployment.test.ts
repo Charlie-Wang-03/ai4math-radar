@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { parsePortableJsonl, validatePortableV1Item } from "../scripts/portable-v1-core.ts";
+import { validateSelectedContent } from "../scripts/check-selected-content.ts";
 
 test("committed portable example satisfies the public-v1 interchange contract", () => {
   const text = readFileSync(new URL("../portable/example/selected.jsonl", import.meta.url), "utf8");
@@ -79,4 +80,70 @@ test("static AIHOT parity assets and generator are committed", () => {
   assert.match(js, /ai4math-static-starred/);
   assert.match(generator, /AI4Math 日报/);
   assert.match(generator, /当前 static-chatgpt profile 暂未提供此动态能力/);
+});
+
+
+test("canonical selected content satisfies editorial integrity invariants", () => {
+  const text = readFileSync(new URL("../portable/content/selected.jsonl", import.meta.url), "utf8");
+  const items = validateSelectedContent(text);
+  assert.ok(items.length > 0);
+});
+
+test("selected-content integrity rejects domain drift and chronology errors", () => {
+  const base = {
+    id: "2026-09-11-example",
+    title: "Title",
+    originalTitle: null,
+    summary: "Summary",
+    source: { name: "Source" },
+    links: {
+      aihot: "https://charlie-wang-03.github.io/ai4math-radar/items/2026-09-11-example/",
+      original: "https://example.com/source",
+    },
+    publishedAt: "2026-09-11T12:00:00.000Z",
+    discoveredAt: "2026-09-12T00:00:00.000Z",
+    category: "math-reasoning",
+    score: 90,
+    selected: true,
+    reason: "Reason",
+    attribution: {
+      name: "AI4Math Radar",
+      url: "https://charlie-wang-03.github.io/ai4math-radar/items/2026-09-11-example/",
+    },
+  };
+
+  assert.equal(validateSelectedContent(JSON.stringify(base)).length, 1);
+  assert.throws(
+    () => validateSelectedContent(JSON.stringify({ ...base, category: "model-release" })),
+    /category must be one of/,
+  );
+  assert.throws(
+    () => validateSelectedContent(JSON.stringify({ ...base, score: 101 })),
+    /score must be a finite number in \[0, 100\]/,
+  );
+  assert.throws(
+    () => validateSelectedContent(JSON.stringify({
+      ...base,
+      links: { ...base.links, aihot: "https://charlie-wang-03.github.io/ai4math-radar/items/wrong/" },
+    })),
+    /links\.aihot path must end with/,
+  );
+  assert.throws(
+    () => validateSelectedContent(JSON.stringify({
+      ...base,
+      id: "2026-09-10-example",
+      links: {
+        ...base.links,
+        aihot: "https://charlie-wang-03.github.io/ai4math-radar/items/2026-09-10-example/",
+      },
+    })),
+    /dated id prefix .* must match publishedAt date/,
+  );
+  assert.throws(
+    () => validateSelectedContent(JSON.stringify({
+      ...base,
+      discoveredAt: "2026-09-10T00:00:00.000Z",
+    })),
+    /discoveredAt must not precede publishedAt/,
+  );
 });
