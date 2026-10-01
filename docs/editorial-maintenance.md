@@ -1,5 +1,7 @@
 # Editorial maintenance contract
 
+[简体中文](editorial-maintenance.zh-CN.md)
+
 This document defines the editorial rules for maintaining the canonical AI4Math Radar selected corpus under the active `static-chatgpt` profile.
 
 It is intentionally narrower than a general news policy. The goal is to keep date attribution, duplicate handling, evidence strength and historical backfill decisions consistent across routine maintenance.
