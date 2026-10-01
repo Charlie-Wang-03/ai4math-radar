@@ -78,6 +78,8 @@ ChatGPT 默认负责：
 
 对于普通日常内容维护，PR 仍提供 Git audit trail。
 
+日常编辑判断的长期规则见 [Editorial maintenance contract](editorial-maintenance.md)。该文档固定事件日期、重复/后续事件、证据强度与历史回填规则；普通内容 PR 不应临时改写这些规则。
+
 ## 4. 每条记录最低证据要求
 
 至少保存：
