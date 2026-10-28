@@ -1,27 +1,155 @@
-(function(){
-  const root=document.documentElement,key='ai4math-static-theme',starKey='ai4math-static-starred';
-  function starIds(){try{const x=JSON.parse(localStorage.getItem(starKey)||'[]');return Array.isArray(x)?x:[]}catch{return []}}
-  function applyTheme(mode){const resolved=mode==='system'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):mode;root.setAttribute('data-theme',resolved);document.querySelectorAll('[data-theme-choice]').forEach(b=>b.classList.toggle('active',b.dataset.themeChoice===mode));}
-  let pref=localStorage.getItem(key)||'system';applyTheme(pref);
-  function currentCategory(){return document.querySelector('[data-category].active')?.dataset.category||'all'}
-  function filter(cat,q){
-    q=(q||'').trim().toLowerCase();const starred=document.body.dataset.view==='starred',stars=new Set(starIds());
-    document.querySelectorAll('[data-feed-item]').forEach(el=>{
-      const okCat=cat==='all'||el.dataset.category===cat,hay=(el.dataset.search||'').toLowerCase(),id=el.querySelector('[data-star-id]')?.dataset.starId;
-      const okStar=!starred||(id&&stars.has(id));
-      el.classList.toggle('hidden',!(okCat&&okStar&&(!q||hay.includes(q))));
-    });
-    document.querySelectorAll('[data-day]').forEach(day=>{const any=[...day.querySelectorAll('[data-feed-item]')].some(el=>!el.classList.contains('hidden'));day.classList.toggle('hidden',!any);});
+(function () {
+  "use strict";
+
+  const root = document.documentElement;
+  const themeKey = "ai4math-static-theme";
+  const starKey = "ai4math-static-starred";
+  const input = document.querySelector("[data-search]");
+  const categoryTabs = () => [...document.querySelectorAll(".tabs .tab[data-category]")];
+
+  function starIds() {
+    try {
+      const value = JSON.parse(localStorage.getItem(starKey) || "[]");
+      return Array.isArray(value) ? value : [];
+    } catch {
+      return [];
+    }
   }
-  function syncStars(){const ids=new Set(starIds());document.querySelectorAll('[data-star-id]').forEach(b=>{const on=ids.has(b.dataset.starId);b.classList.toggle('on',on);b.textContent=on?'★':'☆';});filter(currentCategory(),document.querySelector('[data-search]')?.value||'');}
-  document.addEventListener('click',e=>{
-    const theme=e.target.closest('[data-theme-choice]');if(theme){pref=theme.dataset.themeChoice;localStorage.setItem(key,pref);applyTheme(pref);return;}
-    const tab=e.target.closest('[data-category]');if(tab){document.querySelectorAll('[data-category]').forEach(x=>x.classList.toggle('active',x===tab));const u=new URL(location.href);if(tab.dataset.category==='all')u.searchParams.delete('category');else u.searchParams.set('category',tab.dataset.category);history.replaceState(null,'',u);filter(tab.dataset.category||'all',document.querySelector('[data-search]')?.value||'');return;}
-    const star=e.target.closest('[data-star-id]');if(star){const id=star.dataset.starId,ids=starIds(),next=ids.includes(id)?ids.filter(x=>x!==id):[id,...ids].slice(0,500);localStorage.setItem(starKey,JSON.stringify(next));syncStars();}
+
+  function applyTheme(mode) {
+    const resolved = mode === "system"
+      ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+      : mode;
+    root.setAttribute("data-theme", resolved);
+    document.querySelectorAll("[data-theme-choice]").forEach((button) => {
+      button.classList.toggle("active", button.dataset.themeChoice === mode);
+    });
+  }
+
+  let themePreference = localStorage.getItem(themeKey) || "system";
+  applyTheme(themePreference);
+
+  function currentCategory() {
+    return categoryTabs().find((tab) => tab.classList.contains("active"))?.dataset.category || "all";
+  }
+
+  function filter() {
+    const category = currentCategory();
+    const query = (input?.value || "").trim().toLowerCase();
+    const starredOnly = document.body.dataset.view === "starred";
+    const stars = new Set(starIds());
+    let visibleTotal = 0;
+
+    document.querySelectorAll("[data-day]").forEach((day) => {
+      const slots = [...day.querySelectorAll("[data-feed-item-shell]")];
+      let lastVisible = null;
+      let visibleCount = 0;
+
+      slots.forEach((slot) => {
+        slot.classList.remove("is-last-visible");
+        const card = slot.querySelector("[data-feed-item]");
+        if (!card) return;
+        const id = card.querySelector("[data-star-id]")?.dataset.starId;
+        const matchesCategory = category === "all" || card.dataset.category === category;
+        const matchesSearch = !query || (card.dataset.search || "").toLowerCase().includes(query);
+        const matchesStar = !starredOnly || (id && stars.has(id));
+        const visible = Boolean(matchesCategory && matchesSearch && matchesStar);
+        // Hide the entire slot, including its time label and rail—not just the article.
+        slot.classList.toggle("hidden", !visible);
+        if (visible) {
+          visibleCount++;
+          lastVisible = slot;
+        }
+      });
+
+      lastVisible?.classList.add("is-last-visible");
+      day.classList.toggle("hidden", visibleCount === 0);
+      const counter = day.querySelector("[data-day-count]");
+      if (counter) counter.textContent = String(visibleCount);
+      visibleTotal += visibleCount;
+    });
+
+    const emptyState = document.querySelector("[data-filter-empty]");
+    if (emptyState) emptyState.classList.toggle("hidden", visibleTotal > 0);
+  }
+
+  function syncStars() {
+    const ids = new Set(starIds());
+    document.querySelectorAll("[data-star-id]").forEach((button) => {
+      const on = ids.has(button.dataset.starId);
+      button.classList.toggle("on", on);
+      button.textContent = on ? "★" : "☆";
+      button.setAttribute("aria-pressed", String(on));
+    });
+    filter();
+  }
+
+  function syncCategoryFromUrl() {
+    const fromUrl = new URL(location.href).searchParams.get("category") || "all";
+    const selected = categoryTabs().find((tab) => tab.dataset.category === fromUrl)
+      || categoryTabs().find((tab) => tab.dataset.category === "all");
+    categoryTabs().forEach((tab) => {
+      const active = tab === selected;
+      tab.classList.toggle("active", active);
+      tab.setAttribute("aria-pressed", String(active));
+    });
+  }
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    const theme = event.target.closest("[data-theme-choice]");
+    if (theme) {
+      themePreference = theme.dataset.themeChoice;
+      localStorage.setItem(themeKey, themePreference);
+      applyTheme(themePreference);
+      return;
+    }
+
+    // Only tabs are category controls. Feed articles also carry data-category.
+    const tab = event.target.closest(".tabs .tab[data-category]");
+    if (tab) {
+      event.preventDefault();
+      categoryTabs().forEach((button) => {
+        const active = button === tab;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+      const url = new URL(location.href);
+      if (tab.dataset.category === "all") url.searchParams.delete("category");
+      else url.searchParams.set("category", tab.dataset.category);
+      history.replaceState(null, "", url);
+      filter();
+      return;
+    }
+
+    const star = event.target.closest("[data-star-id]");
+    if (star) {
+      const id = star.dataset.starId;
+      const ids = starIds();
+      const next = ids.includes(id) ? ids.filter((value) => value !== id) : [id, ...ids].slice(0, 500);
+      localStorage.setItem(starKey, JSON.stringify(next));
+      syncStars();
+    }
   });
-  const input=document.querySelector('[data-search]');
-  if(input){input.addEventListener('input',()=>filter(currentCategory(),input.value));addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|TEXTAREA/.test(document.activeElement?.tagName||'')){e.preventDefault();input.focus();}});}
-  const fromUrl=new URL(location.href).searchParams.get('category');if(fromUrl){const tab=document.querySelector('[data-category="'+CSS.escape(fromUrl)+'"]');if(tab){document.querySelectorAll('[data-category]').forEach(x=>x.classList.toggle('active',x===tab));}}
-  syncStars();filter(currentCategory(),input?.value||'');
-  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>{if(pref==='system')applyTheme(pref);});
+
+  if (input) {
+    input.addEventListener("input", filter);
+    addEventListener("keydown", (event) => {
+      if (event.key === "/" && !/INPUT|TEXTAREA/.test(document.activeElement?.tagName || "")) {
+        event.preventDefault();
+        input.focus();
+      }
+    });
+  }
+
+  window.addEventListener("popstate", () => {
+    syncCategoryFromUrl();
+    filter();
+  });
+  syncCategoryFromUrl();
+  syncStars();
+
+  matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => {
+    if (themePreference === "system") applyTheme(themePreference);
+  });
 })();
