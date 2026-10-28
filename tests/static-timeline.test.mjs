@@ -218,3 +218,39 @@ test("portable precision contract permits verified midnight and rejects unsuppor
   assert.throws(() => validatePortableV1Item({ ...fixture, publishedAtPrecision: "hour" }), /publishedAtPrecision/);
   assert.throws(() => validatePortableV1Item({ ...fixture, publishedAt: null }), /publishedAtPrecision requires publishedAt/);
 });
+
+
+test("static item detail has two evidence-labelled times without changing timeline sort", () => {
+  const dir = mkdtempSync(path.join(tmpdir(), "ai4math-chronology-"));
+  try {
+    const built = spawnSync(process.execPath, ["scripts/build-static-chatgpt.ts"], {
+      cwd: root, env: { ...process.env, STATIC_OUT_DIR: dir },
+      encoding: "utf8", timeout: 120000,
+    });
+    assert.equal(built.status, 0, built.stderr || built.stdout);
+    const getItem = (id) => readFileSync(path.join(dir, "items", id, "index.html"), "utf8");
+    const wormald = getItem("2026-10-22-wormald-tournament-hamilton-lean");
+    assert.match(wormald, /data-chronology-earliest/);
+    assert.match(wormald, /首次已核实公开记录/);
+    assert.match(wormald, /本次报道里程碑/);
+    assert.match(wormald, /2026-10-14 17:27:13/); // GitHub release UTC+8
+    assert.match(wormald, /2026-10-22[\s\S]*?仅核实日期（UTC）/);
+    assert.match(wormald, /releases\/tag\/v1\.0\.0/);
+    assert.match(wormald, /2610\.00460v1/);
+    assert.doesNotMatch(wormald, /未注明<\/time>/);
+
+    const unknown = getItem("2026-10-20-tao-tenth-discriminant-ai-challenge");
+    assert.match(unknown, /data-chronology-earliest/);
+    assert.match(unknown, /尚无独立核验的更早公开记录/);
+    assert.match(unknown, /2026-10-20（历史归档日期）/);
+    assert.doesNotMatch(unknown, /chronology-evidence/);
+    assert.doesNotMatch(unknown, /08:00/);
+
+    const home = readFileSync(path.join(dir,"index.html"),"utf8");
+    assert.match(home, /class="time precision-day"/);
+    assert.equal((home.match(/data-feed-item-shell/g)??[]).length,
+      readFileSync(path.join(root,"portable/content/selected.jsonl"),"utf8").split(/\r?\n/).filter(Boolean).length);
+  } finally {
+    rmSync(dir,{recursive:true,force:true});
+  }
+});
