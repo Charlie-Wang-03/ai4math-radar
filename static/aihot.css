@@ -36,3 +36,18 @@
 @media(max-width:960px){
   .sidebar{display:none}.main{padding:0 16px 76px}.content{max-width:640px}.mobile-top{display:flex;height:56px;align-items:center;justify-content:space-between}.mobile-top .brand{margin:0;padding:0;height:auto}.page-title,.desktop-only{display:none}.toolbar{margin:6px 0 12px;gap:8px}.tabs{flex:1}.search{display:none}.subline{display:none}.hot-panel{margin-top:10px}.day-head{height:36px;display:flex;gap:8px;align-items:center;background:var(--bg-sunk);margin:0 -16px;padding:0 16px}.day-date{font-size:14px;text-align:left;font-weight:700;white-space:nowrap}.day-chevron{display:none}.day-meta{font-size:12.5px}.slot{grid-template-columns:48px minmax(0,1fr);border-bottom:1px solid var(--line-soft);padding:14px 0}.time{padding-top:2px;text-align:left;font-size:13px}.rail{display:none}.feed-card{border:0;border-radius:0;background:transparent;padding:0}.feed-card:hover{background:transparent}.feed-head{font-size:12px}.feed-title{font-size:17px}.feed-summary{font-size:14.5px}.reason{border:0;background:var(--bg-sunk);border-radius:8px;padding:8px 11px;margin-top:10px}.mobile-tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;height:62px;display:grid;grid-template-columns:repeat(4,1fr);background:color-mix(in srgb,var(--sidebar) 94%,transparent);backdrop-filter:blur(14px);border-top:1px solid var(--line)}.mobile-tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--ink-4);font-size:11px}.mobile-tabs a.active{color:var(--accent)}.mobile-tabs a.disabled{opacity:.4;pointer-events:none}.item-card h1{font-size:26px}
 }
+
+
+/* Evidence-backed dual chronology on static item details. Does not change feed anchors. */
+.chronology-panel{margin-top:23px;padding-top:18px;border-top:1px solid var(--line-soft)}
+.chronology-panel h2{margin:0 0 12px;font-size:16px;font-weight:700}
+.chronology-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.chronology-entry{min-width:0;padding:15px;border:1px solid var(--line-strong);border-radius:10px;background:var(--bg-sunk)}
+.chronology-entry h3{margin:0 0 12px;font-size:12px;font-weight:650;color:var(--ink-3);line-height:1.6}
+.chronology-value{font-size:15px;font-weight:600;line-height:1.5;overflow-wrap:anywhere}
+.chronology-precision{display:block;margin-top:6px;font-size:12px;font-weight:400;line-height:1.6;color:var(--ink-4)}
+.chronology-evidence{display:inline-block;margin-top:11px;font-size:12px;font-weight:600;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.chronology-evidence:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.chronology-unverified{color:var(--ink-3);font-weight:500}
+.chronology-note{margin:13px 0 0;color:var(--ink-4);font-size:12px;line-height:1.75}
+@media(max-width:640px){.chronology-grid{grid-template-columns:1fr}.chronology-entry{padding:13px}.chronology-panel{margin-top:18px}.item-card{padding:18px}}
