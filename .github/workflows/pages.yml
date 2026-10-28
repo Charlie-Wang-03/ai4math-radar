@@ -55,6 +55,8 @@ jobs:
           test -f static-dist/assets/aihot.css
           test -f static-dist/assets/aihot.js
           node -e "const x=require('./static-dist/data/selected.json'); if (!(Number.isInteger(x.count) && x.count > 0 && x.items.length === x.count)) process.exit(1)"
+      - name: Static timeline interaction and publication-precision regression
+        run: node --test tests/static-timeline.test.mjs
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: static-dist
