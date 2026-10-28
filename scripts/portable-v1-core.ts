@@ -93,19 +93,19 @@ export function validatePortableV1Item(value: unknown, line = 1): PortableV1Item
   const parseMoment = (value: unknown, field: string): ChronologyMoment => {
     if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error(`line ${line}: ${field} must be an object`);
     const obj = value as Record<string, unknown>;
-    if (typeof obj.date !== "string" || !/^\\d{4}-\\d{2}-\\d{2}$/.test(obj.date) || Number.isNaN(Date.parse(obj.date+"T00:00:00Z"))) {
+    if (typeof obj.date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(obj.date) || Number.isNaN(Date.parse(obj.date+"T00:00:00Z"))) {
       throw new Error(`line ${line}: ${field}.date must be YYYY-MM-DD`);
     }
     if (obj.precision !== "day" && obj.precision !== "minute" && obj.precision !== "second") {
       throw new Error(`line ${line}: ${field}.precision invalid`);
     }
-    if (typeof obj.evidenceUrl !== "string" || !/^https?:\\/\\//.test(obj.evidenceUrl)) {
+    if (typeof obj.evidenceUrl !== "string" || !/^https?:\/\//.test(obj.evidenceUrl)) {
       throw new Error(`line ${line}: ${field}.evidenceUrl must be HTTP(S)`);
     }
     if (!evidenceKinds.has(obj.evidenceKind as ChronologyEvidenceKind)) throw new Error(`line ${line}: ${field}.evidenceKind invalid`);
     if (obj.precision === "day") {
       if (obj.at !== undefined) throw new Error(`line ${line}: ${field} day-precision cannot assert .at`);
-    } else if (typeof obj.at !== "string" || !/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$/.test(obj.at)
+    } else if (typeof obj.at !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(obj.at)
       || !Number.isFinite(Date.parse(obj.at)) || obj.at.slice(0, 10) !== obj.date) {
       throw new Error(`line ${line}: ${field}.at must be a valid UTC instant on the stated calendar date`);
     }
