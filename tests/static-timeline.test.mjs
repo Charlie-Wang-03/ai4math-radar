@@ -28,13 +28,29 @@ test("static pages never invent 08:00 for legacy date-only publication data", ()
     assert.equal((html.match(/class="time precision-day"/g) ?? []).length, dayOnly.length);
     assert.equal((html.match(/data-feed-item-shell/g) ?? []).length, items.length);
 
+    // The Oct 15 production screenshot is a regression target, but curation may add
+    // entries or verify midnight timestamps later. Compute expected counts from source.
+    const isDayOnly = (item) => item.publishedAtPrecision === "day"
+      || (!item.publishedAtPrecision && /^\d{4}-\d{2}-\d{2}T00:00:00(?:\.0+)?Z$/.test(item.publishedAt ?? ""));
+    const displayedDay = (item) => isDayOnly(item)
+      ? item.publishedAt.slice(0, 10)
+      : new Date(Date.parse(item.publishedAt ?? item.discoveredAt) + 8 * 3600_000).toISOString().slice(0, 10);
+    const oct15Items = items.filter((item) => displayedDay(item) === "2026-10-15");
     const oct15 = [...html.matchAll(/<section class="day" data-day>([\s\S]*?)<\/section>/g)]
       .map((match) => match[1]).find((section) => section.includes("10月15日"));
-    assert.ok(oct15, "Oct 15 group must exist");
-    assert.equal((oct15.match(/data-feed-item-shell/g) ?? []).length, 7);
-    assert.match(oct15, /<time datetime="2026-10-15T13:46:41\.000Z"[^>]*>21:46<\/time>/);
-    assert.match(oct15, /<time datetime="2026-10-15" class="time precision-day"[^>]*>未注明<\/time>/);
-    assert.doesNotMatch(oct15, /<time[^>]*>08:00<\/time>/);
+    assert.equal(Boolean(oct15), oct15Items.length > 0);
+    if (oct15) {
+      assert.equal((oct15.match(/data-feed-item-shell/g) ?? []).length, oct15Items.length);
+      assert.equal((oct15.match(/class="time precision-day"/g) ?? []).length, oct15Items.filter(isDayOnly).length);
+      for (const item of oct15Items) {
+        if (isDayOnly(item)) {
+          assert.ok(oct15.includes('datetime="' + item.publishedAt.slice(0, 10) + '" class="time precision-day"'));
+        } else if (item.publishedAt) {
+          const beijingClock = new Date(Date.parse(item.publishedAt) + 8 * 3600_000).toISOString().slice(11, 16);
+          assert.ok(oct15.includes('datetime="' + item.publishedAt + '" class="time" title="北京时间">' + beijingClock + '</time>'));
+        }
+      }
+    }
     assert.match(html, /data-filter-empty/);
     assert.match(html, /data-day-count/);
     assert.match(html, /时间为北京时间/);
@@ -183,4 +199,22 @@ test("category query loads on initial page, and starred filter has no empty time
   assert.equal(starred.entries[0].slot.classList.contains("hidden"), false);
   assert.equal(starred.entries.slice(1).every((e) => e.slot.classList.contains("hidden")), true);
   assert.equal(starred.groups[0].counter.textContent, "1");
+});
+
+
+test("portable precision contract permits verified midnight and rejects unsupported metadata", async () => {
+  const { validatePortableV1Item } = await import("../scripts/portable-v1-core.ts");
+  const fixture = {
+    id: "2026-10-15-verified-midnight", title: "Verified midnight release", originalTitle: null,
+    summary: null, source: { name: "Evidence" },
+    links: { aihot: "https://example.org/items/verified/", original: "https://example.org/release" },
+    publishedAt: "2026-10-15T00:00:00.000Z", discoveredAt: "2026-10-15T01:00:00.000Z",
+    category: "evaluation", score: 92, selected: true, reason: null,
+    attribution: { name: "Evidence", url: "https://example.org/release" },
+    publishedAtPrecision: "minute",
+  };
+  assert.equal(validatePortableV1Item(fixture).publishedAtPrecision, "minute");
+  assert.equal(validatePortableV1Item({ ...fixture, publishedAtPrecision: "day" }).publishedAtPrecision, "day");
+  assert.throws(() => validatePortableV1Item({ ...fixture, publishedAtPrecision: "hour" }), /publishedAtPrecision/);
+  assert.throws(() => validatePortableV1Item({ ...fixture, publishedAt: null }), /publishedAtPrecision requires publishedAt/);
 });
