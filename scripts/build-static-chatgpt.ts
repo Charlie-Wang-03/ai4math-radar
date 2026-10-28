@@ -31,7 +31,7 @@ function beijingParts(iso:string){
 function publicationParts(item: PortableV1Item) {
   const published = item.publishedAt;
   const stamp = published ?? item.discoveredAt;
-  const legacyDayOnly = published !== null && /^\\d{4}-\\d{2}-\\d{2}T00:00:00(?:\\.0+)?Z$/.test(published);
+  const legacyDayOnly = published !== null && /^\d{4}-\d{2}-\d{2}T00:00:00(?:\.0+)?Z$/.test(published);
   const dayOnly = published !== null && (
     item.publishedAtPrecision === "day" ||
     (item.publishedAtPrecision === undefined && legacyDayOnly)
