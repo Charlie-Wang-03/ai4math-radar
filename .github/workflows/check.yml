@@ -110,6 +110,9 @@ jobs:
           test -f static-dist/assets/aihot.css
           test -f static-dist/assets/aihot.js
 
+      - name: Static timeline interaction and publication-precision regression
+        run: node --test tests/static-timeline.test.mjs
+
       - name: Web tests
         if: steps.changes.outputs.content_only != 'true'
         run: node --test apps/web/tests/*.test.ts
