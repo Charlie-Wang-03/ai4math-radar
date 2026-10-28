@@ -147,3 +147,35 @@ test("selected-content integrity rejects domain drift and chronology errors", ()
     /discoveredAt must not precede publishedAt/,
   );
 });
+
+
+test("chronology v1 supports earlier public artifacts without changing immutable event IDs", () => {
+  const base = {
+    id: "2026-10-22-example", title: "Example", originalTitle: null, summary: null,
+    source: { name: "Hexagon" },
+    links: { aihot: "https://charlie-wang-03.github.io/ai4math-radar/items/2026-10-22-example/", original: "https://hexagonmath.org/2610.00460v1" },
+    publishedAt: "2026-10-22T00:00:00.000Z",
+    discoveredAt: "2026-10-25T10:00:00.000Z",
+    category: "formal-math", score: 95, selected: true, reason: null,
+    attribution: { name: "AI4Math Radar", url: "https://example.org" },
+    chronology: {
+      eventKind: "paper-release",
+      milestone: { date: "2026-10-22", precision: "day", evidenceKind: "hexagon-v1", evidenceUrl: "https://hexagonmath.org/2610.00460v1" },
+      earliestVerifiedPublic: { date: "2026-10-14", precision: "second", at: "2026-10-14T09:27:13.000Z", evidenceKind: "github-release", evidenceUrl: "https://github.com/creelie/Breakthrough-problems-1/releases/tag/v1.0.0" },
+    },
+  };
+  const actual = validateSelectedContent(JSON.stringify(base))[0]!;
+  assert.equal(actual.id, base.id);
+  assert.equal(actual.publishedAt, base.publishedAt);
+  assert.equal(actual.chronology?.earliestVerifiedPublic?.date, "2026-10-14");
+  assert.equal(actual.chronology?.milestone.date, "2026-10-22");
+  assert.throws(() => validatePortableV1Item({
+    ...base, chronology: { ...base.chronology, earliestVerifiedPublic: { ...base.chronology.earliestVerifiedPublic, at: "2026-10-15T09:27:13Z" } }
+  }), /calendar date/);
+  assert.throws(() => validatePortableV1Item({
+    ...base, chronology: { ...base.chronology, milestone: { ...base.chronology.milestone, at: "2026-10-22T08:00:00Z" } }
+  }), /day-precision cannot assert/);
+  assert.throws(() => validatePortableV1Item({
+    ...base, chronology: { ...base.chronology, earliestVerifiedPublic: { ...base.chronology.earliestVerifiedPublic, date: "2026-10-27", at: "2026-10-27T09:27:13Z" } }
+  }), /earliest public evidence cannot be later/);
+});
