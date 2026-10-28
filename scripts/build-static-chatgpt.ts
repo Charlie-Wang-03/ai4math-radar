@@ -49,6 +49,37 @@ function publicationParts(item: PortableV1Item) {
   };
 }
 
+/** Item-page time labels: the evidence moment is UTC, while a verified clock displays in Beijing time. */
+function chronologyMomentView(moment: NonNullable<PortableV1Item["chronology"]>["milestone"]): string {
+  if (moment.precision === "day" || !moment.at)
+    return `${esc(moment.date)} <span class="chronology-precision">仅核实日期（UTC），时刻未注明</span>`;
+  const bj = beijingParts(moment.at);
+  const sec = moment.precision === "second" ? ":" + new Date(moment.at).toISOString().slice(17,19) : "";
+  return `<time datetime="${esc(moment.at)}">${esc(bj.day)} ${esc(bj.time + sec)}</time><span class="chronology-precision">北京时间 · 精度到${moment.precision === "second"?"秒":"分钟"}；UTC 日期 ${esc(moment.date)}</span>`;
+}
+function chronologyDetail(item:PortableV1Item):string {
+  const chronology = item.chronology;
+  const source = (url:string) => `<a class="chronology-evidence" href="${esc(url)}" rel="noopener noreferrer" target="_blank">查看时间证据 ↗</a>`;
+  const milestone=chronology?.milestone;
+  const first=chronology?.earliestVerifiedPublic;
+  // A legacy publishedAt placeholder is not independent evidence of public announcement.
+  const legacy=publicationParts(item);
+  const milestoneView=milestone
+    ? `${chronologyMomentView(milestone)}${source(milestone.evidenceUrl)}`
+    : `<span class="chronology-unverified">${esc(legacy.precision==="unknown"?"日期未核实":legacy.date+"（历史归档日期）")}</span><span class="chronology-precision">尚无独立里程碑时间证据；${esc(legacy.precision==="day"?"时刻未注明":"以原记录为准")}</span>`;
+  const earliestView=first
+    ? `${chronologyMomentView(first)}${source(first.evidenceUrl)}`
+    : `<span class="chronology-unverified">尚无独立核验的更早公开记录</span><span class="chronology-precision">不等于断言此前没有公开</span>`;
+  return `<section class="chronology-panel" aria-labelledby="chronology-title">
+<h2 id="chronology-title">公开时间与证据</h2>
+<div class="chronology-grid">
+<div class="chronology-entry" data-chronology-earliest><h3>首次已核实公开记录</h3><div class="chronology-value">${earliestView}</div></div>
+<div class="chronology-entry" data-chronology-milestone><h3>本次报道里程碑</h3><div class="chronology-value">${milestoneView}</div></div>
+</div>
+<p class="chronology-note">“首次已核实”仅指目前查到的同一成果最早公开证据，不代表绝对首次发现，也不代表数学结论已独立验证。仅有日期的记录不显示推测的时刻。</p>
+</section>`;
+}
+
 function icon(kind:string):string{
   const icons:Record<string,string>={
     bolt:'<svg viewBox="0 0 24 24"><path d="M13 2.5L4.5 13.5H11l-1 8L19.5 10.5H13z"/></svg>',
@@ -157,7 +188,7 @@ write("changelog/index.html",simplePage("更新日志",`<p class="feed-summary">
 write("404.html",shell(`页面不存在 · ${SITE.name}`,`<div class="card item-card"><h1>404</h1><p class="feed-summary">你访问的页面不存在。</p><a class="cta" href="${href("")}">回到精选</a></div>`,""));
 
 for(const item of items){
- const body=`<div class="item-page"><a class="item-back" href="${href("")}">← 返回精选</a><article class="card item-card"><div class="feed-head"><span>${esc(item.source.name)}</span><span class="selected-badge">精选</span>${item.score!==null?`<span class="score">AI 评分&nbsp; ${item.score}</span>`:""}</div><h1>${esc(item.title)}</h1>${item.summary?`<p class="summary">${esc(item.summary)}</p>`:""}${item.reason?`<div class="reason">推荐理由：${esc(item.reason)}</div>`:""}<a class="cta" href="${esc(item.links.original)}" rel="noopener noreferrer">阅读原始来源 ↗</a></article></div>`;
+ const body=`<div class="item-page"><a class="item-back" href="${href("")}">← 返回精选</a><article class="card item-card"><div class="feed-head"><span>${esc(item.source.name)}</span><span class="selected-badge">精选</span>${item.score!==null?`<span class="score">AI 评分&nbsp; ${item.score}</span>`:""}</div><h1>${esc(item.title)}</h1>${item.summary?`<p class="summary">${esc(item.summary)}</p>`:""}${item.reason?`<div class="reason">推荐理由：${esc(item.reason)}</div>`:""}${chronologyDetail(item)}<a class="cta" href="${esc(item.links.original)}" rel="noopener noreferrer">阅读原始来源 ↗</a></article></div>`;
  write(path.join("items",encodeURIComponent(item.id),"index.html"),shell(`${item.title} · ${SITE.name}`,body,"",item.summary??SITE.description));
 }
 
