@@ -34,6 +34,19 @@ The exporter walks all pages of `/api/v1/selected/snapshot`, validates every ite
 
 It does not require database access.
 
+## Publication date and time precision (static profile)
+
+`publishedAt` is retained for compatibility with the portable v1 interchange. The optional `publishedAtPrecision` field may be set to `day`, `minute`, or `second` **only when supported by source evidence**.
+
+- `day`: the ISO calendar date is known, but there is no reliable publication clock time. The static timeline shows **未注明** (no time); it does not convert the date to a Beijing clock time.
+- `minute` / `second`: the publication instant was verified to this precision. The static site formats it in `Asia/Shanghai`.
+- Legacy records without a precision field that are exactly `T00:00:00.000Z` are **conservatively displayed as date-only** (pending source review), not as 08:00 Beijing time. An actually verified UTC-midnight event must explicitly declare `publishedAtPrecision: "minute"` or `"second"`.
+- Non-midnight legacy timestamps retain their existing exact-time display; historical `publishedAt`, stable IDs and original links are not rewritten to guess a time.
+- If `publishedAt` is null, fallback grouping may use `discoveredAt`, but the page labels the publication time **待核实** rather than presenting discovery time as publication time.
+
+Curators should check the primary source before upgrading a record from `day` to `minute` or `second`. Day-level evidence must not be converted into an invented timestamp. The explicit `publishedAtPrecision` field is an optional extension, not a breaking change to existing canonical records.
+
+
 ## GitHub / ChatGPT mode
 
 If `static-chatgpt` becomes active, ChatGPT may create or update portable JSONL directly, but every record must satisfy the same v1 item contract.
