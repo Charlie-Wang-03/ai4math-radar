@@ -6,6 +6,8 @@ export interface PortableV1Item {
   source: { name: string };
   links: { aihot: string; original: string };
   publishedAt: string | null;
+  /** Optional evidence-backed publication precision. Legacy UTC-midnight timestamps default to date-only in the static view. */
+  publishedAtPrecision?: "day" | "minute" | "second";
   discoveredAt: string;
   category: string | null;
   score: number | null;
@@ -52,6 +54,11 @@ export function validatePortableV1Item(value: unknown, line = 1): PortableV1Item
 
   const publishedAt = v.publishedAt;
   if (publishedAt !== null && !isIsoDate(publishedAt)) throw new Error(`line ${line}: publishedAt must be an ISO date or null`);
+  const precision = v.publishedAtPrecision;
+  if (precision !== undefined && precision !== "day" && precision !== "minute" && precision !== "second") {
+    throw new Error(`line ${line}: publishedAtPrecision must be day, minute, or second`);
+  }
+  if (publishedAt === null && precision !== undefined) throw new Error(`line ${line}: publishedAtPrecision requires publishedAt`);
   if (!isIsoDate(v.discoveredAt)) throw new Error(`line ${line}: discoveredAt must be an ISO date`);
 
   if (v.category !== null && typeof v.category !== "string") throw new Error(`line ${line}: category must be a string or null`);
@@ -66,6 +73,7 @@ export function validatePortableV1Item(value: unknown, line = 1): PortableV1Item
     source: { name: (source as { name: string }).name },
     links: { aihot, original },
     publishedAt: publishedAt as string | null,
+    ...(precision !== undefined ? { publishedAtPrecision: precision as "day" | "minute" | "second" } : {}),
     discoveredAt: v.discoveredAt as string,
     category: v.category as string | null,
     score: v.score as number | null,
