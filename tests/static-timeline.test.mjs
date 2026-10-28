@@ -242,7 +242,7 @@ test("static item detail has two evidence-labelled times without changing timeli
     const unknown = getItem("2026-10-20-tao-tenth-discriminant-ai-challenge");
     assert.match(unknown, /data-chronology-earliest/);
     assert.match(unknown, /尚无独立核验的更早公开记录/);
-    assert.match(unknown, /2026-10-20（历史归档日期）/);
+    assert.match(unknown, /10月20日（历史归档日期）/);
     assert.doesNotMatch(unknown, /chronology-evidence/);
     assert.doesNotMatch(unknown, /08:00/);
 
