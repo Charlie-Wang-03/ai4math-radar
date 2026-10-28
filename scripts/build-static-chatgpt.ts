@@ -66,7 +66,7 @@ function chronologyDetail(item:PortableV1Item):string {
   const legacy=publicationParts(item);
   const milestoneView=milestone
     ? `${chronologyMomentView(milestone)}${source(milestone.evidenceUrl)}`
-    : `<span class="chronology-unverified">${esc(legacy.precision==="unknown"?"日期未核实":legacy.date+"（历史归档日期）")}</span><span class="chronology-precision">尚无独立里程碑时间证据；${esc(legacy.precision==="day"?"时刻未注明":"以原记录为准")}</span>`;
+    : `<span class="chronology-unverified">${esc(legacy.precision==="unknown"?"日期未核实":legacy.day+"（历史归档日期）")}</span><span class="chronology-precision">尚无独立里程碑时间证据；${esc(legacy.precision==="day"?"时刻未注明":"以原记录为准")}</span>`;
   const earliestView=first
     ? `${chronologyMomentView(first)}${source(first.evidenceUrl)}`
     : `<span class="chronology-unverified">尚无独立核验的更早公开记录</span><span class="chronology-precision">不等于断言此前没有公开</span>`;
