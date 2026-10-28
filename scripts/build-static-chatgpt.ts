@@ -23,6 +23,32 @@ function beijingParts(iso:string){
   const get=(t:string)=>parts.find(p=>p.type===t)?.value??"";
   return { day:`${get("year")}-${get("month")}-${get("day")}`, date:`${Number(get("month"))}月${Number(get("day"))}日`, weekday:get("weekday"), time:`${get("hour")}:${get("minute")}` };
 }
+/**
+ * Publication precision is an editorial property, not a timezone conversion.
+ * Legacy midnight-UTC timestamps were often used as day-only placeholders.
+ * Without explicit evidence of the exact instant, never render a fabricated 08:00.
+ */
+function publicationParts(item: PortableV1Item) {
+  const published = item.publishedAt;
+  const stamp = published ?? item.discoveredAt;
+  const legacyDayOnly = published !== null && /^\\d{4}-\\d{2}-\\d{2}T00:00:00(?:\\.0+)?Z$/.test(published);
+  const dayOnly = published !== null && (
+    item.publishedAtPrecision === "day" ||
+    (item.publishedAtPrecision === undefined && legacyDayOnly)
+  );
+  // At day precision, the date is a calendar date, not an instant to convert to UTC+8.
+  const reference = dayOnly ? published!.slice(0, 10) + "T04:00:00.000Z" : stamp;
+  const parts = beijingParts(reference);
+  const unknown = published === null;
+  return {
+    ...parts,
+    time: dayOnly ? "未注明" : unknown ? "待核实" : parts.time,
+    dateTime: dayOnly ? published!.slice(0, 10) : stamp,
+    precision: dayOnly ? "day" : unknown ? "unknown" : "exact",
+    sortAt: Date.parse(stamp),
+  };
+}
+
 function icon(kind:string):string{
   const icons:Record<string,string>={
     bolt:'<svg viewBox="0 0 24 24"><path d="M13 2.5L4.5 13.5H11l-1 8L19.5 10.5H13z"/></svg>',
@@ -82,21 +108,41 @@ ${item.reason?`<div class="reason">推荐理由：${esc(item.reason)}</div>`:""}
 </article>`;
 }
 function timeline(items:PortableV1Item[]){
- if(!items.length) return `<div class="empty"><strong>这个筛选下还没有精选内容</strong><p>第一批真实 AI4Math 条目将在完成证据核验后发布；synthetic 示例不会进入正式站点。</p></div>`;
- const groups=new Map<string,{meta:ReturnType<typeof beijingParts>,items:PortableV1Item[]}>();
- for(const item of items){const meta=beijingParts(item.publishedAt??item.discoveredAt); const g=groups.get(meta.day); if(g)g.items.push(item); else groups.set(meta.day,{meta,items:[item]});}
- return [...groups.values()].map(g=>`<section class="day" data-day><div class="day-head"><span class="day-date">${esc(g.meta.date)}</span><span class="day-chevron">⌄</span><span class="day-meta">${esc(g.meta.weekday)} · ${g.items.length} 条</span></div><ol class="timeline">${g.items.map(item=>{const meta=beijingParts(item.publishedAt??item.discoveredAt);return `<li class="slot" data-feed-item-shell><time class="time">${esc(meta.time)}</time><span class="rail"></span>${feedCard(item)}</li>`;}).join("")}</ol></section>`).join("");
+  if(!items.length) return `<div class="empty"><strong>这个筛选下还没有精选内容</strong><p>第一批真实 AI4Math 条目将在完成证据核验后发布；synthetic 示例不会进入正式站点。</p></div>`;
+  const groups=new Map<string,{meta:ReturnType<typeof publicationParts>,items:PortableV1Item[]}>();
+  for(const item of items){
+    const meta=publicationParts(item);
+    const group=groups.get(meta.day);
+    if(group) group.items.push(item);
+    else groups.set(meta.day,{meta,items:[item]});
+  }
+  return [...groups.values()].map(group=>{
+    const header=`<div class="day-head"><span class="day-date">${esc(group.meta.date)}</span><span class="day-chevron">⌄</span><span class="day-meta">${esc(group.meta.weekday)} · <span data-day-count>${group.items.length}</span> 条</span></div>`;
+    const slots=group.items.map(item=>{
+      const meta=publicationParts(item);
+      const title=meta.precision==="day" ? "仅核实到首发日期；具体发布时间未注明" : meta.precision==="unknown" ? "首次发现日期；发布时间尚未核实" : "北京时间";
+      return `<li class="slot" data-feed-item-shell><time datetime="${esc(meta.dateTime)}" class="time${meta.precision==="day"?" precision-day":meta.precision==="unknown"?" precision-unknown":""}" title="${esc(title)}">${esc(meta.time)}</time><span class="rail"></span>${feedCard(item)}</li>`;
+    }).join("");
+    return `<section class="day" data-day>${header}<ol class="timeline">${slots}</ol></section>`;
+  }).join("");
 }
 function toolbar(){return `<div class="toolbar">${tabs()}<label class="search"><span class="search-icon">⌕</span><input data-search placeholder="搜索标题、摘要…" autocomplete="off"><kbd class="search-kbd">/</kbd></label></div>`;}
 function feedPage(items:PortableV1Item[],mode:"home"|"all"|"starred"){
  const title=mode==="all"?"全部 AI4Math 动态":mode==="starred"?"收藏":"精选";
- return `<div class="topline"><h1 class="page-title">${title}</h1></div>${toolbar()}<p class="subline">先扫描摘要，再展开感兴趣的内容。<a href="${href("feed.xml")}">订阅 AI4Math Radar RSS →</a></p>${timeline(items)}`;
+ return `<div class="topline"><h1 class="page-title">${title}</h1></div>${toolbar()}<p class="subline">先扫描摘要，再展开感兴趣的内容。时间为北京时间；「未注明」表示仅核实到日期。<a href="${href("feed.xml")}">订阅 AI4Math Radar RSS →</a></p>${timeline(items)}<div class="empty hidden" data-filter-empty role="status" aria-live="polite"><strong>没有匹配的内容</strong><p>请尝试更换分类、搜索词或收藏条件。</p></div>`;
 }
 function legalPage(file:string,title:string,active:string){const raw=readFileSync(path.join(ROOT,"industry/pages",file),"utf8");return shell(`${title} · ${SITE.name}`,`<div class="topline"><h1 class="page-title">${esc(title)}</h1></div><div class="legal" style="margin-top:20px">${esc(raw)}</div>`,active);}
 function simplePage(title:string,body:string,active:string){return shell(`${title} · ${SITE.name}`,`<div class="topline"><h1 class="page-title">${esc(title)}</h1></div><div class="card item-card" style="margin-top:20px">${body}</div>`,active);}
 
 const canonicalPath=path.join(ROOT,"portable/content/selected.jsonl");
-const items=parsePortableJsonl(readFileSync(canonicalPath,"utf8")).filter(i=>i.selected).sort((a,b)=>Date.parse(b.publishedAt??b.discoveredAt)-Date.parse(a.publishedAt??a.discoveredAt));
+const items=parsePortableJsonl(readFileSync(canonicalPath,"utf8")).filter(i=>i.selected).sort((a,b)=>{
+  const left=publicationParts(a), right=publicationParts(b);
+  // Calendar-day records belong to the recorded day and follow exact-time reports within that day.
+  return right.day.localeCompare(left.day)
+    || Number(left.precision!=="exact")-Number(right.precision!=="exact")
+    || right.sortAt-left.sortAt
+    || a.id.localeCompare(b.id);
+});
 mkdirSync(OUT,{recursive:true});
 mkdirSync(path.join(OUT,"assets"),{recursive:true});
 copyFileSync(path.join(ROOT,"static/aihot.css"),path.join(OUT,"assets/aihot.css"));
