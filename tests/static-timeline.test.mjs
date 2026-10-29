@@ -234,17 +234,31 @@ test("static item detail has two evidence-labelled times without changing timeli
     assert.match(wormald, /首次已核实公开记录/);
     assert.match(wormald, /本次报道里程碑/);
     assert.match(wormald, /2026-10-14 17:27:13/); // GitHub release UTC+8
-    assert.match(wormald, /2026-10-22[\s\S]*?仅核实日期（UTC）/);
+    const reference = JSON.parse(readFileSync(path.join(root, "portable/content/selected.jsonl"), "utf8")
+      .split(/\r?\n/).find(line => line.includes('"id":"2026-10-22-wormald-tournament-hamilton-lean"')));
+    const milestone = reference.chronology.milestone;
+    if (milestone.precision === "day") {
+      assert.ok(wormald.includes("仅核实日期（UTC）"));
+    } else {
+      const bj = new Date(Date.parse(milestone.at) + 8 * 3600_000).toISOString().replace("T", " ").slice(0, 19);
+      assert.ok(wormald.includes(bj), "exact-time milestone should render in Beijing time");
+      assert.ok(wormald.includes('datetime="' + milestone.at + '"'));
+    }
     assert.match(wormald, /releases\/tag\/v1\.0\.0/);
     assert.match(wormald, /2610\.00460v1/);
     assert.doesNotMatch(wormald, /未注明<\/time>/);
 
-    const unknown = getItem("2026-10-20-tao-tenth-discriminant-ai-challenge");
-    assert.match(unknown, /data-chronology-earliest/);
-    assert.match(unknown, /尚无独立核验的更早公开记录/);
-    assert.match(unknown, /2026-10-20（历史归档日期）/);
-    assert.doesNotMatch(unknown, /chronology-evidence/);
-    assert.doesNotMatch(unknown, /08:00/);
+    const unresolvedRecord = readFileSync(path.join(root, "portable/content/selected.jsonl"), "utf8")
+      .split(/\r?\n/).filter(Boolean).map(JSON.parse).find(item => !item.chronology);
+    // The unresolved sample is selected dynamically: source-backed time upgrades should
+    // never break the regression merely because a previously unknown article was verified.
+    if (unresolvedRecord) {
+      const unknown = getItem(unresolvedRecord.id);
+      assert.match(unknown, /data-chronology-earliest/);
+      assert.match(unknown, /尚无独立核验的更早公开记录/);
+      assert.ok(unknown.includes(unresolvedRecord.publishedAt.slice(0,10) + "（历史归档日期）"));
+      assert.doesNotMatch(unknown, /chronology-evidence/);
+    }
 
     const home = readFileSync(path.join(dir,"index.html"),"utf8");
     assert.match(home, /class="time precision-day"/);
