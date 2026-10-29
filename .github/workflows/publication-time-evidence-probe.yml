@@ -25,7 +25,7 @@ jobs:
       - name: Verify no-auto-promotion guard
         run: node --test tests/publication-evidence-probe.test.mjs
       - name: Inspect explicitly allowlisted publication sources
-        run: node scripts/probe-publication-evidence.mjs evidence/time-candidates.json
+        run: node scripts/probe-publication-evidence.mjs evidence/time-candidates.json --canonical
       - name: Save research candidates for human evidence review
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
