@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { inspectPublicJson, probeOne, PROBES } from "../scripts/probe-publication-evidence.mjs";
+import { inspectPublicJson, probeOne, PROBES, deriveCanonicalProbes } from "../scripts/probe-publication-evidence.mjs";
 
 test("publication probe catalogs proposed times but never certifies or writes publishedAt", () => {
   const record = { id: 317, status: "publish", date: "2026-10-09T10:28:00",
@@ -32,4 +32,19 @@ test("hexagon and Palomar nested metadata are candidate evidence only", () => {
   assert.ok(report.observations.some(x=>x.field.includes("submitted_at")));
   assert.ok(report.observations.some(x=>x.field.includes("published_at")));
   assert.equal(report.observations.every(x=>!x.field.startsWith("publishedAt")),true);
+});
+
+test("canonical probe generation is strict to supported sources and not release-clock inference", () => {
+  const base = {publishedAt:"2026-10-16T00:00:00.000Z",links:{original:"https://terrytao.wordpress.com/2026/10/16/sair-open-math-os-released/"}};
+  const x=deriveCanonicalProbes([
+    JSON.stringify({ ...base,id:"wordpress" }),
+    JSON.stringify({ ...base,id:"hexagon",links:{original:"https://hexagonmath.org/2610.00460v2"} }),
+    JSON.stringify({ ...base,id:"palomar",links:{original:"https://palomar-registry.org/entry?id=PALOMAR-2026-10-15-000001&version=1"} }),
+    JSON.stringify({ ...base,id:"unknown",links:{original:"https://untrusted.example/fake"} }),
+    JSON.stringify({ ...base,id:"already-precise",publishedAtPrecision:"minute" }),
+  ].join("\n"));
+  assert.deepEqual(x.map(p=>p.id),["wordpress","hexagon","palomar"]);
+  assert.equal(x[0].family,"wordpress-com");
+  assert.equal(x[1].url,"https://hexagonmath.org/api/v1/works/2610.00460v1");
+  assert.equal(x[2].family,"palomar");
 });
