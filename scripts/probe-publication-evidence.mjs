@@ -1,4 +1,4 @@
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -19,6 +19,38 @@ export const PROBES = [
   { id: "palomar-unit-distance", family: "palomar", url: "https://data.palomar-registry.org/versions/PALOMAR-2026-10-01-000018.json" },
   { id: "palomar-recent", family: "palomar", url: "https://data.palomar-registry.org/recent.json" },
 ];
+
+// Use only canonical selected records and known provider APIs. Data and result IDs are
+// descriptive, not URLs the caller may choose. No result automatically updates any news row.
+export function deriveCanonicalProbes(text) {
+  const records = text.split(/\\r?\\n/).filter(Boolean).map(line=>JSON.parse(line));
+  const result=[];
+  for(const item of records){
+    if(!item.publishedAt || !/^\\d{4}-\\d{2}-\\d{2}T00:00:00(?:\\.0+)?Z$/.test(item.publishedAt)
+       || item.publishedAtPrecision)continue;
+    const original=new URL(item.links.original);
+    let api=null,family=null;
+    if(original.hostname==="hexagonmath.org"){
+      const hit=original.pathname.match(/^\\/(\\d{4}\\.\\d{5})(?:v\\d+)?\\/?$/);
+      if(hit){api="https://hexagonmath.org/api/v1/works/"+hit[1]+"v1";family="hexagon";}
+    }else if(["terrytao.wordpress.com","xenaproject.wordpress.com"].includes(original.hostname)){
+      const parts=original.pathname.split("/").filter(Boolean);
+      if(parts.length===4&&/^\\d{4}$/.test(parts[0])&&/^\\d{2}$/.test(parts[1])
+        &&/^\\d{2}$/.test(parts[2])&&/^[a-z0-9-]+$/.test(parts[3])){
+        api="https://public-api.wordpress.com/rest/v1.1/sites/"+original.hostname+"/posts/slug:"+parts[3];
+        family="wordpress-com";
+      }
+    }else if(original.hostname==="palomar-registry.org"){
+      const id=original.searchParams.get("id"),version=original.searchParams.get("version");
+      if(id&&/^PALOMAR-\\d{4}-\\d{2}-\\d{2}-\\d{6}$/.test(id)&&/^\\d+$/.test(version??"")){
+        api="https://data.palomar-registry.org/versions/"+id+".json";family="palomar";
+      }
+    }
+    if(api)result.push({id:item.id,family,url:api,sourceUrl:item.links.original,
+      expectedUtcDay:item.publishedAt.slice(0,10)});
+  }
+  return result;
+}
 
 const HOSTS = new Set(["terrytao.wordpress.com","xenaproject.wordpress.com",
   "public-api.wordpress.com","hexagonmath.org","data.palomar-registry.org"]);
@@ -57,6 +89,13 @@ export async function probeOne(probe, fetcher=fetch) {
       ok:response.ok,contentType:response.headers.get("content-type")?.slice(0,100)??null,
       bytes:body.length,parsedJson:data!==null,
       ...(data!==null?inspectPublicJson(data):{keys:[],observations:[]}),
+      ...(data!==null ? {identity:probe.family==="hexagon"
+        ? {identifier:data?.work?.identifier??data?.work?.id??null,title:String(data?.work?.title??"").slice(0,160)}
+        : probe.family==="wordpress-com"
+        ? {url:data?.URL??null,slug:data?.slug??null,status:data?.status??null}
+        : probe.family==="palomar"
+        ? {versionIndexPreview:JSON.stringify(data?.entries?.slice?.(0,3)??data?.entries??[]).slice(0,850)}
+        : null} : {}),
       ms:Date.now()-started};
   }catch(error){
     return {id:probe.id,family:probe.family,url:probe.url,ok:false,
@@ -73,11 +112,13 @@ export async function probeAll(probes=PROBES,fetcher=fetch) {
 }
 if(process.argv[1] && import.meta.url===pathToFileURL(process.argv[1]).href) {
   const output=process.argv[2]||"time-evidence-candidates.json";
-  const data=await probeAll();
+  const fullScan=process.argv.includes("--canonical");
+  const probes=fullScan ? deriveCanonicalProbes(readFileSync("portable/content/selected.jsonl","utf8")) : PROBES;
+  const data=await probeAll(probes);
   mkdirSync(dirname(output),{recursive:true});
   writeFileSync(output,JSON.stringify(data,null,2)+"\n");
   console.log("TARGETED_PUBLICATION_PROBE_SUMMARY="+JSON.stringify({
-    output,probes:data.probes.length,httpOk:data.probes.filter(x=>x.ok).length,
+    mode:fullScan?"canonical":"fixed",output,probes:data.probes.length,httpOk:data.probes.filter(x=>x.ok).length,
     jsonOk:data.probes.filter(x=>x.ok&&x.parsedJson).length,
     familyStats:Object.fromEntries([...new Set(data.probes.map(x=>x.family))].map(f=>[f,{
       count:data.probes.filter(x=>x.family===f).length,
