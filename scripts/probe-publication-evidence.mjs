@@ -85,6 +85,27 @@ export async function probeOne(probe, fetcher=fetch) {
     const body=await response.text();
     if(body.length>1400000)throw new Error("response too large");
     let data; try{data=JSON.parse(body)}catch{data=null}
+    let versionRecord=null;
+    if(probe.family==="palomar"&&response.ok&&data&&Array.isArray(data.entries)){
+      const expectedId=probe.url.match(/versions\/(PALOMAR-\d{4}-\d{2}-\d{2}-\d{6})\.json$/)?.[1];
+      const expectedVersion=Number(probe.sourceUrl?.match(/[?&]version=(\d+)/)?.[1]);
+      const selected=data.entries.find(e=>e.id===expectedId&&e.version===expectedVersion&&
+        e.path===("entries/"+expectedId+"-v"+expectedVersion+".json"));
+      if(selected){
+        const childUrl="https://data.palomar-registry.org/"+selected.path;
+        try{
+          const child=await fetcher(childUrl,{redirect:"error",
+            headers:{Accept:"application/json"},signal:AbortSignal.timeout(10000)});
+          const raw=await child.text();
+          const json=child.ok&&raw.length<1000000?JSON.parse(raw):null;
+          versionRecord={url:childUrl,status:child.status,ok:child.ok,
+            ...(json?{keys:Object.keys(json).slice(0,60),...inspectPublicJson(json),
+             title:String(json.title??json.entry?.title??"").slice(0,170),
+             id:json.id??json.entry?.id??null,
+             version:json.version??json.entry?.version??null}: {})};
+        }catch(error){versionRecord={url:childUrl,ok:false,error:String(error).slice(0,180)};}
+      }
+    }
     return {id:probe.id,family:probe.family,url:probe.url,status:response.status,
       ok:response.ok,contentType:response.headers.get("content-type")?.slice(0,100)??null,
       bytes:body.length,parsedJson:data!==null,
@@ -96,7 +117,7 @@ export async function probeOne(probe, fetcher=fetch) {
         : probe.family==="palomar"
         ? {versionIndexPreview:JSON.stringify(data?.entries?.slice?.(0,3)??data?.entries??[]).slice(0,850)}
         : null} : {}),
-      ms:Date.now()-started};
+      ...(versionRecord?{versionRecord}:{}),ms:Date.now()-started};
   }catch(error){
     return {id:probe.id,family:probe.family,url:probe.url,ok:false,
       error:String(error).slice(0,220),ms:Date.now()-started};
