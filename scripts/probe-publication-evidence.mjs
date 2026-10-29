@@ -23,26 +23,26 @@ export const PROBES = [
 // Use only canonical selected records and known provider APIs. Data and result IDs are
 // descriptive, not URLs the caller may choose. No result automatically updates any news row.
 export function deriveCanonicalProbes(text) {
-  const records = text.split(/\\r?\\n/).filter(Boolean).map(line=>JSON.parse(line));
+  const records = text.split(/\r?\n/).filter(Boolean).map(line=>JSON.parse(line));
   const result=[];
   for(const item of records){
-    if(!item.publishedAt || !/^\\d{4}-\\d{2}-\\d{2}T00:00:00(?:\\.0+)?Z$/.test(item.publishedAt)
+    if(!item.publishedAt || !/^\d{4}-\d{2}-\d{2}T00:00:00(?:\.0+)?Z$/.test(item.publishedAt)
        || item.publishedAtPrecision)continue;
     const original=new URL(item.links.original);
     let api=null,family=null;
     if(original.hostname==="hexagonmath.org"){
-      const hit=original.pathname.match(/^\\/(\\d{4}\\.\\d{5})(?:v\\d+)?\\/?$/);
+      const hit=original.pathname.match(/^\/(\d{4}\.\d{5})(?:v\d+)?\/?$/);
       if(hit){api="https://hexagonmath.org/api/v1/works/"+hit[1]+"v1";family="hexagon";}
     }else if(["terrytao.wordpress.com","xenaproject.wordpress.com"].includes(original.hostname)){
       const parts=original.pathname.split("/").filter(Boolean);
-      if(parts.length===4&&/^\\d{4}$/.test(parts[0])&&/^\\d{2}$/.test(parts[1])
-        &&/^\\d{2}$/.test(parts[2])&&/^[a-z0-9-]+$/.test(parts[3])){
+      if(parts.length===4&&/^\d{4}$/.test(parts[0])&&/^\d{2}$/.test(parts[1])
+        &&/^\d{2}$/.test(parts[2])&&/^[a-z0-9-]+$/.test(parts[3])){
         api="https://public-api.wordpress.com/rest/v1.1/sites/"+original.hostname+"/posts/slug:"+parts[3];
         family="wordpress-com";
       }
     }else if(original.hostname==="palomar-registry.org"){
       const id=original.searchParams.get("id"),version=original.searchParams.get("version");
-      if(id&&/^PALOMAR-\\d{4}-\\d{2}-\\d{2}-\\d{6}$/.test(id)&&/^\\d+$/.test(version??"")){
+      if(id&&/^PALOMAR-\d{4}-\d{2}-\d{2}-\d{6}$/.test(id)&&/^\d+$/.test(version??"")){
         api="https://data.palomar-registry.org/versions/"+id+".json";family="palomar";
       }
     }
