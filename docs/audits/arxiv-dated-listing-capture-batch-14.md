@@ -42,3 +42,18 @@ The new `scripts/capture-arxiv-dated-listings.mjs` captures ten **explicitly all
 ## Fail-closed archive health (review repair)
 
 The CLI writes the bounded JSON audit artifact first, then **sets a nonzero exit code** if no official-source, dated heading group contains any valid arXiv article ID. GitHub Actions uses `if: always()` for its upload step, so failure preserves diagnostics without falsely claiming that evidence was collected. A capture containing dated paper groups but zero matches to the current Radar catalog remains valid (a legitimate editorial slow day). Other per-source partial failures remain visible in the artifact's individual HTTP statuses and should be monitored separately.
+
+## Batch 15 follow-up — replayable source payloads and historical probes
+
+The first Batch 14 artifact retained only page **hashes and parsed ID/day pairs**. Once the upstream rolling page changes, a digest alone cannot reconstruct or independently verify the observed markup. This patch therefore retains **inert, gzip-compressed raw official HTML response bytes** alongside the JSON, for each successful category request. Every JSON entry includes `rawEvidence.relativePath`, raw-response SHA-256, compressed-file SHA-256 and compressed byte length; tests decompress and check bitwise fidelity to fetched UTF-8 bytes. These archived HTML files must be treated as **untrusted source data**, never executed or served as application HTML.
+
+For the two unresolved history cases, the workflow additionally probes original older-category monthly pages **only in PR/manual executions**:
+
+| Record | Fixed official original listing | Research goal |
+| --- | --- | --- |
+| ProofNet (`2302.12433`) | `https://arxiv.org/list/cs.CL/2302?show=2000&skip=0` | Look for ID under an explicit February 2023 daily heading |
+| Lean Atlas (`2604.16347`) | `https://arxiv.org/list/cs.HC/2604?show=2000&skip=0` | Look for ID under an explicit April 2026 daily heading |
+
+The monthly URL **by itself never verifies a day**. Only a returned page that *actually contains the exact arXiv ID under a dated heading* yields a candidate. It still requires v1 versus revised/cross-listed record reconciliation and review before changing chronology. Both older pages are preserved as gzip evidence when accessible; if a remote request fails or no dated group appears, status remains unresolved. This research probe does not run on the recurring schedule and never changes `selected.jsonl`.
+
+Validation: read-only GitHub Actions workflow with code tests plus real response count, raw gzip digests and URL/ID evidence inspection. 90-day artifact retention is **not permanent storage**; any long-term archival solution must be reviewed separately with provenance, security and retention policies.
