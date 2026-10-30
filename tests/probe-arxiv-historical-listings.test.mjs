@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import {createHash} from "node:crypto";
 import {mkdtempSync,readFileSync,rmSync} from "node:fs";
 import {tmpdir} from "node:os";
 import {join} from "node:path";
@@ -19,7 +20,7 @@ test("exact ID under dated heading is only a candidate, not certified first-publ
     called++;
     assert.equal(opts.redirect,"error");
     assert.equal(new URL(url).hostname,"arxiv.org");
-    return {ok:true,status:200,text:async()=>page};
+    return {ok:true,status:200,arrayBuffer:async()=>Buffer.from(page)};
   };
   const x=await inspectArchive(TARGETS[0],request);
   assert.equal(x.groupsFound,1);
@@ -36,9 +37,20 @@ test("exact ID under dated heading is only a candidate, not certified first-publ
   assert.equal(called,2);
 });
 test("HTTP errors and missing IDs cannot manufacture publication dates",async()=>{
-  const a=await inspectArchive(TARGETS[0],async()=>({ok:false,status:404,text:async()=>"Not Found"}));
+  const a=await inspectArchive(TARGETS[0],async()=>({ok:false,status:404,arrayBuffer:async()=>Buffer.from("Not Found")}));
   assert.equal(a.ok,false);assert.deepEqual(a.matches,[]);
   const b=await inspectArchive(TARGETS[0],async()=>({ok:true,status:200,
-    text:async()=>'<h3>Mon, 27 Feb 2023</h3><dt><a href="/abs/2302.00001">x</a></dt>'}));
+    arrayBuffer:async()=>Buffer.from('<h3>Mon, 27 Feb 2023</h3><dt><a href="/abs/2302.00001">x</a></dt>')}));
   assert.equal(b.ok,true);assert.deepEqual(b.matches,[]);
+});
+
+test("historic response BOM is archived bitwise rather than text-normalized",async()=>{
+  const bytes=Buffer.concat([Buffer.from([0xef,0xbb,0xbf]),Buffer.from(page)]);
+  const source=await inspectArchive(TARGETS[0],async()=>({ok:true,status:200,arrayBuffer:async()=>bytes}));
+  assert.equal(source.responseSha256,createHash("sha256").update(bytes).digest("hex"));
+  const dir=mkdtempSync(join(tmpdir(),"arxiv-history-bom-"));
+  try{
+    archiveHistoricRaw({results:[source]},dir);
+    assert.deepEqual(gunzipSync(readFileSync(join(dir,"2302.12433-cs.CL.html.gz"))),bytes);
+  }finally{rmSync(dir,{recursive:true,force:true});}
 });
