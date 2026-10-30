@@ -26,8 +26,15 @@ export function deriveCanonicalProbes(text) {
   const records = text.split(/\r?\n/).filter(Boolean).map(line=>JSON.parse(line));
   const result=[];
   for(const item of records){
-    if(!item.publishedAt || !/^\d{4}-\d{2}-\d{2}T00:00:00(?:\.0+)?Z$/.test(item.publishedAt)
-       || item.publishedAtPrecision)continue;
+    // Both legacy implicit date-only values and newer explicit "day" markers
+    // need provenance probing. Never re-probe already verified exact milestones
+    // (including immutable cross-UTC-day permalink conflicts).
+    const dayPlaceholder=/^\d{4}-\d{2}-\d{2}T00:00:00(?:\.0+)?Z$/.test(item.publishedAt??"");
+    const dayPrecision=item.publishedAtPrecision==="day" ||
+      (item.publishedAtPrecision===undefined && dayPlaceholder);
+    if(item.selected!==true || !dayPrecision ||
+       item.chronology?.milestone?.precision==="second" ||
+       item.chronology?.milestone?.precision==="minute")continue;
     const original=new URL(item.links.original);
     let api=null,family=null;
     if(original.hostname==="hexagonmath.org"){
