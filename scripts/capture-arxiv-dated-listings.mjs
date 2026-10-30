@@ -3,6 +3,7 @@
  * later revisions/crosslists can be present. No canonical write path exists here.
  */
 import {createHash} from "node:crypto";
+import {gzipSync} from "node:zlib";
 import {readFileSync,mkdirSync,writeFileSync} from "node:fs";
 import {dirname} from "node:path";
 import {pathToFileURL} from "node:url";
@@ -59,11 +60,16 @@ export async function captureOne(category,fetcher=fetch) {
     const res=await fetcher(url,{redirect:"error",headers:{Accept:"text/html"},
       signal:AbortSignal.timeout(15000)});
     const body=await res.text();
-    if(body.length>3800000)throw new Error("large response rejected");
-    return {category,url,status:res.status,ok:res.ok,
-      sha256:createHash("sha256").update(body).digest("hex"),bytes:body.length,
+    const bodyBytes=Buffer.from(body,"utf8");
+    if(bodyBytes.length>3800000)throw new Error("large response rejected");
+    const result={category,url,status:res.status,ok:res.ok,
+      sha256:createHash("sha256").update(bodyBytes).digest("hex"),bytes:bodyBytes.length,
       groups:res.ok?parseDatedListing(body):[],
       ...(res.ok?{}:{error:"HTTP "+res.status})};
+    // Preserve original bytes separately, without bloating or executing the JSON log.
+    // This property is intentionally non-enumerable and is never emitted in console logs.
+    if(res.ok)Object.defineProperty(result,"sourceHtml",{value:bodyBytes,enumerable:false});
+    return result;
   }catch(error){return {category,url,ok:false,error:String(error).slice(0,220),groups:[]};}
 }
 export async function captureAll(categories=CATEGORIES,fetcher=fetch,spacingMs=3300,
@@ -92,6 +98,30 @@ export async function captureAll(categories=CATEGORIES,fetcher=fetch,spacingMs=3
     rules:"News data is read-only; dated listing can include cross-lists and revisions. Verify paper v1 and event identity separately; no inferred precise clock.",
     snapshots};
 }
+/**
+ * Archive the exact UTF-8 response bytes alongside parsed listings. Source markup
+ * remains inert .html.gz files, never served or executed by the static site.
+ * The JSON contains relative filename, raw SHA-256 and compressed hash for replay.
+ */
+export function archiveSourceSnapshots(data,rawDir) {
+  mkdirSync(rawDir,{recursive:true});
+  let archived=0;
+  for(const snapshot of data.snapshots??[]){
+    const raw=snapshot.sourceHtml;
+    if(!snapshot.ok||!Buffer.isBuffer(raw))continue;
+    if(!CATEGORIES.includes(snapshot.category))throw new Error("unapproved category filename");
+    const name=snapshot.category+".html.gz";
+    const compressed=gzipSync(raw,{level:9,mtime:0});
+    const rawDigest=createHash("sha256").update(raw).digest("hex");
+    if(rawDigest!==snapshot.sha256)throw new Error("raw evidence digest mismatch");
+    writeFileSync(rawDir+"/"+name,compressed,{flag:"w"});
+    snapshot.rawEvidence={relativePath:"arxiv-source-pages/"+name,
+      rawSha256:rawDigest,gzipSha256:createHash("sha256").update(compressed).digest("hex"),
+      gzipBytes:compressed.length};
+    archived++;
+  }
+  return archived;
+}
 export function hasUsableDatedListingEvidence(data) {
   return Array.isArray(data?.snapshots) && data.snapshots.some(snapshot =>
     snapshot.ok===true && Array.isArray(snapshot.groups) &&
@@ -102,8 +132,9 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
   const output=process.argv[2]||"evidence/arxiv-dated-listings.json";
   const data=await captureAll();
   mkdirSync(dirname(output),{recursive:true});
+  const archived=archiveSourceSnapshots(data,dirname(output)+"/arxiv-source-pages");
   writeFileSync(output,JSON.stringify(data,null,2)+"\n");
-  console.log("OFFICIAL_ARXIV_LISTING_CAPTURE="+JSON.stringify({output,ok:data.ok,
+  console.log("OFFICIAL_ARXIV_LISTING_CAPTURE="+JSON.stringify({output,ok:data.ok,archived,
     requested:data.providers,groupCount:data.snapshots.reduce((n,s)=>n+s.groups.length,0),
     matched:data.matchedNews.length}));
   for(const x of data.matchedNews)console.log("LISTING_CANDIDATE="+JSON.stringify(x));
