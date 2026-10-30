@@ -40,6 +40,12 @@ test('reject OAI identity mismatch and provider-side missing records',()=>{
   assert.equal(bad.matched,false);
   assert.equal(bad.errorCode,'idDoesNotExist');
 });
+test('reject nested markup rather than attempt incomplete HTML sanitization',()=>{
+  const adversarial=xml.replace('<id>2604.16347</id>','<id><script>2604.16347</script></id>');
+  const result=inspectOaiXml(adversarial,'2604.16347');
+  assert.equal(result.matched,false);
+  assert.equal(result.error,'metadata identifier mismatch');
+});
 test('read-only fetch rejects redirects and cannot promote date',async()=>{
   const x=extractArxivItems(JSON.stringify(item))[0];
   const result=await probeOai(x,async(url,options)=>{
