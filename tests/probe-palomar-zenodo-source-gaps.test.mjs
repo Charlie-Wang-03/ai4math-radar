@@ -45,6 +45,8 @@ test("specific version identity mismatch is not approved",async()=>{
 });
 test("only two literal predefined original source targets can be probed",async()=>{
  await assert.rejects(()=>investigate({...TARGETS[1],eventId:"foreign-record"},fake),/unknown fixed source/);
+ await assert.rejects(()=>investigate({...TARGETS[1],dataciteUrl:"https://api.datacite.org/dois/unrelated"},fake),/unknown fixed source/);
+ await assert.rejects(()=>investigate({...TARGETS[1],url:"https://zenodo.org/api/records/12345"},fake),/unknown fixed source/);
  const r=await investigateAll(TARGETS,fake);
  assert.equal(r.items.length,2);
  assert.equal(Object.hasOwn(r.items[0],"publishedAt"),false);
