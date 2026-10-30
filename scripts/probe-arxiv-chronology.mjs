@@ -56,7 +56,7 @@ export function inspectOaiXml(xml, expectedId) {
   const metadata=xml.match(/<metadata(?:\s[^>]*)?>([\s\S]*?)<\/metadata>/i)?.[1]??'';
   if(!metadata)return {matched:false,error:'metadata missing'};
   const metadataId=tag(metadata,'id');
-  if(metadataId&&metadataId!==expectedId)
+  if(metadataId!==expectedId)
     return {matched:false,error:'metadata identifier mismatch',metadataId};
   const versions=[...metadata.matchAll(/<(?:[\w.-]+:)?version\b([^>]*)>([\s\S]*?)<\/(?:[\w.-]+:)?version\s*>/gi)]
     .slice(0,12).map(x=>({version:x[1].match(/\bversion=["']([^"']+)["']/i)?.[1]||tag(x[2],'version')||null,
