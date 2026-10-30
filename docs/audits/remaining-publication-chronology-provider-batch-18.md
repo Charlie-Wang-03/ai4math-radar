@@ -3,8 +3,8 @@
 ## Scope and contract
 
 - Baseline: `main@00e87063f6a25e55c3232de37915676d6d7d9161` immediately after Batch 17, **314** selected stories and **97** legacy date-only clocks. This report reviews every one of those 97 rows and does **not** assume all 97 historical dates are wrong.
-- The 97 split into **8** already carrying a verified **exact** alternate chronology milestone, but preserving a legacy date-only `publishedAt` for permalink/feed compatibility; **63** with a source-backed **day-only** milestone; and **26** without a verified optional chronology record.
-- The current PR adds **eight first-party-supported day-only milestones** (AGMAI, two SAIR competitions, First Proof, author sorting-network paper, Axiom, CICM Workshop, o3/FrontierMath announcement), including **one correction to the false CICM September 25 meeting date** in the summary. Original IDs, `publishedAt`, scores and all original source links remain stable.
+- The 97 split into **8** already carrying a verified **exact** alternate chronology milestone, but preserving a legacy date-only `publishedAt` for permalink/feed compatibility; **64** with a source-backed **day-only** milestone; and **25** without a verified optional chronology record.
+- The current PR adds **nine first-party-supported day-only milestones** (AGMAI, two SAIR competitions, First Proof, author sorting-network paper, Axiom, CICM Workshop, o3/FrontierMath announcement, and Epoch's 2/68 Astra result), including **one correction to the false CICM September 25 meeting date** in the summary. Original IDs, `publishedAt`, scores and all original source links remain stable.
 - Primary official dates indicate **publication day, event start day, author first-posted day, registration day or a specific software/artifact milestone** depending on the actual evidence. They do not imply a verified clock and do not certify claimed mathematical proofs.
 - This ledger enumerates `links.original` *hosts* (one row per article, not per news brand). An allowed source date in `chronology` is evidence for a **specified milestone**, not necessarily the absolute earliest public disclosure of all mathematical claims.
 
@@ -13,7 +13,7 @@
 | Original host | Legacy date-only | Exact chronology already known | Day-only chronology | Unresolved |
 | --- | ---: | ---: | ---: | ---: |
 | `arxiv.org` | 21 | 0 | 9 | 12 |
-| `epoch.ai` | 15 | 0 | 12 | 3 |
+| `epoch.ai` | 15 | 0 | 13 | 2 |
 | `openai.com` | 8 | 0 | 8 | 0 |
 | `github.com` | 6 | 2 | 0 | 4 |
 | `www.proofatlas.ai` | 4 | 0 | 4 | 0 |
@@ -49,9 +49,9 @@
 | `www.mefyi.com` | 1 | 0 | 1 | 0 |
 | `axiommath.ai` | 1 | 0 | 1 | 0 |
 | `palomar-registry.org` | 1 | 1 | 0 | 0 |
-| **TOTAL** | **97** | **8** | **63** | **26** |
+| **TOTAL** | **97** | **8** | **64** | **25** |
 
-## Eight adjudications in this PR
+## Nine adjudications in this PR
 
 1. **CICM AI4Math Workshop**: conference website gives overall CICM dates Sep21–25, but [workshop general information](https://cicm-conference.org/2026/cicm.php?event=ai4math&menu=general) explicitly says held **Monday Sep21**. The legacy title/summary conflated **Sep25 conference end** with **workshop day**; correct summary to Sep21, add `chronology.milestone.date=2026-09-21`. Immutable id and legacy publishedAt Sept25 remain for compatibility, **not** a factual certification of Sept25.
 2. **AGMAI independent math advisory group**: [OpenAI's original Sept21 statement](https://openai.com/index/advisory-group-on-mathematics-and-ai/) announces the independently operating organization; AGMAI's original [About page](https://agmai.org/) is dated Sep22. The two organizations' published days are **separate reporting milestones**. Record Sept21 institutional disclosure without recasting the body as a paid internal OpenAI board.
@@ -61,6 +61,8 @@
 6. **Sorting network S(13)=45**: author's [original public manuscript page](https://www.mefyi.com/papers/sorting-networks-13-inputs-45/) explicitly says **first posted Oct21**; the linked later Zenodo or Hexagon artifact is not automatically first disclosure.
 7. **Axiom CFSG**: original [institutional article](https://axiommath.ai/research/the-enormous-theorem-formalized/) explicitly dated **Oct26**; no clock, independent verification of Lean reconstruction or statement fidelity not performed.
 8. **OpenAI o3 FrontierMath 25.2% claim**: Epoch's [first-party ABOUT](https://epoch.ai/frontiermath/tiers-1-4/about) explicitly attributes the reported result to **OpenAI's Dec20, 2024 public announcement**, not to Epoch's current mutable leaderboard or a later third-party retrospective.
+
+9. **Astra FrontierMath Erdős 2/68**: Epoch's [original Sept1, 2026 announcement](https://epoch.ai/latest/announcing-frontiermath-erdos) already reports the **2/68** fixed-budget result for the **pre-release** Astra model. The previously claimed Sep3 results update has no independent original source. Correct the news summary to state Sep1 first disclosure; keep the old Sep3 permalink and compatibility `publishedAt` unchanged.
 
 ## Per-record evidence and disposition — all 97
 
@@ -91,7 +93,7 @@
 | 23 | `2026-09-06-bugeaud-10-61-ai-formalization` | [aixiv.online](https://aixiv.online/abs/2609.01723) | 2026-09-06 | — | `UNVERIFIED_EVENT_DATE_OR_CLOCK` | Source page does not independently certify this specific public event at an exact clock. Keep unresolved. |
 | 24 | `2026-09-04-chafai-codex-lean-theorem-1-9` | [djalil.chafai.net](https://djalil.chafai.net/blog/2026/09/04/lean-formalization-with-ai/) | 2026-09-04 | `2026-09-04` (day) | `DAY_MILESTONE_ONLY` | A source-backed calendar day is recorded; no independently verified first-public hour/minute. |
 | 25 | `2026-09-03-kothe-astra-autonomous` | [github.com](https://github.com/tadamcz/koethe) | 2026-09-03 | — | `UNVERIFIED_EVENT_DATE_OR_CLOCK` | GitHub repo created Sep3; dependency-update PR is not the theorem disclosure. |
-| 26 | `2026-09-03-frontiermath-erdos-astra` | [epoch.ai](https://epoch.ai/latest/announcing-frontiermath-erdos) | 2026-09-03 | — | `UNVERIFIED_EVENT_DATE_OR_CLOCK` | Cited Epoch official source is Sep 1 benchmark launch. No independent Sep 3 result-disclosure date on that source. |
+| 26 | `2026-09-03-frontiermath-erdos-astra` | [epoch.ai](https://epoch.ai/latest/announcing-frontiermath-erdos) | 2026-09-03 | `2026-09-01` (day) | `DAY_MILESTONE_ONLY` | Same original Sept1 announcement already reports Astra's 2/68 result; Sept3 result-update description was incorrect and is fixed in summary. |
 | 27 | `2026-09-01-frontiermath-erdos-launch` | [epoch.ai](https://epoch.ai/latest/announcing-frontiermath-erdos) | 2026-09-01 | `2026-09-01` (day) | `DAY_MILESTONE_ONLY` | A source-backed calendar day is recorded; no independently verified first-public hour/minute. |
 | 28 | `2026-08-01-openai-ten-advances` | [openai.com](https://openai.com/index/ten-advances-in-mathematics/) | 2026-08-01 | `2026-08-01` (day) | `DAY_MILESTONE_ONLY` | A source-backed calendar day is recorded; no independently verified first-public hour/minute. |
 | 29 | `2026-08-05-sendov-proof-candidate` | [www.proofatlas.ai](https://www.proofatlas.ai/formalizations/sendov-conjecture/) | 2026-08-05 | `2026-08-05` (day) | `DAY_MILESTONE_ONLY` | A source-backed calendar day is recorded; no independently verified first-public hour/minute. |
@@ -170,9 +172,9 @@
 2. **Older arXiv records:** a v1 submission click, OAI-PMH metadata modification day and rolling monthly category listing are not guaranteed first-public announcement. Lean Atlas March submission + April arXiv identifier can be consistent; ProofNet historical Feb23 archive predates Feb24 v1 submission and remains a genuine claim-relative chronology red flag. Do not infer exact 20:00 ET.
 3. **Institutional websites:** preserve day-only unless original site provides verifiable first-party `datePublished` with an actual timezone and stable publication semantics. Page edit dates, web crawler capture, schedule time and Git commit author time are not substitutes.
 4. **Mutable Epoch leaderboards:** no historical date for an update is warranted from today's live dashboard; match the exact revision/press release or preserve unresolved.
-5. **Next research targets:** 26 unresolved first (source-specific snapshot, original blog/release); for the 63 day-only records attempt second precision **only if** a genuinely public clock exists. The 8 already exact cross-day cases need a separately reviewed UI/feed migration, not fresh source crawling.
+5. **Next research targets:** 25 unresolved first (source-specific snapshot, original blog/release); for the 64 day-only records attempt second precision **only if** a genuinely public clock exists. The 8 already exact cross-day cases need a separately reviewed UI/feed migration, not fresh source crawling.
 6. Required acceptance: `npm run content:check`, static build/date regression, hosted `check`/`docker` and resolved reviews; original IDs and old public URLs preserved.
 
 ## Final accounting
 
-After this evidence-first batch, the old date-only total is **still 97**, by design. The scientifically meaningful coverage improved from **34 to 26 unverified provenance items**, plus one false workshop event day corrected in body and chronology. No invented second or minute precision was introduced.
+After this evidence-first batch, the old date-only total is **still 97**, by design. The scientifically meaningful coverage improved from **34 to 25 unverified provenance items**, plus two false event/report days corrected in news summaries and chronology (CICM and Astra results). No invented second or minute precision was introduced.
