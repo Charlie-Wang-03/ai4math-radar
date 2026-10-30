@@ -95,7 +95,7 @@ export async function captureAll(categories=CATEGORIES,fetcher=fetch,spacingMs=3
 export function hasUsableDatedListingEvidence(data) {
   return Array.isArray(data?.snapshots) && data.snapshots.some(snapshot =>
     snapshot.ok===true && Array.isArray(snapshot.groups) &&
-    snapshot.groups.some(group => /^\\d{4}-\\d{2}-\\d{2}$/.test(group.date??"") &&
+    snapshot.groups.some(group => /^\d{4}-\d{2}-\d{2}$/.test(group.date??"") &&
       Array.isArray(group.ids) && group.ids.length>0));
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
