@@ -5,6 +5,8 @@ on:
     paths:
       - scripts/capture-arxiv-dated-listings.mjs
       - tests/capture-arxiv-dated-listings.test.mjs
+      - scripts/probe-arxiv-historical-listings.mjs
+      - tests/probe-arxiv-historical-listings.test.mjs
       - .github/workflows/arxiv-dated-listing-capture.yml
   workflow_dispatch:
   schedule:
@@ -29,14 +31,21 @@ jobs:
         with:
           node-version: "24"
       - name: Verify source and day-only candidate guards
-        run: node --test tests/capture-arxiv-dated-listings.test.mjs
+        run: node --test tests/capture-arxiv-dated-listings.test.mjs tests/probe-arxiv-historical-listings.test.mjs
       - name: Capture official recent-listing day groups without altering content
         run: node scripts/capture-arxiv-dated-listings.mjs evidence/arxiv-dated-listings.json
+      - name: Inspect two historical arXiv archive months (research only)
+        if: github.event_name != 'schedule'
+        run: node scripts/probe-arxiv-historical-listings.mjs evidence/arxiv-historical.json
       - name: Preserve source-labeled audit artifact
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: arxiv-dated-listings
-          path: evidence/arxiv-dated-listings.json
+          path: |
+            evidence/arxiv-dated-listings.json
+            evidence/arxiv-source-pages/*.html.gz
+            evidence/arxiv-historical.json
+            evidence/arxiv-historical-pages/*.html.gz
           retention-days: 90
           if-no-files-found: warn

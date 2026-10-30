@@ -42,3 +42,33 @@ The new `scripts/capture-arxiv-dated-listings.mjs` captures ten **explicitly all
 ## Fail-closed archive health (review repair)
 
 The CLI writes the bounded JSON audit artifact first, then **sets a nonzero exit code** if no official-source, dated heading group contains any valid arXiv article ID. GitHub Actions uses `if: always()` for its upload step, so failure preserves diagnostics without falsely claiming that evidence was collected. A capture containing dated paper groups but zero matches to the current Radar catalog remains valid (a legitimate editorial slow day). Other per-source partial failures remain visible in the artifact's individual HTTP statuses and should be monitored separately.
+
+## Batch 15 follow-up — replayable source payloads and historical probes
+
+The first Batch 14 artifact retained only page **hashes and parsed ID/day pairs**. Once the upstream rolling page changes, a digest alone cannot reconstruct or independently verify the observed markup. This patch therefore retains **inert, gzip-compressed raw official HTML response bytes** alongside the JSON, for each successful category request. Every JSON entry includes `rawEvidence.relativePath`, raw-response SHA-256, compressed-file SHA-256 and compressed byte length; tests decompress and check bitwise fidelity to fetched UTF-8 bytes. These archived HTML files must be treated as **untrusted source data**, never executed or served as application HTML.
+
+For the two unresolved history cases, the workflow additionally probes original older-category monthly pages **only in PR/manual executions**:
+
+| Record | Fixed official original listing | Research goal |
+| --- | --- | --- |
+| ProofNet (`2302.12433`) | `https://arxiv.org/list/cs.CL/2023-02?show=2000&skip=0` | Look for ID under an explicit February 2023 daily heading |
+| Lean Atlas (`2604.16347`) | `https://arxiv.org/list/cs.HC/2026-04?show=2000&skip=0` | Look for ID under an explicit April 2026 daily heading |
+
+The monthly URL **by itself never verifies a day**. Only a returned page that *actually contains the exact arXiv ID under a dated heading* yields a candidate. It still requires v1 versus revised/cross-listed record reconciliation and review before changing chronology. Both older pages are preserved as gzip evidence when accessible; if a remote request fails or no dated group appears, status remains unresolved. This research probe does not run on the recurring schedule and never changes `selected.jsonl`.
+
+Validation: read-only GitHub Actions workflow with code tests plus real response count, raw gzip digests and URL/ID evidence inspection. 90-day artifact retention is **not permanent storage**; any long-term archival solution must be reviewed separately with provenance, security and retention policies.
+
+**Historical URL repair:** The initial research probe used YYMM paths and observed two HTTP 404 responses. arXiv's [official Finding Articles documentation](https://info.arxiv.org/help/find/index.html) specifies `/list/<category>/YYYY-MM`, not YYMM. The corrected PR reruns the exact two fixed YYYY-MM URLs; old 404s were URL-format failures, not historical evidence of non-publication.
+
+**Raw-byte integrity repair (PR #123):** A code review identified that `Response.text()` can strip UTF-8 BOM bytes or normalize malformed sequences. Both collectors now use `Response.arrayBuffer()` and compute SHA-256/gzip from those bytes **before** separately decoding for date/ID parsing. Tests check a BOM-containing source byte-for-byte after compression and replay. The archive represents the decompressed HTTP response payload bytes exposed by Fetch, not transport-level TLS/framing bytes.
+
+## Verified GitHub Actions source evidence (Batch 15, 2026-10-30)
+
+- [Read-only capture run #41026654826](https://github.com/Charlie-Wang-03/ai4math-radar/actions/runs/41026654826), artifact `arxiv-dated-listings` ID **12963733045**, preserves original parsed JSON, **10 gzip recent HTML sources** and **2 gzip historic HTML sources**.
+- **Recent:** 10/10 official category endpoints HTTP 200, 50 dated headings, 15 Radar item/category matches (some duplicates through cross-listing). Every gzip file was decompressed and its raw SHA-256 verified against the metadata manifest; 10/10 matched. There were no canonical content edits.
+- **Historic ProofNet:** [official cs.CL February 2023 archive](https://arxiv.org/list/cs.CL/2023-02?show=2000&skip=0) returned HTTP 200. Original HTML contains exact article ID `2302.12433` and the heading **“Authors and titles for February 2023”**, but **no individual daily heading** (`groupsFound=0`); therefore the Feb 23 historical Radar date is **still unresolved** and must not be certified from this archive.
+- **Historic Lean Atlas:** [official cs.HC April 2026 archive](https://arxiv.org/list/cs.HC/2026-04?show=2000&skip=0) returned HTTP 200. Original HTML contains exact article ID `2604.16347` under **“Authors and titles for April 2026”**, with **no individual daily heading** (`groupsFound=0`); the existing Apr 21 Radar date remains **unverified at day precision**, not disproven.
+- The two archived historical payloads also passed byte-for-byte gunzip + SHA-256 verification. The first unsuccessful YYMM URL attempts were corrected to arXiv's official YYYY-MM path format and are not evidence of historical unavailability.
+- This outcome is not a claim of arXiv daily first-public timestamps. A dated, article-matched original announcement feed or independently preserved daily snapshot remains necessary for either historic case.
+
+**Artifact retention limitation:** GitHub Actions artifacts expire after 90 days. Their checksums support integrity checking *while the raw bytes are available*; neither GitHub artifacts nor PDF/source mirrors are permanent archival guarantees. A more durable research-evidence store would be a separate, explicitly reviewed project decision, not a silent addition to the news data.
