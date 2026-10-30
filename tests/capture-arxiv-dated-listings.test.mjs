@@ -5,10 +5,11 @@ import {officialListingUrl,parseDatedListing,canonicalArxivIndex,captureOne,capt
 
 const html=[
   "<html><h3>Wed, 28 Oct 2026 (showing 2 of 2 entries )</h3><dl>",
-  '<dt><a href="/abs/2610.37018" title="Abstract">arXiv:2610.37018</a></dt>',
-  '<dt><a href="/abs/2610.37125" title="Abstract">arXiv:2610.37125</a></dt></dl>',
+  '<dt><a href ="/abs/2610.37018" title="Abstract">arXiv:2610.37018</a></dt>',
+  '<dt><a href ="/abs/2610.37125" title="Abstract">arXiv:2610.37125</a></dt></dl>',
+  "<dd><a href=\"https://arxiv.org/abs/2610.99999\">unrelated cited prior work</a></dd>",
   "<h3>Tue, 27 Oct 2026 (showing 1 of 1 entries )</h3><dl>",
-  '<dt><a href="/abs/2610.34389" title="Abstract">arXiv:2610.34389</a></dt></dl></html>'
+  '<dt><a href ="/abs/2610.34389" title="Abstract">arXiv:2610.34389</a></dt></dl></html>'
 ].join("");
 test("official dated headers assign article ID to correct listing DAY only",()=>{
   const x=parseDatedListing(html);
