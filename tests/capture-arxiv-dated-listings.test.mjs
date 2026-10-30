@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {officialListingUrl,parseDatedListing,canonicalArxivIndex,captureOne,captureAll}
+import {officialListingUrl,parseDatedListing,canonicalArxivIndex,captureOne,captureAll,hasUsableDatedListingEvidence}
   from "../scripts/capture-arxiv-dated-listings.mjs";
 
 const html=[
@@ -50,4 +50,11 @@ test("capture is strictly read-only and does not certify first-public version",a
   assert.equal(all.matchedNews.length,1);
   assert.equal(all.matchedNews[0].decision,"CANDIDATE_ONLY_VERIFY_FIRST_PUBLIC_V1_AND_CROSSLIST");
   assert.equal(calls,2);
+});
+
+test("empty or failed scheduled capture is not green evidence",()=>{
+  assert.equal(hasUsableDatedListingEvidence({snapshots:[]}),false);
+  assert.equal(hasUsableDatedListingEvidence({snapshots:[{ok:false,groups:[]}]}),false);
+  assert.equal(hasUsableDatedListingEvidence({snapshots:[{ok:true,groups:[{date:"2026-10-28",ids:[]}]}]}),false);
+  assert.equal(hasUsableDatedListingEvidence({snapshots:[{ok:true,groups:[{date:"2026-10-28",ids:["2610.34389"]}]}]}),true);
 });
