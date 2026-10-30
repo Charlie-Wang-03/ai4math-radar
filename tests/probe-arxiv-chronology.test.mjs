@@ -8,7 +8,7 @@ const item={id:'2026-04-21-lean-atlas-semantic-alignment',selected:true,
 const xml='<?xml version="1.0"?><OAI-PMH><GetRecord><record><header>'+
   '<identifier>oai:arXiv.org:2604.16347</identifier><datestamp>2026-10-30</datestamp>'+
   '</header><metadata><arXivRaw><id>2604.16347</id><created>2026-03-16</created>'+
-  '<version><version>v1</version><date>2026-03-16</date></version>'+
+  '<version version="v1"><date>2026-03-16</date></version>'+
   '</arXivRaw></metadata></record></GetRecord></OAI-PMH>';
 
 test('derive solely strict selected official arXiv day-only IDs',()=>{
@@ -32,6 +32,7 @@ test('March submission and October OAI header are NOT April public announcement'
   assert.equal(x.oaiHeaderDatestamp,'2026-10-30');
   assert.equal(x.firstPublicAnnouncementAt,null);
   assert.equal(x.approvedForPublishedAt,false);
+  assert.equal(x.versions[0].version,'v1');
 });
 test('reject OAI identity mismatch and provider-side missing records',()=>{
   assert.equal(inspectOaiXml(xml,'2302.12433').matched,false);
