@@ -1,6 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {officialListingUrl,parseDatedListing,canonicalArxivIndex,captureOne,captureAll,hasUsableDatedListingEvidence}
+import {mkdtempSync,readFileSync,rmSync} from "node:fs";
+import {tmpdir} from "node:os";
+import {join} from "node:path";
+import {gunzipSync} from "node:zlib";
+import {officialListingUrl,parseDatedListing,canonicalArxivIndex,captureOne,captureAll,archiveSourceSnapshots,hasUsableDatedListingEvidence}
   from "../scripts/capture-arxiv-dated-listings.mjs";
 
 const html=[
@@ -57,4 +61,22 @@ test("empty or failed scheduled capture is not green evidence",()=>{
   assert.equal(hasUsableDatedListingEvidence({snapshots:[{ok:false,groups:[]}]}),false);
   assert.equal(hasUsableDatedListingEvidence({snapshots:[{ok:true,groups:[{date:"2026-10-28",ids:[]}]}]}),false);
   assert.equal(hasUsableDatedListingEvidence({snapshots:[{ok:true,groups:[{date:"2026-10-28",ids:["2610.34389"]}]}]}),true);
+});
+
+test("archive source bytes for later replay; keep raw markup out of JSON",async()=>{
+  const mock=async()=>({ok:true,status:200,text:async()=>html});
+  const index=canonicalArxivIndex(JSON.stringify({id:"a",selected:true,
+    publishedAt:"2026-10-27T00:00:00.000Z",links:{original:"https://arxiv.org/abs/2610.34389"}}));
+  const result=await captureAll(["math.AC"],mock,0,index);
+  const dir=mkdtempSync(join(tmpdir(),"arxiv-capture-"));
+  try{
+    assert.equal(archiveSourceSnapshots(result,dir),1);
+    const path=join(dir,"math.AC.html.gz");
+    assert.equal(gunzipSync(readFileSync(path)).toString("utf8"),html);
+    assert.equal(result.snapshots[0].rawEvidence.relativePath,"arxiv-source-pages/math.AC.html.gz");
+    assert.equal(result.snapshots[0].rawEvidence.rawSha256,result.snapshots[0].sha256);
+    const j=JSON.stringify(result);
+    assert.ok(j.includes("rawEvidence"));
+    assert.ok(!j.includes("<html>"));
+  }finally{rmSync(dir,{recursive:true,force:true});}
 });
