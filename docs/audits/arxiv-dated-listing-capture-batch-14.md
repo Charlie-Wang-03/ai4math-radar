@@ -29,3 +29,12 @@ The new `scripts/capture-arxiv-dated-listings.mjs` captures ten **explicitly all
 - Live official capture is required: the script's fixtures alone do not prove that the current site HTML matches the parser.
 - Verify count of valid category results, dated groups, article ID matches and SHA-256 hashes from a real Actions artifact before merge.
 - Require repository `Check`, `Docker`, code scanning, review resolution and no canonical content edits.
+
+## Real official GitHub Actions acceptance (2026-10-30)
+
+- [Read-only official capture run #41025169577](https://github.com/Charlie-Wang-03/ai4math-radar/actions/runs/41025169577) **PASS**, original source date captured 2026-10-30 UTC. Artifact: `arxiv-dated-listings`, GitHub artifact ID **12963480926**.
+- **10/10** official category pages HTTP 200; **50** date-heading groups; **4,765** article occurrences across lists (not 4,765 globally distinct papers; cross-listing overlaps are expected).
+- **15** source-to-Radar occurrences, corresponding to **9 unique existing arXiv news IDs**, including two papers under the October 27 group and seven under October 28. All nine match the existing Batch 13 `chronology.milestone.date`, with **0 contrary source days**.
+- Category occurrence distribution: `math.AC` 39; `cs.CC` 55; `cs.LG` 1,438; `cs.LO` 73; `math.NT` 202; `cs.AI` 1,497; `cs.DS` 118; `math.CO` 390; `cs.CL` 738; `math.AG` 215.
+- **Important debugging/repair:** the original page emits `href ="/abs/2610.40540"` (space before equals), which the initial parser missed. Live evidence in the early exploratory run had `10/10` success but **0 matched** due to mistakenly matching only cited absolute links in abstracts. Final implementation accepts the real spacing and extracts only **main `dt` article identifier anchors**, not `dd` citation links. Bounded raw markup diagnostic fields have been removed from the final collector.
+- The resulting artifact is a reproducible **observed membership snapshot**, not an automated timestamp authority. A paper may appear in cross-listing/replacement groups. The nine matches confirm previously manually reviewed days but this pipeline **never writes** or auto-promotes a canonical date.
