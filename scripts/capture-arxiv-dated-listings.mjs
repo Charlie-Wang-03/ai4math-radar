@@ -59,9 +59,11 @@ export async function captureOne(category,fetcher=fetch) {
   try{
     const res=await fetcher(url,{redirect:"error",headers:{Accept:"text/html"},
       signal:AbortSignal.timeout(15000)});
-    const body=await res.text();
-    const bodyBytes=Buffer.from(body,"utf8");
+    // Hash and archive the byte-identical, decompressed HTTP response payload.
+    // Response.text() can strip a BOM or replace invalid UTF-8 before hashing.
+    const bodyBytes=Buffer.from(await res.arrayBuffer());
     if(bodyBytes.length>3800000)throw new Error("large response rejected");
+    const body=new TextDecoder("utf-8").decode(bodyBytes);
     const result={category,url,status:res.status,ok:res.ok,
       sha256:createHash("sha256").update(bodyBytes).digest("hex"),bytes:bodyBytes.length,
       groups:res.ok?parseDatedListing(body):[],
