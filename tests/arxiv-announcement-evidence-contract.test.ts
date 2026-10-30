@@ -27,9 +27,19 @@ test("third-party/host spoofing, non-HTTPS and ordinary search API are rejected"
     "https://export.arxiv.org/api/query?id_list=2610.34389"])
     assert.throws(()=>validatePortableV1Item(candidate(url)),/official dated listing or announcement feed/);
 });
-test("first-party announcement feed shape accepted but feed still requires independent content review",()=>{
-  const item=validatePortableV1Item(candidate("https://rss.arxiv.org/atom/math.AC"));
-  assert.equal(item.chronology!.milestone.evidenceKind,"arxiv-announcement");
+test("first-party Atom and RSS announcement feed shapes accepted but require independent item/date review",()=>{
+  for(const feed of ["atom","rss"]) {
+    const item=validatePortableV1Item(candidate(`https://rss.arxiv.org/${feed}/math.AC`));
+    assert.equal(item.chronology!.milestone.evidenceKind,"arxiv-announcement");
+  }
+});
+test("a forged or non-official RSS feed is not evidence",()=>{
+  for(const url of ["http://rss.arxiv.org/rss/math.AC",
+    "https://rss.arxiv.org.attacker.invalid/rss/math.AC",
+    "https://rss.arxiv.org/rss/math.AC/../../other",
+    "https://rss.arxiv.org/search/math.AC",
+    "https://github.com/ehijano/rss_fetch"])
+    assert.throws(()=>validatePortableV1Item(candidate(url)),/official dated listing or announcement feed/);
 });
 test("same source shape rule applies to earliestVerifiedPublic",()=>{
   const prior={...base.chronology.milestone,date:"2026-10-26",evidenceUrl:"https://arxiv.org/abs/2610.34389"};
