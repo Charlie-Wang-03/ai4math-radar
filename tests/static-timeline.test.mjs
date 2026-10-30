@@ -249,7 +249,8 @@ test("static item detail has two evidence-labelled times without changing timeli
     assert.doesNotMatch(wormald, /未注明<\/time>/);
 
     const unresolvedRecord = readFileSync(path.join(root, "portable/content/selected.jsonl"), "utf8")
-      .split(/\r?\n/).filter(Boolean).map(JSON.parse).find(item => !item.chronology);
+      .split(/\r?\n/).filter(Boolean).map(JSON.parse)
+      .find(item => !item.chronology && item.publishedAt.endsWith("T00:00:00.000Z"));
     // The unresolved sample is selected dynamically: source-backed time upgrades should
     // never break the regression merely because a previously unknown article was verified.
     if (unresolvedRecord) {
@@ -259,6 +260,15 @@ test("static item detail has two evidence-labelled times without changing timeli
       assert.ok(unknown.includes(unresolvedRecord.publishedAt.slice(0,10) + "（历史归档日期）"));
       assert.doesNotMatch(unknown, /chronology-evidence/);
     }
+
+    const pmlr = getItem("2026-07-mathliblemma");
+    assert.match(pmlr, /本次报道里程碑/);
+    assert.match(pmlr, /2026-09-29/); // PMLR official issued date
+    const pmlrSource = readFileSync(path.join(root, "portable/content/selected.jsonl"), "utf8")
+      .split(/\r?\n/).filter(Boolean).map(JSON.parse)
+      .find(item => item.id === "2026-07-mathliblemma");
+    assert.equal(pmlrSource.publishedAt, "2026-07-06T00:00:00.000Z"); // legacy feed compatibility
+    assert.match(pmlr, /mlresearch\/v306/); // item-specific primary publication evidence
 
     const home = readFileSync(path.join(dir,"index.html"),"utf8");
     assert.match(home, /class="time precision-day"/);
