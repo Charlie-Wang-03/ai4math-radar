@@ -31,7 +31,8 @@ async function readJson(url,fetcher=fetch){
     rawSha256:createHash("sha256").update(bytes).digest("hex"),bytes:bytes.length};
 }
 export async function investigate(t,fetcher=fetch){
-  if(!TARGETS.some(x=>x.eventId===t.eventId&&x.provider===t.provider))
+  const approved=TARGETS.find(x=>x.eventId===t.eventId&&x.provider===t.provider);
+  if(!approved||JSON.stringify(t)!==JSON.stringify(approved))
     throw Error("unknown fixed source target");
   try{
     if(t.provider==="palomar"){
