@@ -15,7 +15,8 @@ const MONTHS={Jan:"01",Feb:"02",Mar:"03",Apr:"04",May:"05",Jun:"06",Jul:"07",Aug
   Sep:"09",Oct:"10",Nov:"11",Dec:"12"};
 const ARXIV_ID=/^\d{4}\.\d{4,5}$/;
 const HEADING=/<h3\b[^>]*>\s*(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s*(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{4})\b[^<]*<\/h3>/gi;
-const PAPER=/<a\b[^>]*\bhref=["'](?:https:\/\/arxiv\.org)?\/abs\/(\d{4}\.\d{4,5})(?:v\d+)?["'][^>]*>/gi;
+const MAIN_DT=/<dt\b[^>]*>([\s\S]*?)<\/dt>/gi;
+const MAIN_PAPER=/<a\b[^>]*\bhref\s*=\s*["']\/abs\/(\d{4}\.\d{4,5})(?:v\d+)?["'][^>]*>/i;
 
 export function officialListingUrl(category) {
   if(!CATEGORIES.includes(category))throw new Error("arXiv category is not allowlisted");
@@ -29,8 +30,9 @@ export function parseDatedListing(html) {
     const h=heads[i],start=h.index+h[0].length,end=i+1<heads.length?heads[i+1].index:html.length;
     const date=h[4]+"-"+MONTHS[h[3]]+"-"+h[2].padStart(2,"0");
     if(Number.isNaN(Date.parse(date+"T00:00:00Z")))continue;
-    const ids=[...new Set([...html.slice(start,end).matchAll(PAPER)]
-      .map(m=>m[1]).filter(id=>ARXIV_ID.test(id)))];
+    const ids=[...new Set([...html.slice(start,end).matchAll(MAIN_DT)]
+      .map(m=>m[1].match(MAIN_PAPER)?.[1]??null)
+      .filter(id=>typeof id==="string"&&ARXIV_ID.test(id)))];
     groups.push({date,heading:h[1]+", "+h[2]+" "+h[3]+" "+h[4],count:ids.length,ids});
   }
   return groups;
@@ -60,11 +62,6 @@ export async function captureOne(category,fetcher=fetch) {
     if(body.length>3800000)throw new Error("large response rejected");
     return {category,url,status:res.status,ok:res.ok,
       sha256:createHash("sha256").update(body).digest("hex"),bytes:body.length,
-      // Bounded debugging: a single original article identifier block to inspect link format.
-      articleIdentifierSample:(body.match(/<dt\b[^>]*>[\s\S]{0,900}?<\/dt>/i)?.[0]??"").slice(0,420),
-      // Diagnostic link shapes only; never archive full provider HTML.
-      linkExamples:[...body.matchAll(/href=["\x27]([^"\x27>]{1,130})["\x27]/gi)]
-        .map(x=>x[1]).filter(x=>x.includes("/abs/")).slice(0,12),
       groups:res.ok?parseDatedListing(body):[],
       ...(res.ok?{}:{error:"HTTP "+res.status})};
   }catch(error){return {category,url,ok:false,error:String(error).slice(0,220),groups:[]};}
