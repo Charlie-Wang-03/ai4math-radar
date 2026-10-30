@@ -10,7 +10,7 @@ import {archiveUrl,TARGETS,inspectArchive,inspectAll,archiveHistoricRaw}
 const page='<h3>Mon, 27 Feb 2023 (showing 1 of 1 entries)</h3><dl>'+
   '<dt><a href ="/abs/2302.12433" title="Abstract">arXiv:2302.12433</a></dt></dl>';
 test("historical URLs are fixed allowlisted categories/months, not arbitrary",()=>{
-  assert.equal(archiveUrl(TARGETS[0]),"https://arxiv.org/list/cs.CL/2302?show=2000&skip=0");
+  assert.equal(archiveUrl(TARGETS[0]),"https://arxiv.org/list/cs.CL/2023-02?show=2000&skip=0");
   assert.throws(()=>archiveUrl({...TARGETS[0],category:"cs.CL.attacker.invalid"}),/unapproved/);
 });
 test("exact ID under dated heading is only a candidate, not certified first-public event",async()=>{
