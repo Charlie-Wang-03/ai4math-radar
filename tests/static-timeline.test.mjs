@@ -264,7 +264,10 @@ test("static item detail has two evidence-labelled times without changing timeli
     const pmlr = getItem("2026-07-mathliblemma");
     assert.match(pmlr, /本次报道里程碑/);
     assert.match(pmlr, /2026-09-29/); // PMLR official issued date
-    assert.match(pmlr, /2026-07-06/); // immutable legacy archive date
+    const pmlrSource = readFileSync(path.join(root, "portable/content/selected.jsonl"), "utf8")
+      .split(/\r?\n/).filter(Boolean).map(JSON.parse)
+      .find(item => item.id === "2026-07-mathliblemma");
+    assert.equal(pmlrSource.publishedAt, "2026-07-06T00:00:00.000Z"); // legacy feed compatibility
     assert.match(pmlr, /mlresearch\/v306/); // item-specific primary publication evidence
 
     const home = readFileSync(path.join(dir,"index.html"),"utf8");
