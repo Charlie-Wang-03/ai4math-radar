@@ -23,6 +23,7 @@ test("an arXiv abs page alone is NOT arxiv-announcement evidence",()=>{
 test("third-party/host spoofing, non-HTTPS and ordinary search API are rejected",()=>{
   for(const url of ["https://arxiv.org.attacker.invalid/list/math.AC/recent",
     "http://arxiv.org/list/math.AC/recent","https://arxiv.org/search/?query=...",
+    "https://arxiv.org/list/math.AC/2026-10",
     "https://export.arxiv.org/api/query?id_list=2610.34389"])
     assert.throws(()=>validatePortableV1Item(candidate(url)),/official dated listing or announcement feed/);
 });
