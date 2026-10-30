@@ -3,7 +3,7 @@
 ## Scope and contract
 
 - Baseline: `main@00e87063f6a25e55c3232de37915676d6d7d9161` immediately after Batch 17, **314** selected stories and **97** legacy date-only clocks. This report reviews every one of those 97 rows and does **not** assume all 97 historical dates are wrong.
-- The 97 split into **8** already carrying a verified **exact** alternate chronology milestone, but preserving a legacy date-only `publishedAt` for permalink/feed compatibility; **64** with a source-backed **day-only** milestone; and **25** without a verified optional chronology record.
+- The 97 split into **8** already carrying a verified **exact** alternate chronology milestone, but preserving a legacy date-only `publishedAt` for permalink/feed compatibility; **65** with a source-backed **day-only** milestone; and **24** without a verified optional chronology record.
 - The current PR adds **nine first-party-supported day-only milestones** (AGMAI, two SAIR competitions, First Proof, author sorting-network paper, Axiom, CICM Workshop, o3/FrontierMath announcement, and Epoch's 2/68 Astra result), including **one correction to the false CICM September 25 meeting date** in the summary. Original IDs, `publishedAt`, scores and all original source links remain stable.
 - Primary official dates indicate **publication day, event start day, author first-posted day, registration day or a specific software/artifact milestone** depending on the actual evidence. They do not imply a verified clock and do not certify claimed mathematical proofs.
 - This ledger enumerates `links.original` *hosts* (one row per article, not per news brand). An allowed source date in `chronology` is evidence for a **specified milestone**, not necessarily the absolute earliest public disclosure of all mathematical claims.
@@ -13,7 +13,7 @@
 | Original host | Legacy date-only | Exact chronology already known | Day-only chronology | Unresolved |
 | --- | ---: | ---: | ---: | ---: |
 | `arxiv.org` | 21 | 0 | 9 | 12 |
-| `epoch.ai` | 15 | 0 | 13 | 2 |
+| `epoch.ai` | 15 | 0 | 14 | 1 |
 | `openai.com` | 8 | 0 | 8 | 0 |
 | `github.com` | 6 | 2 | 0 | 4 |
 | `www.proofatlas.ai` | 4 | 0 | 4 | 0 |
@@ -49,7 +49,7 @@
 | `www.mefyi.com` | 1 | 0 | 1 | 0 |
 | `axiommath.ai` | 1 | 0 | 1 | 0 |
 | `palomar-registry.org` | 1 | 1 | 0 | 0 |
-| **TOTAL** | **97** | **8** | **64** | **25** |
+| **TOTAL** | **97** | **8** | **65** | **24** |
 
 ## Nine adjudications in this PR
 
@@ -103,7 +103,7 @@
 | 33 | `2026-08-16-bondy-longest-cycle-ai` | [www.proofatlas.ai](https://www.proofatlas.ai/formalizations/bondy-longest-cycle-proof/) | 2026-08-16 | `2026-08-16` (day) | `DAY_MILESTONE_ONLY` | A source-backed calendar day is recorded; no independently verified first-public hour/minute. |
 | 34 | `2026-08-18-palomar-launch` | [terrytao.wordpress.com](https://terrytao.wordpress.com/2026/08/18/palomar-a-registry-of-lean-verified-mathematics/) | 2026-08-18 | `2026-08-19` (second) | `EXACT_SOURCE_MILESTONE_LEGACY_COMPAT` | Exact platform milestone already stored; legacy `publishedAt`/ID intentionally retained due to event/UTC-day mismatch. |
 | 35 | `2026-07-26-superpermutations-gpt56` | [epoch.ai](https://epoch.ai/frontiermath/open-problems/superpermutations) | 2026-07-26 | `2026-07-26` (day) | `DAY_MILESTONE_ONLY` | A source-backed calendar day is recorded; no independently verified first-public hour/minute. |
-| 36 | `2026-07-28-q2-galois-frontiermath-confirmation` | [epoch.ai](https://epoch.ai/frontiermath/open-problems/q2-absolute-galois) | 2026-07-28 | — | `UNVERIFIED_EVENT_DATE_OR_CLOCK` | Mutable problem dashboard does not independently document this exact Jul 28 confirmation event. |
+| 36 | `2026-07-28-q2-galois-frontiermath-confirmation` | [epoch.ai](https://epoch.ai/frontiermath/open-problems/q2-absolute-galois) | 2026-07-28 | `2026-07-06` (day) | `DAY_MILESTONE_ONLY` | Original July 6 progress update already documented verifier-accepted AI presentation candidates; no original July28 public confirmation established. News corrected to preserve full-proof caveat. |
 | 37 | `2026-07-31-frontiermath-open-problems-50` | [epoch.ai](https://epoch.ai/frontiermath/open-problems) | 2026-07-31 | `2026-07-31` (day) | `DAY_MILESTONE_ONLY` | A source-backed calendar day is recorded; no independently verified first-public hour/minute. |
 | 38 | `2026-06-12-frontiermath-v2-quality-repair` | [epoch.ai](https://epoch.ai/frontiermath/tiers-1-4) | 2026-06-12 | `2026-06-12` (day) | `DAY_MILESTONE_ONLY` | A source-backed calendar day is recorded; no independently verified first-public hour/minute. |
 | 39 | `2026-06-25-book-ramsey-dualverse` | [epoch.ai](https://epoch.ai/frontiermath/open-problems/ramsey-book-graphs) | 2026-06-25 | `2026-06-25` (day) | `DAY_MILESTONE_ONLY` | A source-backed calendar day is recorded; no independently verified first-public hour/minute. |
@@ -172,9 +172,16 @@
 2. **Older arXiv records:** a v1 submission click, OAI-PMH metadata modification day and rolling monthly category listing are not guaranteed first-public announcement. Lean Atlas March submission + April arXiv identifier can be consistent; ProofNet historical Feb23 archive predates Feb24 v1 submission and remains a genuine claim-relative chronology red flag. Do not infer exact 20:00 ET.
 3. **Institutional websites:** preserve day-only unless original site provides verifiable first-party `datePublished` with an actual timezone and stable publication semantics. Page edit dates, web crawler capture, schedule time and Git commit author time are not substitutes.
 4. **Mutable Epoch leaderboards:** no historical date for an update is warranted from today's live dashboard; match the exact revision/press release or preserve unresolved.
-5. **Next research targets:** 25 unresolved first (source-specific snapshot, original blog/release); for the 64 day-only records attempt second precision **only if** a genuinely public clock exists. The 8 already exact cross-day cases need a separately reviewed UI/feed migration, not fresh source crawling.
+5. **Next research targets:** 24 unresolved first (source-specific snapshot, original blog/release); for the 65 day-only records attempt second precision **only if** a genuinely public clock exists. The 8 already exact cross-day cases need a separately reviewed UI/feed migration, not fresh source crawling.
 6. Required acceptance: `npm run content:check`, static build/date regression, hosted `check`/`docker` and resolved reviews; original IDs and old public URLs preserved.
 
 ## Final accounting
 
-After this evidence-first batch, the old date-only total is **still 97**, by design. The scientifically meaningful coverage improved from **34 to 25 unverified provenance items**, plus two false event/report days corrected in news summaries and chronology (CICM and Astra results). No invented second or minute precision was introduced.
+After this evidence-first batch, the old date-only total is **still 97**, by design. The scientifically meaningful coverage improved from **34 to 25** in Batch 18 and then **24** after Batch 19. Two false event/report days were corrected in Batch 18 (CICM, Astra results); Batch 19 additionally corrected the Q₂ Galois verifier-publication narrative. No invented second or minute precision was introduced.
+
+## Batch 19 addendum — Q₂ Galois publication and verifier review boundary
+
+- [Epoch original Q₂ Galois problem page](https://epoch.ai/frontiermath/open-problems/q2-absolute-galois) explicitly labels **Progress Update (2026-07-06)**, and reports multiple verifier-accepted AI presentations by that date; the source mentions candidate generation June9 (Claude Fable 5) and June24 (GPT-5.5 Pro). It explicitly says full mathematical proof remained to be checked, so the earlier news statement that Epoch **first confirmed** the second solved problem on **July28** was not supported by this source.
+- The canonical news title, summary and editorial reason were corrected to identify the **July6 public verifier-progress milestone** and to distinguish verifier acceptance from a complete proof. Later current-page status `Solved (AI)` and Roe/Turturean write-up are not silently assigned to a specific earlier day.
+- Stable `2026-07-28-...` ID and legacy `publishedAt` remain unchanged per temporal contract #104. Only the source-backed `chronology.milestone.date=2026-07-06` is added; day precision only, no false clock.
+- No mathematical proof or verifier independently rerun. Remaining legacy day-only count is still **97**. Missing optional chronology is **24** (after Batch 19).
