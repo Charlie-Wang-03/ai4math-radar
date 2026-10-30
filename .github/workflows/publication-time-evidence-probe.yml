@@ -5,6 +5,8 @@ on:
     paths:
       - scripts/probe-publication-evidence.mjs
       - tests/publication-evidence-probe.test.mjs
+      - scripts/probe-arxiv-chronology.mjs
+      - tests/probe-arxiv-chronology.test.mjs
       - .github/workflows/publication-time-evidence-probe.yml
   workflow_dispatch:
 
@@ -23,14 +25,18 @@ jobs:
         with:
           node-version: "24"
       - name: Verify no-auto-promotion guard
-        run: node --test tests/publication-evidence-probe.test.mjs
+        run: node --test tests/publication-evidence-probe.test.mjs tests/probe-arxiv-chronology.test.mjs
       - name: Inspect explicitly allowlisted publication sources
         run: node scripts/probe-publication-evidence.mjs evidence/time-candidates.json --canonical
+      - name: Inspect arXiv OAI metadata (NOT first public announcement)
+        run: node scripts/probe-arxiv-chronology.mjs evidence/arxiv-oai-candidates.json
       - name: Save research candidates for human evidence review
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: publication-time-candidates
-          path: evidence/time-candidates.json
+          path: |
+            evidence/time-candidates.json
+            evidence/arxiv-oai-candidates.json
           if-no-files-found: warn
           retention-days: 14
