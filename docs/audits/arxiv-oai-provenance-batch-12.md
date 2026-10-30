@@ -36,3 +36,32 @@ The workflow retains `contents: read`, runs safety regression tests, and uploads
 2. GitHub `check` / `docker` and opt-in publication evidence probe workflow; inspect emitted artifact rather than assuming access works;
 3. No file changes to `portable/content/selected.jsonl`; no touching inactive native AIHOT MCP;
 4. No claim of independent mathematical proof verification.
+
+## Actual first GitHub Actions evidence results (2026-10-30)
+
+[GitHub Actions run #41004507551](https://github.com/Charlie-Wang-03/ai4math-radar/actions/runs/41004507551) **succeeded**; immutable artifact `publication-time-candidates` (artifact ID `12955166646`) includes `arxiv-oai-candidates.json`, SHA-256 digest for each response and the full provider evidence matrix. **18/18** OAI GetRecord requests returned HTTP 200 and matched the expected official article ID.
+
+| arXiv ID | Historical Radar day | OAI last metadata date | OAI v1 submission day |
+| --- | --- | --- | --- |
+| [2609.36663](https://arxiv.org/abs/2609.36663) | 2026-09-29 | 2026-09-30 | 2026-09-29 |
+| [2609.25575](https://arxiv.org/abs/2609.25575) | 2026-09-22 | 2026-09-23 | 2026-09-22 |
+| [2609.27041](https://arxiv.org/abs/2609.27041) | 2026-09-22 | 2026-09-25 | 2026-09-22 |
+| [2605.17283](https://arxiv.org/abs/2605.17283) | 2026-05-17 | 2026-05-19 | 2026-05-17 |
+| [2604.16347](https://arxiv.org/abs/2604.16347) | 2026-04-21 | 2026-04-21 | 2026-03-16 |
+| [2302.12433](https://arxiv.org/abs/2302.12433) | 2023-02-23 | 2023-02-27 | 2023-02-24 |
+| [2306.01694](https://arxiv.org/abs/2306.01694) | 2023-06-02 | 2023-11-07 | 2023-06-02 |
+| [2306.15626](https://arxiv.org/abs/2306.15626) | 2023-06-27 | 2023-10-30 | 2023-06-27 |
+| [2610.26467](https://arxiv.org/abs/2610.26467) | 2026-10-19 | 2026-10-20 | 2026-10-19 |
+| [2610.28208](https://arxiv.org/abs/2610.28208) | 2026-10-20 | 2026-10-21 | 2026-10-20 |
+| [2610.28079](https://arxiv.org/abs/2610.28079) | 2026-10-20 | 2026-10-21 | 2026-10-20 |
+| [2610.28111](https://arxiv.org/abs/2610.28111) | 2026-10-20 | 2026-10-21 | 2026-10-20 |
+| [2610.36534](https://arxiv.org/abs/2610.36534) | 2026-10-27 | 2026-10-28 | 2026-10-27 |
+| [2610.37125](https://arxiv.org/abs/2610.37125) | 2026-10-27 | 2026-10-28 | 2026-10-27 |
+| [2610.37018](https://arxiv.org/abs/2610.37018) | 2026-10-27 | 2026-10-28 | 2026-10-27 |
+| [2610.36377](https://arxiv.org/abs/2610.36377) | 2026-10-26 | 2026-10-28 | 2026-10-26 |
+| [2610.34516](https://arxiv.org/abs/2610.34516) | 2026-10-25 | 2026-10-27 | 2026-10-25 |
+| [2610.34389](https://arxiv.org/abs/2610.34389) | 2026-10-25 | 2026-10-27 | 2026-10-25 |
+
+**Interpretation:** 17/18 OAI header datestamps are later than the archived event day, and 1/18 (Lean Atlas) matches it. This is **not** evidence that 17 article dates are wrong. OAI datestamps represent metadata changes and can reflect first ingestion, corrections, or later versions (e.g. CheckMate 2023-11-07, LeanDojo 2023-10-30). All 18 have **zero independently established announcement clock instants** from this method. The result is an evidence collection success, not a date correction. The date-only legacy count remains 94 after Batch 11.
+
+Next work should obtain **first-announcement listing records**, not reinterpret these OAI dates as public timestamps. Preserve the original ID and `publishedAt` even when v1 submission day and legacy event day conflict.
