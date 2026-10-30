@@ -60,7 +60,7 @@ export async function captureOne(category,fetcher=fetch) {
     if(body.length>3800000)throw new Error("large response rejected");
     return {category,url,status:res.status,ok:res.ok,
       sha256:createHash("sha256").update(body).digest("hex"),bytes:body.length,
-      groups:res.ok?parseDatedListing(body):[],
+      // Diagnostic link shapes only; never archive full provider HTML.\n      linkExamples:[...body.matchAll(/href=["\x27]([^"\x27>]{1,130})["\x27]/gi)]\n        .map(x=>x[1]).filter(x=>x.includes("/abs/")).slice(0,12),\n      groups:res.ok?parseDatedListing(body):[],
       ...(res.ok?{}:{error:"HTTP "+res.status})};
   }catch(error){return {category,url,ok:false,error:String(error).slice(0,220),groups:[]};}
 }
