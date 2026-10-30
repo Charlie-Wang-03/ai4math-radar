@@ -14,24 +14,16 @@ Checked 2026-10-31. Canonical story: `2025-11-29-aristotle-erdos124`.
 
 Later [Boris Alexeev's Nov30 follow-up](https://www.erdosproblems.com/forum/user/BorisAlexeev?all_posts=1) and Thomas Bloom's discussion distinguish **a weaker version allowing the units digit / omitting a necessary gcd condition** from the original BEGL96 open conjecture. This is a public-claim and statement-fidelity case; this timestamp audit **does not assert mathematical validity of the original open problem**, independently execute Lean, or equate the original Formal Conjectures statement with the harder historical conjecture.
 
-## Canonical edit
+## Decision — UTC date not yet authenticated
 
-Add optional **`chronology.milestone`** only:
-```json
-{
-  "chronology": {
-    "eventKind": "other",
-    "milestone": {
-      "date": "2025-11-29",
-      "precision": "day",
-      "evidenceKind": "original-research-page",
-      "evidenceUrl": "https://www.erdosproblems.com/forum/user/BorisAlexeev?all_posts=1"
-    }
-  }
-}
-```
-No `at` and no `earliestVerifiedPublic`, and the timezone of the displayed 22:44 is explicitly **UNVERIFIED**. The marker's event identity is the *original author's dated public report of the particular Lean-backed claim*, not a UTC-certified first proof-release instant. No immutable permalink, old `publishedAt`, source link, summary, score, original title or other news row changes.
+**DO NOT PROMOTE** the candidate 2025-11-29 forum date to a structured `chronology.milestone` in this batch. Under [temporal contract v1](../editorial-temporal-contract-v1.md) and the [current static detail renderer](../../scripts/build-static-chatgpt.ts), `chronology.milestone.date` is explicitly an independently verified **UTC calendar day**. The forum display lacks a certified timezone, and the author/committer Git timestamp does not establish the GitHub public push time. Despite excellent item identity corroboration, the data contract requires stronger source-time proof.
+
+Retain `UNRESOLVED_FORUM_TIMEZONE_AND_PUBLIC_EVENT_DATE` for this record, while recognizing Nov29 as a **source-displayed date** and the same day's original Git commit as supporting the claim and document identity. Distinguish these from a publicly announced UTC event.
+
+A future source-backed data PR may promote a precise source-calendar date only after establishing the site timezone, an authenticated UTC `dateCreated` / original comment timestamp, or an independently verified public push or social post with its own event timestamp. Do not guess it from the 22:44 display.
 
 ## Acceptance
 
-Review the exact Git commit file identities, first-party author-forum record and stated time-zone caveat. Require hosted Check, Docker, CodeQL and resolved comments before merge. If merged onto otherwise unchanged `main`, old 314 records and 96 date-only V1 timestamps remain, while **4 → 3** records lack optional source milestones.
+- This PR adds this audit document **only**. The attempted optional chronology edit was explicitly reverted after review identified the UTC-date semantic problem. All 314 stories, 96 legacy date-only fields, and original IDs and source links remain unchanged.
+- Check that the branch's `portable/content/selected.jsonl` is byte-identical to the base `main`, and that CI and review discussions are resolved before merging a documentation-only research PR.
+- The true unresolved count stays **4**, including this case. A no-change outcome is correct when required primary-source evidence is unavailable.
