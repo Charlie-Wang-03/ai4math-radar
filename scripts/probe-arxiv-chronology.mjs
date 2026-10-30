@@ -54,8 +54,9 @@ export function inspectOaiXml(xml, expectedId) {
   const metadataId=tag(metadata,'id');
   if(metadataId&&metadataId!==expectedId)
     return {matched:false,error:'metadata identifier mismatch',metadataId};
-  const versions=[...metadata.matchAll(/<(?:[\w.-]+:)?version(?:\s[^>]*)?>([\s\S]*?)<\/(?:[\w.-]+:)?version\s*>/gi)]
-    .slice(0,12).map(x=>({version:tag(x[1],'version')||null,date:tag(x[1],'date')||null}));
+  const versions=[...metadata.matchAll(/<(?:[\w.-]+:)?version\b([^>]*)>([\s\S]*?)<\/(?:[\w.-]+:)?version\s*>/gi)]
+    .slice(0,12).map(x=>({version:x[1].match(/\bversion=["']([^"']+)["']/i)?.[1]||tag(x[2],'version')||null,
+      date:tag(x[2],'date')||null}));
   return {matched:true,identifier:actual,metadataId:metadataId||null,
     oaiHeaderDatestamp:tag(header,'datestamp')||null,
     providerCreated:tag(metadata,'created')||null,
