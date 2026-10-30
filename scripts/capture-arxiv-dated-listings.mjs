@@ -60,6 +60,8 @@ export async function captureOne(category,fetcher=fetch) {
     if(body.length>3800000)throw new Error("large response rejected");
     return {category,url,status:res.status,ok:res.ok,
       sha256:createHash("sha256").update(body).digest("hex"),bytes:body.length,
+      // Bounded debugging: a single original article identifier block to inspect link format.
+      articleIdentifierSample:(body.match(/<dt\\b[^>]*>[\\s\\S]{0,900}?<\\/dt>/i)?.[0]??"").slice(0,420),
       // Diagnostic link shapes only; never archive full provider HTML.
       linkExamples:[...body.matchAll(/href=["\x27]([^"\x27>]{1,130})["\x27]/gi)]
         .map(x=>x[1]).filter(x=>x.includes("/abs/")).slice(0,12),
