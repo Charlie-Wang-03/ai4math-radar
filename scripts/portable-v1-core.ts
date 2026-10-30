@@ -103,6 +103,22 @@ export function validatePortableV1Item(value: unknown, line = 1): PortableV1Item
       throw new Error(`line ${line}: ${field}.evidenceUrl must be HTTP(S)`);
     }
     if (!evidenceKinds.has(obj.evidenceKind as ChronologyEvidenceKind)) throw new Error(`line ${line}: ${field}.evidenceKind invalid`);
+    // An arXiv abstract (or ordinary Search API entry) exposes submission metadata,
+    // not an authenticated first-public announcement. Require a first-party listing
+    // or announcement feed as evidence for this specific evidenceKind. This is a
+    // provenance shape guard, NOT a claim that the listing's dated group was matched.
+    if (obj.evidenceKind === "arxiv-announcement") {
+      let evidence: URL;
+      try { evidence = new URL(obj.evidenceUrl); }
+      catch { throw new Error(`line ${line}: ${field} invalid arXiv announcement evidence URL`); }
+      const officialList = evidence.protocol === "https:" && evidence.hostname === "arxiv.org"
+        && /^\/list\/[a-z0-9.-]+\/(?:recent|new)\/?$/i.test(evidence.pathname);
+      const officialFeed = evidence.protocol === "https:" && evidence.hostname === "rss.arxiv.org"
+        && /^\/atom\/[a-z0-9.+-]+\/?$/i.test(evidence.pathname);
+      if (!officialList && !officialFeed) {
+        throw new Error(`line ${line}: ${field} arxiv-announcement requires official dated listing or announcement feed evidence, not an abstract submission page`);
+      }
+    }
     if (obj.precision === "day") {
       if (obj.at !== undefined) throw new Error(`line ${line}: ${field} day-precision cannot assert .at`);
     } else if (typeof obj.at !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(obj.at)
