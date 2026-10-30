@@ -51,9 +51,11 @@ For the two unresolved history cases, the workflow additionally probes original 
 
 | Record | Fixed official original listing | Research goal |
 | --- | --- | --- |
-| ProofNet (`2302.12433`) | `https://arxiv.org/list/cs.CL/2302?show=2000&skip=0` | Look for ID under an explicit February 2023 daily heading |
-| Lean Atlas (`2604.16347`) | `https://arxiv.org/list/cs.HC/2604?show=2000&skip=0` | Look for ID under an explicit April 2026 daily heading |
+| ProofNet (`2302.12433`) | `https://arxiv.org/list/cs.CL/2023-02?show=2000&skip=0` | Look for ID under an explicit February 2023 daily heading |
+| Lean Atlas (`2604.16347`) | `https://arxiv.org/list/cs.HC/2026-04?show=2000&skip=0` | Look for ID under an explicit April 2026 daily heading |
 
 The monthly URL **by itself never verifies a day**. Only a returned page that *actually contains the exact arXiv ID under a dated heading* yields a candidate. It still requires v1 versus revised/cross-listed record reconciliation and review before changing chronology. Both older pages are preserved as gzip evidence when accessible; if a remote request fails or no dated group appears, status remains unresolved. This research probe does not run on the recurring schedule and never changes `selected.jsonl`.
 
 Validation: read-only GitHub Actions workflow with code tests plus real response count, raw gzip digests and URL/ID evidence inspection. 90-day artifact retention is **not permanent storage**; any long-term archival solution must be reviewed separately with provenance, security and retention policies.
+
+**Historical URL repair:** The initial research probe used YYMM paths and observed two HTTP 404 responses. arXiv's [official Finding Articles documentation](https://info.arxiv.org/help/find/index.html) specifies `/list/<category>/YYYY-MM`, not YYMM. The corrected PR reruns the exact two fixed YYYY-MM URLs; old 404s were URL-format failures, not historical evidence of non-publication.
