@@ -21,7 +21,7 @@ After this batch **94** legacy day-only timestamps remain (95 → 94); the two O
 ## Important outstanding conflicts
 
 - `2023-02-23-proofnet`: arXiv [2302.12433](https://arxiv.org/abs/2302.12433) says v1 **Feb 24, 2023 03:28:46Z**, later than the archived Feb 23 date. Its exact public-announcement date is still unknown; this is a clear contradiction with using Feb 23 as the *arXiv paper release* day, not authorization to rename the historical permalink.
-- `2026-04-21-lean-atlas-semantic-alignment`: arXiv [2604.16347](https://arxiv.org/abs/2604.16347) page displays v1 **Mar 16, 2026**—even at odds with the `2604` identifier's month. The archive has Apr 21. This needs independent canonical source history and is held for date adjudication.
+- `2026-04-21-lean-atlas-semantic-alignment`: arXiv [2604.16347](https://arxiv.org/abs/2604.16347) displays v1 **submitted Mar 16, 2026** and an **April** arXiv ID. These are **not inherently inconsistent**: arXiv allocates the ID at announcement, which may occur in a later month after moderation. The archive has Apr 21; its exact first-announcement day remains unverified.
 - `2026-09-06-collatz-predecessors-positive-density`: source [manuscript v1.0](https://www.proofatlas.ai/formalizations/positive-lower-density-collatz-predecessors/) is **Sep 6**; its [credit release JSON](https://www.proofatlas.ai/data/releases/positive-lower-density-collatz-predecessors.json) has `releasedAt=2026-09-07T08:08:49Z`. These may be **distinct source/version events**; do not overwrite the manuscript calendar date to Sep 7 without establishing identity and priority.
 ## arxiv.org — 18 records
 
@@ -31,7 +31,7 @@ After this batch **94** legacy day-only timestamps remain (95 → 94); the two O
 | `2026-09-22-direct-optimization-atp` | [original](https://arxiv.org/abs/2609.25575) | UNVERIFIED_ANNOUNCEMENT: official abs page gives submission/version history, not item-matched public announcement clock |
 | `2026-09-22-math-reasoning-approach-not-topic` | [original](https://arxiv.org/abs/2609.27041) | UNVERIFIED_ANNOUNCEMENT: official abs page gives submission/version history, not item-matched public announcement clock |
 | `2026-05-17-oprover-agentic-training` | [original](https://arxiv.org/abs/2605.17283) | UNVERIFIED_ANNOUNCEMENT: official abs page gives submission/version history, not item-matched public announcement clock |
-| `2026-04-21-lean-atlas-semantic-alignment` | [original](https://arxiv.org/abs/2604.16347) | DATE_CONFLICT: v1 submission shown as Mar 16 (and April identifier is inconsistent), versus archive Apr 21; no original announcement day |
+| `2026-04-21-lean-atlas-semantic-alignment` | [original](https://arxiv.org/abs/2604.16347) | ANNOUNCEMENT_DAY_UNVERIFIED: v1 submitted Mar 16; arXiv ID allocated in April at announcement (valid cross-month lag); historic Apr 21 archive day needs original listing evidence |
 | `2023-02-23-proofnet` | [original](https://arxiv.org/abs/2302.12433) | DATE_CONFLICT: v1 submitted Feb 24, 2023 03:28:46Z, later than archive Feb 23 |
 | `2023-06-02-checkmate` | [original](https://arxiv.org/abs/2306.01694) | UNVERIFIED_ANNOUNCEMENT: official abs page gives submission/version history, not item-matched public announcement clock |
 | `2023-06-27-leandojo` | [original](https://arxiv.org/abs/2306.15626) | UNVERIFIED_ANNOUNCEMENT: official abs page gives submission/version history, not item-matched public announcement clock |
@@ -96,3 +96,7 @@ After this batch **94** legacy day-only timestamps remain (95 → 94); the two O
 - For ProofAtlas, all five original pages and linked release credit JSON were reviewed; distinguish first-party version-clock, version-day, and independent third-party review.
 - Next step: obtain article-matched official arXiv announcement feed archive (record ID, announce_type, first public UTC time), original historical snapshot for the two specific arXiv date conflicts, and check if older OpenAI/Google structured metadata provides reliable source publication offsets. Do not force a guess when feeds are unavailable.
 - Test gates before merge: `npm run content:check`, static build / chronology regression and configured hosted Check/Docker/CodeQL, no unresolved review threads. This connector session did **not** run local npm tests. Avoid a claim of CI green before the hosted check finishes.
+
+## Erratum (2026-10-30; Batch 12)
+
+The initial Batch 11 wording incorrectly described the March 16 submission date and the April-numbered Lean Atlas article as inherently inconsistent. The [official arXiv availability policy](https://info.arxiv.org/help/availability.html) says identifiers are assigned **on public announcement** and may differ in month from an earlier submission. Therefore this pair does not by itself prove the April 21 archive date wrong. A paper-matched dated announcement is still necessary. This correction does not retroactively certify April 21 nor claim first-public minute precision.
