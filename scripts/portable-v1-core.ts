@@ -112,7 +112,7 @@ export function validatePortableV1Item(value: unknown, line = 1): PortableV1Item
       try { evidence = new URL(obj.evidenceUrl); }
       catch { throw new Error(`line ${line}: ${field} invalid arXiv announcement evidence URL`); }
       const officialList = evidence.protocol === "https:" && evidence.hostname === "arxiv.org"
-        && /^\/list\/[a-z0-9.-]+\/(?:recent|new|\d{4}-\d{2})\/?$/i.test(evidence.pathname);
+        && /^\/list\/[a-z0-9.-]+\/(?:recent|new)\/?$/i.test(evidence.pathname);
       const officialFeed = evidence.protocol === "https:" && evidence.hostname === "rss.arxiv.org"
         && /^\/atom\/[a-z0-9.+-]+\/?$/i.test(evidence.pathname);
       if (!officialList && !officialFeed) {
