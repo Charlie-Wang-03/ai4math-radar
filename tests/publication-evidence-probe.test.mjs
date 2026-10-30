@@ -35,16 +35,22 @@ test("hexagon and Palomar nested metadata are candidate evidence only", () => {
 });
 
 test("canonical probe generation is strict to supported sources and not release-clock inference", () => {
-  const base = {publishedAt:"2026-10-16T00:00:00.000Z",links:{original:"https://terrytao.wordpress.com/2026/10/16/sair-open-math-os-released/"}};
+  const base = {selected:true,publishedAt:"2026-10-16T00:00:00.000Z",links:{original:"https://terrytao.wordpress.com/2026/10/16/sair-open-math-os-released/"}};
   const x=deriveCanonicalProbes([
     JSON.stringify({ ...base,id:"wordpress" }),
     JSON.stringify({ ...base,id:"hexagon",links:{original:"https://hexagonmath.org/2610.00460v2"} }),
     JSON.stringify({ ...base,id:"palomar",links:{original:"https://palomar-registry.org/entry?id=PALOMAR-2026-10-15-000001&version=1"} }),
     JSON.stringify({ ...base,id:"unknown",links:{original:"https://untrusted.example/fake"} }),
     JSON.stringify({ ...base,id:"already-precise",publishedAtPrecision:"minute" }),
+    JSON.stringify({ ...base,id:"explicit-day",publishedAtPrecision:"day",links:{original:"https://hexagonmath.org/2610.00597v1"} }),
+    JSON.stringify({ ...base,id:"explicit-day-palomar",publishedAtPrecision:"day",links:{original:"https://palomar-registry.org/entry?id=PALOMAR-2026-10-23-000012&version=2"} }),
+    JSON.stringify({ ...base,id:"cross-day-exact",chronology:{milestone:{date:"2026-10-18",precision:"second",at:"2026-10-18T05:00:00.000Z"}},links:{original:"https://hexagonmath.org/2610.00534v1"} }),
+    JSON.stringify({ ...base,id:"not-selected",selected:false,links:{original:"https://hexagonmath.org/2610.00655v1"} }),
   ].join("\n"));
-  assert.deepEqual(x.map(p=>p.id),["wordpress","hexagon","palomar"]);
+  assert.deepEqual(x.map(p=>p.id),["wordpress","hexagon","palomar","explicit-day","explicit-day-palomar"]);
   assert.equal(x[0].family,"wordpress-com");
   assert.equal(x[1].url,"https://hexagonmath.org/api/v1/works/2610.00460v1");
   assert.equal(x[2].family,"palomar");
+  assert.equal(x[3].url,"https://hexagonmath.org/api/v1/works/2610.00597v1");
+  assert.equal(x[4].url,"https://data.palomar-registry.org/versions/PALOMAR-2026-10-23-000012.json");
 });
