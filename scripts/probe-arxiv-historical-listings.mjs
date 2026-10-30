@@ -10,8 +10,8 @@ import {pathToFileURL} from "node:url";
 import {parseDatedListing} from "./capture-arxiv-dated-listings.mjs";
 
 export const TARGETS=Object.freeze([
-  {eventId:"2023-02-23-proofnet",arxivId:"2302.12433",category:"cs.CL",month:"2302"},
-  {eventId:"2026-04-21-lean-atlas-semantic-alignment",arxivId:"2604.16347",category:"cs.HC",month:"2604"}
+  {eventId:"2023-02-23-proofnet",arxivId:"2302.12433",category:"cs.CL",month:"2023-02"},
+  {eventId:"2026-04-21-lean-atlas-semantic-alignment",arxivId:"2604.16347",category:"cs.HC",month:"2026-04"}
 ]);
 export function archiveUrl(t) {
   if(!TARGETS.some(x=>x.eventId===t.eventId&&x.arxivId===t.arxivId
