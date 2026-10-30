@@ -23,9 +23,10 @@ export async function inspectArchive(t,fetcher=fetch) {
   const url=archiveUrl(t);
   try{
     const r=await fetcher(url,{redirect:"error",headers:{Accept:"text/html"},signal:AbortSignal.timeout(15000)});
-    const bytes=Buffer.from(await r.text(),"utf8");
+    // Preserve the exact downloaded body before UTF-8 decoding for HTML parsing.
+    const bytes=Buffer.from(await r.arrayBuffer());
     if(bytes.length>3800000)throw Error("oversized historical listing");
-    const groups=r.ok?parseDatedListing(bytes.toString("utf8")):[];
+    const groups=r.ok?parseDatedListing(new TextDecoder("utf-8").decode(bytes)):[];
     const matches=groups.filter(x=>x.ids.includes(t.arxivId)).map(x=>({
       day:x.date,heading:x.heading,arxivId:t.arxivId,
       status:"CANDIDATE_ONLY_NOT_FIRST_PUBLIC_CERTIFICATION"
