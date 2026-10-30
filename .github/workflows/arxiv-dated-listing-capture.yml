@@ -1,0 +1,42 @@
+name: Capture official arXiv dated listings (read-only)
+
+on:
+  pull_request:
+    paths:
+      - scripts/capture-arxiv-dated-listings.mjs
+      - tests/capture-arxiv-dated-listings.test.mjs
+      - .github/workflows/arxiv-dated-listing-capture.yml
+  workflow_dispatch:
+  schedule:
+    - cron: "27 7 * * 1-5"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: arxiv-dated-listing-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+      - name: Verify source and day-only candidate guards
+        run: node --test tests/capture-arxiv-dated-listings.test.mjs
+      - name: Capture official recent-listing day groups without altering content
+        run: node scripts/capture-arxiv-dated-listings.mjs evidence/arxiv-dated-listings.json
+      - name: Preserve source-labeled audit artifact
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: arxiv-dated-listings
+          path: evidence/arxiv-dated-listings.json
+          retention-days: 90
+          if-no-files-found: warn
