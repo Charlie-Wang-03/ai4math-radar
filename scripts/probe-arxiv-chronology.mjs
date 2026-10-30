@@ -39,7 +39,11 @@ export function buildOaiUrl(id) {
 }
 function tag(block,name) {
   const rx=new RegExp('<(?:[\\w.-]+:)?'+name+'(?:\\s[^>]*)?>([\\s\\S]*?)<\\/(?:[\\w.-]+:)?'+name+'\\s*>','i');
-  return (block.match(rx)?.[1]??'').trim().replace(/<[^>]*>/g,'').slice(0,300);
+  const value=block.match(rx)?.[1]??'';
+  // Dates, IDs and version labels are scalar XML leaf values. Reject markup instead of
+  // attempting a partial HTML sanitizer (which can be bypassed by malformed tags).
+  if(/[<>]/.test(value))return '';
+  return value.trim().slice(0,300);
 }
 export function inspectOaiXml(xml, expectedId) {
   if(typeof xml!=='string'||!ID.test(expectedId))throw new Error('invalid arguments');
