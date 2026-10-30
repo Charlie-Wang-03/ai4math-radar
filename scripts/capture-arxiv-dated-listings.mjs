@@ -51,7 +51,7 @@ export function canonicalArxivIndex(jsonl) {
 export async function captureOne(category,fetcher=fetch) {
   const url=officialListingUrl(category);
   const u=new URL(url);
-  if(u.protocol!=="https:"||u.hostname!=="arxiv.org"||!/^\/list\/[a-z.]+\/recent$/.test(u.pathname))
+  if(u.protocol!=="https:"||u.hostname!=="arxiv.org"||!/^\/list\/[a-z.]+\/recent$/i.test(u.pathname))
     throw new Error("unapproved announcement endpoint");
   try{
     const res=await fetcher(url,{redirect:"error",headers:{Accept:"text/html"},
