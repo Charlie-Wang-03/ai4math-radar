@@ -17,7 +17,7 @@ An original arXiv publisher RSS item has [well-defined `arxiv:announce_type` sem
 | GenLimitLib | `2609.36663` | 2026-09-29 through 2026-10-03 |
 | CheckMate | `2306.01694` | 2023-06-02 through 2023-06-09 |
 
-- Search [CDX API](https://web.archive.org/cdx/search/cdx) for at most twelve capture metadata rows within each fixed date range, only HTTP 200 and **at most three actual archived response reads per target**.
+- Search [CDX API](https://web.archive.org/cdx/search/cdx) for the contemporary **2026 `rss.arxiv.org/rss/cs.LG`** and **pre-2024 `export.arxiv.org/rss/cs.LG` (2023)** endpoints, respecting the official 2024 feed infrastructure transition. Query at most twelve capture metadata rows within each fixed date range, only HTTP 200 and **at most three actual archived response reads per target**.
 - If original XML is available, match full arXiv ID, exact version **v1**, category feed source, `Announce Type: new` and item's real `pubDate`, separately preserving Wayback **capture time**, original item date, original XML SHA-256 digest and response status.
 - HTTP 403, 429, 503, no captures, malformed XML, other versions or `cross` listings must remain **UNRESOLVED**. The Wayback timestamp is when an archive capture happened, **not** an event-release timestamp.
 - Strict fixed URL and target identity, HTTPS, no redirects, 12-second request deadline, bounded 400 KB CDX / 4.4 MB XML, no user inputs, tokens, paid services, production networking, manual approvals or canonical data writes.
@@ -29,3 +29,9 @@ An original arXiv publisher RSS item has [well-defined `arxiv:announce_type` sem
 The isolated [workflow](../../.github/workflows/historic-arxiv-rss-wayback.yml) runs tests and the live source probe on a PR and on manual dispatch. Check actual GitHub Actions log and artifact; mock tests **do not** certify historical arXiv public dates. GitHub hosted Check, Docker, CodeQL and review must pass before merge.
 
 No changes are made to the news catalog: currently **322** entries, **96** legacy date-only `publishedAt`, and (following PR #144) **three** date-only items still lacking optional source chronology. Stable IDs and old URL compatibility remain intact.
+
+## Real first-pass probe and historical host repair
+
+- [GitHub Actions first-pass run](https://github.com/Charlie-Wang-03/ai4math-radar/pull/145/checks) ran tests successfully and queried Wayback CDX for `rss.arxiv.org/rss/cs.LG` in both time windows. For each, CDX returned HTTP **200** with the same response SHA-256 `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570` and **zero eligible capture rows**. This does **not** prove that the articles were absent from their own primary-category arXiv announcement feed; it only establishes that the queried historic captures were unavailable through that endpoint.
+- Corrected CheckMate's 2023 target to the **old original arXiv RSS host `https://export.arxiv.org/rss/cs.LG`**, because the current `rss.arxiv.org` service was migrated in 2024. The updated bounded archive URL allowlist accepts only these **two fixed original host paths**; tests assert that the 2023 CDX query and potential archive replay use `export.arxiv.org`. No direct publication dates were added.
+- The real post-repair Actions artifact is required for a final verdict on old-host availability. A 200 CDX query with no capture rows is **UNRESOLVED_NO_ARCHIVED_ORIGINAL_RSS**, not proof of any date.
