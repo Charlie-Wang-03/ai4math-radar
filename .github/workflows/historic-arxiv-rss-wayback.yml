@@ -1,0 +1,36 @@
+name: Historic arXiv original RSS snapshot probe (read-only)
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - scripts/probe-historic-arxiv-rss-wayback.mjs
+      - tests/probe-historic-arxiv-rss-wayback.test.mjs
+      - .github/workflows/historic-arxiv-rss-wayback.yml
+
+permissions:
+  contents: read
+
+jobs:
+  historic-rss-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+      - name: Test source match and fail-closed archive handling
+        run: node --test tests/probe-historic-arxiv-rss-wayback.test.mjs
+      - name: Inspect bounded archived publisher RSS snapshots
+        run: node scripts/probe-historic-arxiv-rss-wayback.mjs evidence/arxiv-historic-cdx.json
+      - name: Save original archive candidates and source errors
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: historic-arxiv-rss-candidates
+          path: evidence/arxiv-historic-cdx.json
+          retention-days: 30
+          if-no-files-found: warn

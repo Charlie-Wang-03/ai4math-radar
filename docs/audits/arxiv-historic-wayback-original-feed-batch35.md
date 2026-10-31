@@ -1,0 +1,50 @@
+# Batch 35 — original arXiv historical RSS snapshots via the Internet Archive
+
+Checked 2026-10-31. This is a **read-only, fixed-source research experiment**, not a publication-time migration.
+
+## Problem
+
+Two remaining items lack an archived **original arXiv `new` listing**:
+- `2026-09-29-genlimitlib`, [arXiv 2609.36663](https://arxiv.org/abs/2609.36663), submitted **2026-09-29T04:06:07Z**; archived [cs.LO announcement feed](https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LO/2026-09-30_cs.LO.xml) shows Sept30 **`cross`**, not the primary **cs.LG `new`** item. A [derived secondary paper record](https://github.com/qhduan/cn-chat-arxiv/blob/968aefd7525b8933f8f697c04dad7f5107cbfcc5/papers/26/09/2609.36663.json) reports v1 `new`, but its original announcement date is not independently preserved.
+- `2023-06-02-checkmate`, [arXiv 2306.01694](https://arxiv.org/abs/2306.01694), submitted **2023-06-02T17:12:25Z**; [coauthor-hosted manuscript](https://wenda302.github.io/assets/pdf/eval_LM_Kate.pdf) is dated **June5**, and a [2023-06-05 derivative arXiv daily listing](https://github.com/wwd29/arxiv-daily/blob/763279dd0d1bf3673215152b54bb1c48b901fa7a/html/user_0/2023-06-05.html) mentions the exact paper. Neither proves that this is the date of the **official new arXiv announcement**.
+
+## Fixed historical provider evidence probe
+
+An original arXiv publisher RSS item has [well-defined `arxiv:announce_type` semantics](https://info.arxiv.org/help/rss_specifications.html): `new` denotes first release on arXiv, `cross` a cross-category listing, `replace` a revision. The new `scripts/probe-historic-arxiv-rss-wayback.mjs` runs a read-only search of the **Internet Archive CDX** for pre-existing captures of **https://rss.arxiv.org/rss/cs.LG**, limited to:
+
+| Canonical ID | Exact arXiv ID | CDX archive date window |
+| --- | --- | --- |
+| GenLimitLib | `2609.36663` | 2026-09-29 through 2026-10-03 |
+| CheckMate | `2306.01694` | 2023-06-02 through 2023-06-09 |
+
+- Search [CDX API](https://web.archive.org/cdx/search/cdx) for the contemporary **2026 `rss.arxiv.org/rss/cs.LG`** and **pre-2024 `arxiv.org/rss/cs.LG` (2023)** endpoints, respecting the official 2024 feed infrastructure transition. Query at most twelve capture metadata rows within each fixed date range, only HTTP 200 and **at most three actual archived response reads per target**.
+- If original XML is available, match full arXiv ID, exact version **v1**, category feed source, `Announce Type: new` and item's real `pubDate`, separately preserving Wayback **capture time**, original item date, original XML SHA-256 digest and response status.
+- HTTP 403, 429, 503, no captures, malformed XML, other versions or `cross` listings must remain **UNRESOLVED**. The Wayback timestamp is when an archive capture happened, **not** an event-release timestamp.
+- Strict fixed URL and target identity, HTTPS, no redirects, 12-second request deadline, bounded 400 KB CDX / 4.4 MB XML, no user inputs, tokens, paid services, production networking, manual approvals or canonical data writes.
+- Use existing GitHub Actions as a **short-lived, auditable, read-only runner**, with 30-day JSON artifact retention; deploying an additional long-running authenticated MCP server would add hosting, credentials and security complexity without providing a new source of historical evidence.
+- These archived copies, even if original XML is recovered, require a **manual item/announcement verification and distinct content PR** before any `chronology.milestone` is populated.
+
+## Acceptance
+
+The isolated [workflow](../../.github/workflows/historic-arxiv-rss-wayback.yml) runs tests and the live source probe on a PR and on manual dispatch. Check actual GitHub Actions log and artifact; mock tests **do not** certify historical arXiv public dates. GitHub hosted Check, Docker, CodeQL and review must pass before merge.
+
+No changes are made to the news catalog: currently **322** entries, **96** legacy date-only `publishedAt`, and (following PR #144) **three** date-only items still lacking optional source chronology. Stable IDs and old URL compatibility remain intact.
+
+## Real first-pass probe and historical host repair
+
+- [GitHub Actions first-pass run](https://github.com/Charlie-Wang-03/ai4math-radar/pull/145/checks) ran tests successfully and queried Wayback CDX for `rss.arxiv.org/rss/cs.LG` in both time windows. For each, CDX returned HTTP **200** with the same response SHA-256 `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570` and **zero eligible capture rows**. This does **not** prove that the articles were absent from their own primary-category arXiv announcement feed; it only establishes that the queried historic captures were unavailable through that endpoint.
+- Corrected CheckMate's 2023 target to the **old original arXiv RSS host `https://arxiv.org/rss/cs.LG`**, because the current `rss.arxiv.org` service was migrated in 2024. The updated bounded archive URL allowlist accepts only these **two fixed original host paths**; tests assert that the 2023 CDX query and potential archive replay use `arxiv.org`. No direct publication dates were added.
+- The real post-repair Actions artifact is required for a final verdict on old-host availability. A 200 CDX query with no capture rows is **UNRESOLVED_NO_ARCHIVED_ORIGINAL_RSS**, not proof of any date.
+
+**Official host correction:** [arXiv's January 31, 2024 migration notice](https://blog.arxiv.org/2024/01/31/attention-arxiv-users-re-implemented-rss/) explicitly identifies **`arxiv.org/rss`** as the old pre-2024 service, replaced by **`rss.arxiv.org`**. The early exploratory `export.arxiv.org` guess was corrected **before merge**, following automated review. The 2023 CDX and replay URLs are now fixed to the original `https://arxiv.org/rss/cs.LG`. This source-host accuracy is essential for historical provenance.
+
+## Real post-repair acceptance — correct 2023 historic provider host (2026-10-31)
+
+[PR #145 Actions source probe](https://github.com/Charlie-Wang-03/ai4math-radar/pull/145/checks) PASS after the arXiv-host correction and test-fixture repair.
+
+- **GenLimitLib**: official 2026 source `https://rss.arxiv.org/rss/cs.LG`, CDX window Sept29–Oct3 2026: HTTP **200**, response SHA-256 `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570`, **zero capture candidates**, no original v1 `new` item.
+- **CheckMate**: officially documented **pre-2024** original source `https://arxiv.org/rss/cs.LG`, CDX window June2–9 2023: HTTP **200**, same response digest, **zero capture candidates**, no original v1 `new` item.
+- **Exactly zero** papers had source-validated first-announcement dates found by this archive query. A successful HTTP CDX lookup with no matching captures is **an archive-coverage gap**, not evidence against historical public release. Do not turn 2026-09-29 / 2023-06-02 *submission* timestamps into public-event claims, or substitute the secondary sources' dates.
+- The workflow does **not** alter any news record. Evidence is available through the 30-day GitHub Actions artifact and the original complete source probe log; archival JSON is research evidence, not permanent proof of publication day.
+
+Further useful progress requires a newly found source-specific original arXiv v1 `new` feed snapshot, an original author/public announcement with UTC date, or an explicitly different noteworthy paper-version/source event. Running more infrastructure without a concrete candidate is not necessary.
