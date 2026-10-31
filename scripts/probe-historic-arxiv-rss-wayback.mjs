@@ -13,7 +13,7 @@ export const TARGETS=Object.freeze([
     source:"https://rss.arxiv.org/rss/cs.LG"}),
   Object.freeze({eventId:"2023-06-02-checkmate",arxivId:"2306.01694",
     category:"cs.LG",from:"20230602",to:"20230609",
-    source:"https://export.arxiv.org/rss/cs.LG"})
+    source:"https://arxiv.org/rss/cs.LG"})
 ]);
 const MAX_CDX_BYTES=400000;
 const MAX_XML_BYTES=4400000;
@@ -22,7 +22,7 @@ const MAX_REPLAYS=3;
 async function boundedGet(url,limit,fetcher=fetch){
   const u=new URL(url);
   if(u.protocol!=="https:"||u.hostname!=="web.archive.org"||
-     !(u.pathname==="/cdx/search/cdx"||/^\/web\/\d{14}id_\/https:\/\/(?:rss|export)\.arxiv\.org\/rss\/cs\.LG$/.test(u.pathname)))
+     !(u.pathname==="/cdx/search/cdx"||/^\/web\/\d{14}id_\/https:\/\/(?:rss\.arxiv\.org|arxiv\.org)\/rss\/cs\.LG$/.test(u.pathname)))
     throw Error("Unapproved Wayback lookup URL");
   const response=await fetcher(url,{redirect:"error",headers:{Accept:"application/json, application/xml, text/xml"},
     signal:AbortSignal.timeout(12000)});
