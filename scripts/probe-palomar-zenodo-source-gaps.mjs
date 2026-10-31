@@ -1,6 +1,6 @@
 /** Read-only fixed-target original-source audit. No automatic publishedAt changes.
  * Palomar registered_at = exact version public registry milestone.
- * Zenodo created/updated/publication_date != automatically first-public release.
+ * Zenodo created/updated/publication_date and DataCite DOI registration != automatically first-public record release.
  */
 import {readFileSync,mkdirSync,writeFileSync} from "node:fs";
 import {dirname} from "node:path";
@@ -13,11 +13,13 @@ export const TARGETS=Object.freeze([
   index:"https://data.palomar-registry.org/versions/PALOMAR-2026-08-31-000013.json"},
  {eventId:"2026-10-19-arad-herzog-conditional-ai-proof-claim",provider:"zenodo",
   source:"https://zenodo.org/records/23450488",recordId:23450488,
-  url:"https://zenodo.org/api/records/23450488"}
+  url:"https://zenodo.org/api/records/23450488",
+  dataciteUrl:"https://api.datacite.org/dois/10.5281/zenodo.23450488",
+  doi:"10.5281/zenodo.23450488"}
 ]);
 async function readJson(url,fetcher=fetch){
   const u=new URL(url);
-  if(u.protocol!=="https:"||!["data.palomar-registry.org","zenodo.org"].includes(u.hostname))
+  if(u.protocol!=="https:"||!["data.palomar-registry.org","zenodo.org","api.datacite.org"].includes(u.hostname))
     throw Error("unsafe original-source host");
   const resp=await fetcher(url,{redirect:"error",headers:{Accept:"application/json"},
     signal:AbortSignal.timeout(12000)});
@@ -29,7 +31,8 @@ async function readJson(url,fetcher=fetch){
     rawSha256:createHash("sha256").update(bytes).digest("hex"),bytes:bytes.length};
 }
 export async function investigate(t,fetcher=fetch){
-  if(!TARGETS.some(x=>x.eventId===t.eventId&&x.provider===t.provider))
+  const approved=TARGETS.find(x=>x.eventId===t.eventId&&x.provider===t.provider);
+  if(!approved||JSON.stringify(t)!==JSON.stringify(approved))
     throw Error("unknown fixed source target");
   try{
     if(t.provider==="palomar"){
@@ -51,13 +54,33 @@ export async function investigate(t,fetcher=fetch){
         registeredAt:data?.registered_at,firstRegisteredOn:data?.first_registered_on,
         decision:matched?"CANDIDATE_EXACT_REGISTRY_VERSION_MILESTONE_REQUIRES_EDITORIAL_REVIEW":"UNRESOLVED_VERSION_IDENTITY"};
     }
-    const rec=await readJson(t.url,fetcher),d=rec.obj;
-    const matched=rec.ok&&String(d?.id)===String(t.recordId)&&
+    // The Zenodo origin may deny automated reads (HTTP 403). Probe the
+    // independently published DOI registration record even in that case.
+    // Neither created nor registered alone proves a version's first public instant.
+    const zenodo=await readJson(t.url,fetcher).catch(e=>({ok:false,status:null,error:String(e).slice(0,180)}));
+    const d=zenodo.obj;
+    const matched=zenodo.ok&&String(d?.id)===String(t.recordId)&&
       typeof d?.metadata?.title==="string";
-    return {eventId:t.eventId,provider:t.provider,matched,url:t.url,status:rec.status,
-      digest:rec.rawSha256,id:d?.id,title:d?.metadata?.title,created:d?.created,
+    const datacite=await readJson(t.dataciteUrl,fetcher).catch(e=>({ok:false,status:null,error:String(e).slice(0,180)}));
+    const a=datacite.obj?.data?.attributes;
+    const doiMatched=datacite.ok&&datacite.obj?.data?.type==="dois"
+      &&String(datacite.obj?.data?.id||"").toLowerCase()===t.doi.toLowerCase()
+      &&String(a?.doi||"").toLowerCase()===t.doi.toLowerCase()
+      &&typeof a?.url==="string"&&a.url.includes(String(t.recordId))
+      &&Array.isArray(a?.titles)&&a.titles.some(q=>
+        /arad/i.test(String(q?.title||""))&&/herzog/i.test(String(q?.title||"")));
+    return {eventId:t.eventId,provider:t.provider,matched,url:t.url,
+      status:zenodo.status??null,error:zenodo.error??null,digest:zenodo.rawSha256,
+      id:d?.id,title:d?.metadata?.title,created:d?.created,
       updated:d?.updated,publicationDate:d?.metadata?.publication_date,
       version:d?.metadata?.version,access:d?.access?.record,
+      datacite:{url:t.dataciteUrl,status:datacite.status??null,
+        error:datacite.error??null,digest:datacite.rawSha256,
+        doiMatched,doi:doiMatched?a.doi:null,
+        doiStatus:doiMatched?a.state:null,created:doiMatched?a.created:null,
+        registered:doiMatched?a.registered:null,published:doiMatched?a.published:null,
+        publicationYear:doiMatched?a.publicationYear:null,
+        version:doiMatched?a.version:null,landingUrl:doiMatched?a.url:null},
       decision:"NO_ZENODO_CLOCK_PROMOTION_WITHOUT_EXPLICIT_PUBLIC_RELEASE_SEMANTICS"};
   }catch(error){return {eventId:t.eventId,provider:t.provider,matched:false,
     error:String(error).slice(0,240)};}
@@ -67,7 +90,7 @@ export async function investigateAll(targets=TARGETS,fetcher=fetch){
   for(const t of targets)items.push(await investigate(t,fetcher));
   return {kind:"SOURCE_SPECIFIC_PUBLICATION_EVIDENCE_NOT_AUTOMATIC_CORRECTION",
     generatedAt:new Date().toISOString(),items,
-    rule:"Never infer first-public research clock from repository created, Zenodo metadata.created or user-entered publication_date."};
+    rule:"Never infer first-public release from repository creation, Zenodo draft creation/publication_date, or DataCite DOI registration time."};
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
   const output=process.argv[2]||"evidence/source-gaps.json";
