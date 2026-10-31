@@ -9,19 +9,20 @@ import {pathToFileURL} from "node:url";
 
 export const TARGETS=Object.freeze([
   Object.freeze({eventId:"2026-09-29-genlimitlib",arxivId:"2609.36663",
-    category:"cs.LG",from:"20260929",to:"20261003"}),
+    category:"cs.LG",from:"20260929",to:"20261003",
+    source:"https://rss.arxiv.org/rss/cs.LG"}),
   Object.freeze({eventId:"2023-06-02-checkmate",arxivId:"2306.01694",
-    category:"cs.LG",from:"20230602",to:"20230609"})
+    category:"cs.LG",from:"20230602",to:"20230609",
+    source:"https://export.arxiv.org/rss/cs.LG"})
 ]);
 const MAX_CDX_BYTES=400000;
 const MAX_XML_BYTES=4400000;
 const MAX_REPLAYS=3;
-const official="https://rss.arxiv.org/rss/cs.LG";
 
 async function boundedGet(url,limit,fetcher=fetch){
   const u=new URL(url);
   if(u.protocol!=="https:"||u.hostname!=="web.archive.org"||
-     !(u.pathname==="/cdx/search/cdx"||/^\/web\/\d{14}id_\/https:\/\/rss\.arxiv\.org\/rss\/cs\.LG$/.test(u.pathname)))
+     !(u.pathname==="/cdx/search/cdx"||/^\/web\/\d{14}id_\/https:\/\/(?:rss|export)\.arxiv\.org\/rss\/cs\.LG$/.test(u.pathname)))
     throw Error("Unapproved Wayback lookup URL");
   const response=await fetcher(url,{redirect:"error",headers:{Accept:"application/json, application/xml, text/xml"},
     signal:AbortSignal.timeout(12000)});
@@ -50,7 +51,7 @@ export function inspectRssItem(xml,id){
   return found;
 }
 function cdxUrl(t){
-  const q=new URLSearchParams({url:"rss.arxiv.org/rss/"+t.category,
+  const q=new URLSearchParams({url:new URL(t.source).hostname+"/rss/"+t.category,
     from:t.from,to:t.to,output:"json",filter:"statuscode:200",
     fl:"timestamp,original,statuscode",collapse:"timestamp:8",limit:"12"});
   return "https://web.archive.org/cdx/search/cdx?"+q.toString();
@@ -60,7 +61,7 @@ export async function inspectTarget(t,fetcher=fetch){
   if(!approved||JSON.stringify(t)!==JSON.stringify(approved))
     throw Error("Only exact fixed target parameters allowed");
   const result={eventId:t.eventId,arxivId:t.arxivId,category:t.category,
-    archiveQuery:cdxUrl(t),primarySource:official,candidates:[],
+    archiveQuery:cdxUrl(t),primarySource:t.source,candidates:[],
     decision:"UNRESOLVED_HISTORIC_ORIGINAL_NEW_FEED"};
   try{
     const index=await boundedGet(result.archiveQuery,MAX_CDX_BYTES,fetcher);
@@ -71,7 +72,7 @@ export async function inspectTarget(t,fetcher=fetch){
     const rows=records.slice(1).filter(x=>Array.isArray(x)&&
       /^\d{14}$/.test(x[0])&&x[0].slice(0,8)>=t.from&&x[0].slice(0,8)<=t.to&&x[2]==="200");
     for(const row of rows.slice(0,MAX_REPLAYS)){
-      const stamp=row[0],url="https://web.archive.org/web/"+stamp+"id_/"+official;
+      const stamp=row[0],url="https://web.archive.org/web/"+stamp+"id_/"+t.source;
       try{
         const resp=await boundedGet(url,MAX_XML_BYTES,fetcher);
         const matches=resp.ok?inspectRssItem(resp.body,t.arxivId):[];
