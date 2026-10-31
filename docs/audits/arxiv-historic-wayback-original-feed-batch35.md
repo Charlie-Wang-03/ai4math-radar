@@ -37,3 +37,14 @@ No changes are made to the news catalog: currently **322** entries, **96** legac
 - The real post-repair Actions artifact is required for a final verdict on old-host availability. A 200 CDX query with no capture rows is **UNRESOLVED_NO_ARCHIVED_ORIGINAL_RSS**, not proof of any date.
 
 **Official host correction:** [arXiv's January 31, 2024 migration notice](https://blog.arxiv.org/2024/01/31/attention-arxiv-users-re-implemented-rss/) explicitly identifies **`arxiv.org/rss`** as the old pre-2024 service, replaced by **`rss.arxiv.org`**. The early exploratory `export.arxiv.org` guess was corrected **before merge**, following automated review. The 2023 CDX and replay URLs are now fixed to the original `https://arxiv.org/rss/cs.LG`. This source-host accuracy is essential for historical provenance.
+
+## Real post-repair acceptance — correct 2023 historic provider host (2026-10-31)
+
+[PR #145 Actions source probe](https://github.com/Charlie-Wang-03/ai4math-radar/pull/145/checks) PASS after the arXiv-host correction and test-fixture repair.
+
+- **GenLimitLib**: official 2026 source `https://rss.arxiv.org/rss/cs.LG`, CDX window Sept29–Oct3 2026: HTTP **200**, response SHA-256 `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570`, **zero capture candidates**, no original v1 `new` item.
+- **CheckMate**: officially documented **pre-2024** original source `https://arxiv.org/rss/cs.LG`, CDX window June2–9 2023: HTTP **200**, same response digest, **zero capture candidates**, no original v1 `new` item.
+- **Exactly zero** papers had source-validated first-announcement dates found by this archive query. A successful HTTP CDX lookup with no matching captures is **an archive-coverage gap**, not evidence against historical public release. Do not turn 2026-09-29 / 2023-06-02 *submission* timestamps into public-event claims, or substitute the secondary sources' dates.
+- The workflow does **not** alter any news record. Evidence is available through the 30-day GitHub Actions artifact and the original complete source probe log; archival JSON is research evidence, not permanent proof of publication day.
+
+Further useful progress requires a newly found source-specific original arXiv v1 `new` feed snapshot, an original author/public announcement with UTC date, or an explicitly different noteworthy paper-version/source event. Running more infrastructure without a concrete candidate is not necessary.
