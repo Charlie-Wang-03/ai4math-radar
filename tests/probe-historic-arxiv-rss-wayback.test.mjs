@@ -51,3 +51,12 @@ test("all targets fail closed under an unreachable archive service",async()=>{
   assert.ok(report.results.every(x=>x.decision.startsWith("UNRESOLVED")));
   assert.ok(report.results.every(x=>x.error?.includes("blocked")));
 });
+
+test("the 2023 target uses the pre-2024 export.arxiv.org feed host, not current RSS host",async()=>{
+  assert.equal(TARGETS[1].source,"https://export.arxiv.org/rss/cs.LG");
+  const result=await inspectTarget(TARGETS[1],fake("<rss><channel></channel></rss>"));
+  assert.ok(result.archiveQuery.includes("export.arxiv.org"));
+  assert.equal(result.primarySource,TARGETS[1].source);
+  assert.ok(result.candidates[0].archiveUrl.includes("export.arxiv.org"));
+  assert.match(result.decision,/UNRESOLVED/);
+});
