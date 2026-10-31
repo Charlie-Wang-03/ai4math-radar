@@ -13,8 +13,9 @@ const cdx=JSON.stringify([["timestamp","original","statuscode"],["20260930040300
 function fake(xml,type=200){
   return async (url,opts)=>{
     assert.equal(opts.redirect,"error");
-    const isIndex=url.includes("/cdx/search/cdx");
-    const payload=isIndex?(url.includes("from=20230602")?JSON.stringify([["timestamp","original","statuscode"],["20230605040000","https://arxiv.org/rss/cs.LG","200"]]):cdx):xml;
+    const address=new URL(url);
+    const isIndex=address.pathname==="/cdx/search/cdx";
+    const payload=isIndex?(address.searchParams.get("from")==="20230602"?JSON.stringify([["timestamp","original","statuscode"],["20230605040000","https://arxiv.org/rss/cs.LG","200"]]):cdx):xml;
     return {ok:type===200,status:type,
       arrayBuffer:async()=>Buffer.from(payload)};
   };
@@ -55,8 +56,8 @@ test("all targets fail closed under an unreachable archive service",async()=>{
 test("the 2023 target uses the pre-2024 arxiv.org feed host, not current RSS host",async()=>{
   assert.equal(TARGETS[1].source,"https://arxiv.org/rss/cs.LG");
   const result=await inspectTarget(TARGETS[1],fake("<rss><channel></channel></rss>"));
-  assert.ok(result.archiveQuery.includes("arxiv.org"));
+  assert.equal(new URL(result.archiveQuery).searchParams.get("url"),"arxiv.org/rss/cs.LG");
   assert.equal(result.primarySource,TARGETS[1].source);
-  assert.ok(result.candidates[0].archiveUrl.includes("id_/https://arxiv.org/rss/cs.LG"));
+  assert.equal(result.candidates[0].archiveUrl,"https://web.archive.org/web/20230605040000id_/https://arxiv.org/rss/cs.LG");
   assert.match(result.decision,/UNRESOLVED/);
 });
