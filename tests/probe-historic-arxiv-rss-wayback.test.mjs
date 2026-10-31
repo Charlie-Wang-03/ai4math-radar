@@ -14,7 +14,7 @@ function fake(xml,type=200){
   return async (url,opts)=>{
     assert.equal(opts.redirect,"error");
     const isIndex=url.includes("/cdx/search/cdx");
-    const payload=isIndex?cdx:xml;
+    const payload=isIndex?(url.includes("from=20230602")?JSON.stringify([["timestamp","original","statuscode"],["20230605040000","https://arxiv.org/rss/cs.LG","200"]]):cdx):xml;
     return {ok:type===200,status:type,
       arrayBuffer:async()=>Buffer.from(payload)};
   };
