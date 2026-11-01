@@ -1,0 +1,79 @@
+name: Batch39 one-off summary blob preparation
+on:
+  push:
+    branches: [content/date-evidence-qualifications-batch39]
+    paths: [.github/workflows/batch39-prepare-blob.yml]
+permissions:
+  contents: write
+jobs:
+  prepare-blob:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Validate pinned baseline and create unattached blob only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {createHash} from 'node:crypto';
+          const repo='Charlie-Wang-03/ai4math-radar';
+          const branch='content/date-evidence-qualifications-batch39';
+          const base='8c285145474f78cdca8f14cf4c264385f8f08abe';
+          const oldBlob='16feedd052c010f436582bed443d7ee057e19e1c';
+          const expectedNew='dde56d03c262a590a63fbffe9b7ccfaafeb9462d';
+          const path='portable/content/selected.jsonl';
+          const gen='2026-09-29-genlimitlib',zen='2026-10-19-arad-herzog-conditional-ai-proof-claim';
+          assert.equal(process.env.GITHUB_REPOSITORY,repo);
+          assert.equal(process.env.GITHUB_REF,'refs/heads/'+branch);
+          assert.equal(process.env.GITHUB_EVENT_NAME,'push');
+          const allowedGet='/repos/'+repo+'/contents/'+path+'?ref='+base;
+          const allowedPost='/repos/'+repo+'/git/blobs';
+          async function api(endpoint,method='GET',body){
+            assert.ok((method==='GET'&&endpoint===allowedGet)||(method==='POST'&&endpoint===allowedPost));
+            const res=await fetch('https://api.github.com'+endpoint,{method,redirect:'error',signal:AbortSignal.timeout(20000),
+              headers:{Authorization:'Bearer '+process.env.GH_TOKEN,Accept:'application/vnd.github+json','Content-Type':'application/json'},
+              body:body?JSON.stringify(body):undefined});
+            if(!res.ok)throw Error('GitHub API HTTP '+res.status);
+            return res.json();
+          }
+          const src=await api(allowedGet);
+          assert.equal(src.sha,oldBlob);assert.equal(src.encoding,'base64');
+          const raw=Buffer.from(src.content,'base64');assert.ok(raw.length<1000000);
+          const gitSha=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex');
+          assert.equal(gitSha(raw),oldBlob);
+          const text=new TextDecoder('utf8',{fatal:true}).decode(raw),lines=text.split('\n');
+          const before=lines.filter(x=>x.trim()).map(JSON.parse);
+          assert.equal(before.length,334);assert.equal(new Set(before.map(x=>x.id)).size,334);
+          const genNote='\n\n时间核验：2026 年 9 月 29 日是 arXiv v1 提交日期，不等于已核实的首次公开公告日期。已保存的原始 RSS 条目确认 9 月 30 日在 cs.LO 的跨分类公告（cross），但不能替代主分类 cs.LG 的首次公告（new）证据。条目 ID 和兼容日期保留历史值；首次公开公告时间仍待核。';
+          const oldStart='Aran S. Ziegler 于 2026 年 10 月 19 日在 Zenodo 公开《Proof of the Arad–Herzog conjecture》的版本 3，';
+          const newStart='Aran S. Ziegler 的《Proof of the Arad–Herzog conjecture》版本 3，';
+          const oldEnd='Zenodo 显示公开日期为 10 月 19 日，记录的更早技术创建时间不视为首次公开发表。';
+          const zenNote='\n\n时间核验：与 Zenodo 记录 23450488 对应的 DataCite 元数据记载，版本 3 的来源声明发行日期（Issued）为 2026 年 10 月 19 日，DOI 登记时间为 2026 年 10 月 18 日 15:39:11 UTC。两者是不同类型的日期，均不能单独证明该版本首次公开可访问的 UTC 日期或时刻。本次核验未取得版本 3 的首次公开元数据，版本 4 的日期不用于替代版本 3。条目 ID 和兼容日期保留历史值；首次公开 UTC 时间仍待核。';
+          let changed=0;
+          for(let i=0;i<lines.length;i++){
+            if(!lines[i].trim())continue;
+            const x=JSON.parse(lines[i]);
+            if(x.id===gen){assert.equal(x.chronology,undefined);x.summary+=genNote;changed++;}
+            else if(x.id===zen){assert.equal(x.chronology,undefined);assert.ok(x.summary.startsWith(oldStart));assert.ok(x.summary.endsWith(oldEnd));x.summary=newStart+x.summary.slice(oldStart.length,-oldEnd.length)+zenNote;changed++;}
+            else continue;
+            lines[i]=JSON.stringify(x);
+          }
+          assert.equal(changed,2);
+          const after=lines.filter(x=>x.trim()).map(JSON.parse);assert.equal(after.length,334);
+          for(let i=0;i<before.length;i++){
+            const keys=Object.keys(after[i]).filter(k=>JSON.stringify(before[i][k])!==JSON.stringify(after[i][k]));
+            assert.deepEqual(keys,[gen,zen].includes(before[i].id)?['summary']:[]);
+          }
+          assert.equal(lines.filter((x,i)=>x!==text.split('\n')[i]).length,2);
+          const gaps=xs=>xs.filter(x=>/T00:00:00(?:\.000)?Z$/.test(x.publishedAt||'')&&!x.chronology).map(x=>x.id);
+          assert.deepEqual(gaps(after),gaps(before));assert.equal(gaps(after).length,2);
+          const updated=Buffer.from(lines.join('\n'));
+          assert.equal(gitSha(updated),expectedNew);
+          const blob=await api(allowedPost,'POST',{content:updated.toString('base64'),encoding:'base64'});
+          assert.equal(blob.sha,expectedNew);
+          console.log('BATCH39_BLOB='+JSON.stringify({base,path,oldBlob,newBlob:blob.sha,bytes:updated.length,
+            sha256:createHash('sha256').update(updated).digest('hex'),records:334,changedRecords:2,
+            changedFields:['summary'],unchangedOtherRecords:332,gapsBefore:gaps(before),gapsAfter:gaps(after),refWritten:false}));
+          for(const item of after.filter(x=>[gen,zen].includes(x.id)))console.log('BATCH39_ITEM='+JSON.stringify(item));
+          NODE
