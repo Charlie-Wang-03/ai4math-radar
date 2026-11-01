@@ -11,7 +11,7 @@ export const ARCHIVE='https://data.gharchive.org/2023-06-05-12.json.gz';
 export const DOIS=Object.freeze(['10.5281/zenodo.23450488','10.5281/zenodo.23475012']);
 const URLS=new Set([ARCHIVE,...DOIS.map(x=>'https://api.datacite.org/dois/'+x)]);
 const REPO='collinskatie/checkmate';
-const LIMITS={compressed:128*1024*1024,expanded:768*1024*1024,line:8*1024*1024,json:1300000};
+const LIMITS={compressed:256*1024*1024,expanded:2*1024*1024*1024,line:8*1024*1024,json:1300000};
 
 async function request(url,fetcher){
   if(!URLS.has(url))throw Error('Unapproved fixed evidence URL');
