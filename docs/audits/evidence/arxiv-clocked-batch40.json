@@ -1,0 +1,430 @@
+{
+  "checkedAt": "2026-11-02T04:17:34.447124+00:00",
+  "baselineCommit": "fcea9ce8f277d0caf5f79733d842408740dcd781",
+  "catalogBlob": "dde56d03c262a590a63fbffe9b7ccfaafeb9462d",
+  "catalogSha256": "d3d13ed022defbb2d249b5421722179bb6dcb26656842189142142ae7476284e",
+  "inventorySha256": "a8abdc29c0fbc92037d55431eb9d987b45a01eadba8280da94453dece6afad80",
+  "counts": {
+    "baselineCandidates": 98,
+    "reviewed": 8,
+    "adopted": 1,
+    "held": 7,
+    "notYetReviewed": 90,
+    "remainingWithoutChronology": 97
+  },
+  "rawArchive": {
+    "repository": "ehijano/rss_fetch",
+    "commit": "e597e5120c034115fda2049d72812f2da7f99f3a",
+    "runId": 41387622863,
+    "artifactId": 13115632347,
+    "zipSha256": "f7b425ae6caf04f178613d91b5d1eaabc9ffe661bef02153b71a2e02b26b1112"
+  },
+  "renderedArchive": {
+    "repository": "sifted-network/sifted-awesome-ai-agents",
+    "commit": "9e971e4a9ec325fec5eadf178c36e2afe223b0b2",
+    "runId": 41387806992,
+    "artifactId": 13115663962,
+    "zipSha256": "f7ccc11a9e4e57e63bc66fd8b3bf485b59c1c944058db8681a82a5174dc2ca29",
+    "limitation": "Published text omits a timezone; collector conversion code not established. Not promoted alone."
+  },
+  "items": [
+    {
+      "id": "2026-10-15-lean-graph-search",
+      "arxivId": "2610.22339",
+      "sourceUrl": "https://arxiv.org/abs/2610.22339",
+      "storedAt": "2026-10-15T17:55:21.000Z",
+      "observedV1SubmittedAt": "2026-10-15T17:55:21.000Z",
+      "observedLabel": "Submission history [v1]",
+      "status": "HELD_RENDERED_ONLY_NO_ORIGINAL_UTC_DATE",
+      "adoptedDate": null
+    },
+    {
+      "id": "2026-10-15-learning-lean-feedback-gpu",
+      "arxivId": "2610.21881",
+      "sourceUrl": "https://arxiv.org/abs/2610.21881",
+      "storedAt": "2026-10-15T13:46:41.000Z",
+      "observedV1SubmittedAt": "2026-10-15T13:46:41.000Z",
+      "observedLabel": "Submission history [v1]",
+      "status": "HELD_RENDERED_ONLY_NO_ORIGINAL_UTC_DATE",
+      "adoptedDate": null
+    },
+    {
+      "id": "2026-10-14-ineqagent-symbolic-lean",
+      "arxivId": "2610.20681",
+      "sourceUrl": "https://arxiv.org/abs/2610.20681",
+      "storedAt": "2026-10-14T16:29:11.000Z",
+      "observedV1SubmittedAt": "2026-10-14T16:29:11.000Z",
+      "observedLabel": "Submission history [v1]",
+      "status": "HELD_CONFLICTING_NEW_DATES",
+      "adoptedDate": null
+    },
+    {
+      "id": "2026-10-14-euler-human-centered-math-agents",
+      "arxivId": "2610.19864",
+      "sourceUrl": "https://arxiv.org/abs/2610.19864",
+      "storedAt": "2026-10-14T09:27:36.000Z",
+      "observedV1SubmittedAt": "2026-10-14T09:27:36.000Z",
+      "observedLabel": "Submission history [v1]",
+      "status": "HELD_RENDERED_ONLY_NO_ORIGINAL_UTC_DATE",
+      "adoptedDate": null
+    },
+    {
+      "id": "2026-10-14-aristotle-postage-stamp-h-bases",
+      "arxivId": "2610.19470",
+      "sourceUrl": "https://arxiv.org/abs/2610.19470",
+      "storedAt": "2026-10-14T02:51:11.000Z",
+      "observedV1SubmittedAt": "2026-10-14T02:51:11.000Z",
+      "observedLabel": "Submission history [v1]",
+      "status": "ADOPTED_ORIGINAL_NEW_DAY",
+      "adoptedDate": "2026-10-15"
+    },
+    {
+      "id": "2026-10-13-definition-grounding-reusebench",
+      "arxivId": "2610.19223",
+      "sourceUrl": "https://arxiv.org/abs/2610.19223",
+      "storedAt": "2026-10-13T21:42:35.000Z",
+      "observedV1SubmittedAt": "2026-10-13T21:42:35.000Z",
+      "observedLabel": "Submission history [v1]",
+      "status": "HELD_RENDERED_ONLY_NO_ORIGINAL_UTC_DATE",
+      "adoptedDate": null
+    },
+    {
+      "id": "2026-10-13-annalschallenge",
+      "arxivId": "2610.18301",
+      "sourceUrl": "https://arxiv.org/abs/2610.18301",
+      "storedAt": "2026-10-13T12:48:33.000Z",
+      "observedV1SubmittedAt": "2026-10-13T12:48:33.000Z",
+      "observedLabel": "Submission history [v1]",
+      "status": "HELD_CONFLICTING_NEW_DATES",
+      "adoptedDate": null
+    },
+    {
+      "id": "2026-10-12-mini-lean-agent-baseline",
+      "arxivId": "2610.17331",
+      "sourceUrl": "https://arxiv.org/abs/2610.17331",
+      "storedAt": "2026-10-12T19:40:30.000Z",
+      "observedV1SubmittedAt": "2026-10-12T19:40:30.000Z",
+      "observedLabel": "Submission history [v1]",
+      "status": "HELD_CONFLICTING_NEW_DATES",
+      "adoptedDate": null
+    }
+  ],
+  "originalMatches": [
+    {
+      "arxivId": "2610.17331",
+      "title": "Do Theorem Provers Need Theorem-Proving Agents? mini-Lean-agent: A Coding-Agent Baseline for Lean",
+      "link": "https://arxiv.org/abs/2610.17331",
+      "guid": "oai:arXiv.org:2610.17331v1",
+      "announceType": "new",
+      "descriptionVersion": "2610.17331v1",
+      "descriptionType": "new",
+      "sourcePubDate": "Wed, 14 Oct 2026 00:00:00 -0400",
+      "utcDate": "2026-10-14",
+      "categories": [
+        "cs.AI",
+        "cs.LO"
+      ],
+      "sourceCategory": "cs.AI",
+      "archivePath": "rss_data/cs.AI/2026-10-14_cs.AI.xml",
+      "sourceSha256": "65b22bf7267fad5272e4a275a6225475a920acc6ed3f4c5db832e1d31d41af6c"
+    },
+    {
+      "arxivId": "2610.18301",
+      "title": "A dataset of formalised theorem statements from the Annals of Mathematics",
+      "link": "https://arxiv.org/abs/2610.18301",
+      "guid": "oai:arXiv.org:2610.18301v1",
+      "announceType": "new",
+      "descriptionVersion": "2610.18301v1",
+      "descriptionType": "new",
+      "sourcePubDate": "Wed, 14 Oct 2026 00:00:00 -0400",
+      "utcDate": "2026-10-14",
+      "categories": [
+        "cs.AI"
+      ],
+      "sourceCategory": "cs.AI",
+      "archivePath": "rss_data/cs.AI/2026-10-14_cs.AI.xml",
+      "sourceSha256": "65b22bf7267fad5272e4a275a6225475a920acc6ed3f4c5db832e1d31d41af6c"
+    },
+    {
+      "arxivId": "2610.17331",
+      "title": "Do Theorem Provers Need Theorem-Proving Agents? mini-Lean-agent: A Coding-Agent Baseline for Lean",
+      "link": "https://arxiv.org/abs/2610.17331",
+      "guid": "oai:arXiv.org:2610.17331v1",
+      "announceType": "new",
+      "descriptionVersion": "2610.17331v1",
+      "descriptionType": "new",
+      "sourcePubDate": "Thu, 15 Oct 2026 00:00:00 -0400",
+      "utcDate": "2026-10-15",
+      "categories": [
+        "cs.AI",
+        "cs.LO"
+      ],
+      "sourceCategory": "cs.AI",
+      "archivePath": "rss_data/cs.AI/2026-10-15_cs.AI.xml",
+      "sourceSha256": "f901774f179913bdce42bcfbfa8c795acaf0c7121f88e20db4cd25d015f7e1af"
+    },
+    {
+      "arxivId": "2610.18301",
+      "title": "A dataset of formalised theorem statements from the Annals of Mathematics",
+      "link": "https://arxiv.org/abs/2610.18301",
+      "guid": "oai:arXiv.org:2610.18301v1",
+      "announceType": "new",
+      "descriptionVersion": "2610.18301v1",
+      "descriptionType": "new",
+      "sourcePubDate": "Thu, 15 Oct 2026 00:00:00 -0400",
+      "utcDate": "2026-10-15",
+      "categories": [
+        "cs.AI"
+      ],
+      "sourceCategory": "cs.AI",
+      "archivePath": "rss_data/cs.AI/2026-10-15_cs.AI.xml",
+      "sourceSha256": "f901774f179913bdce42bcfbfa8c795acaf0c7121f88e20db4cd25d015f7e1af"
+    },
+    {
+      "arxivId": "2610.20681",
+      "title": "IneqAgent: Agentic Inequality Proving in Lean with Symbolic Computation",
+      "link": "https://arxiv.org/abs/2610.20681",
+      "guid": "oai:arXiv.org:2610.20681v1",
+      "announceType": "new",
+      "descriptionVersion": "2610.20681v1",
+      "descriptionType": "new",
+      "sourcePubDate": "Sat, 17 Oct 2026 00:00:00 -0400",
+      "utcDate": "2026-10-17",
+      "categories": [
+        "cs.AI"
+      ],
+      "sourceCategory": "cs.AI",
+      "archivePath": "rss_data/cs.AI/2026-10-16_cs.AI.xml",
+      "sourceSha256": "4845615ac7d1d7c9b382ec93f6c835480fd08dc0e2a2db219a34ccd8a1e472be"
+    },
+    {
+      "arxivId": "2610.19470",
+      "title": "Positivity and negativity for $h$-bases for $n$",
+      "link": "https://arxiv.org/abs/2610.19470",
+      "guid": "oai:arXiv.org:2610.19470v1",
+      "announceType": "new",
+      "descriptionVersion": "2610.19470v1",
+      "descriptionType": "new",
+      "sourcePubDate": "Thu, 15 Oct 2026 00:00:00 -0400",
+      "utcDate": "2026-10-15",
+      "categories": [
+        "math.CO",
+        "math.NT"
+      ],
+      "sourceCategory": "math.CO",
+      "archivePath": "rss_data/math.CO/2026-10-15_math.CO.xml",
+      "sourceSha256": "1d8a6bbd54efe2e701cc8204d3e489081decd77dbd63aac20982012467c164da"
+    }
+  ],
+  "renderedMatches": [
+    {
+      "arxivId": "2610.17331",
+      "path": "feed-entries/2026-10-14/arxiv-cs-ai.md",
+      "publishedText": "10/14/2026, 4:00:00 AM",
+      "announceType": "new",
+      "version": "2610.17331v1",
+      "sourceSha256": "d9834942f1c2501e157f7b826aed300bf14c8b818dd291d65002437352ffd782"
+    },
+    {
+      "arxivId": "2610.18301",
+      "path": "feed-entries/2026-10-14/arxiv-cs-ai.md",
+      "publishedText": "10/14/2026, 4:00:00 AM",
+      "announceType": "new",
+      "version": "2610.18301v1",
+      "sourceSha256": "d9834942f1c2501e157f7b826aed300bf14c8b818dd291d65002437352ffd782"
+    },
+    {
+      "arxivId": "2610.19223",
+      "path": "feed-entries/2026-10-15/arxiv-cs-ai.md",
+      "publishedText": "10/15/2026, 4:00:00 AM",
+      "announceType": "new",
+      "version": "2610.19223v1",
+      "sourceSha256": "3f44255af9acb2f6bc40b48ea8e84eda2e2f5bb9086e0a3a2cd3fa22175c44c2"
+    },
+    {
+      "arxivId": "2610.19864",
+      "path": "feed-entries/2026-10-15/arxiv-cs-ai.md",
+      "publishedText": "10/15/2026, 4:00:00 AM",
+      "announceType": "new",
+      "version": "2610.19864v1",
+      "sourceSha256": "3f44255af9acb2f6bc40b48ea8e84eda2e2f5bb9086e0a3a2cd3fa22175c44c2"
+    },
+    {
+      "arxivId": "2610.20681",
+      "path": "feed-entries/2026-10-16/arxiv-cs-ai.md",
+      "publishedText": "10/16/2026, 4:00:00 AM",
+      "announceType": "new",
+      "version": "2610.20681v1",
+      "sourceSha256": "dfcf7483ccb08daca6e701f501d8d3fc66b7a7ef864d236e7c5e4611d7dfa0e2"
+    },
+    {
+      "arxivId": "2610.21881",
+      "path": "feed-entries/2026-10-16/arxiv-cs-lg.md",
+      "publishedText": "10/16/2026, 4:00:00 AM",
+      "announceType": "new",
+      "version": "2610.21881v1",
+      "sourceSha256": "ac0e36b9453ce5a3c6e9fd817b6cdd32a5081980acfd5df501c0f9513ae8b6c1"
+    },
+    {
+      "arxivId": "2610.22339",
+      "path": "feed-entries/2026-10-16/arxiv-cs-lg.md",
+      "publishedText": "10/16/2026, 4:00:00 AM",
+      "announceType": "new",
+      "version": "2610.22339v1",
+      "sourceSha256": "ac0e36b9453ce5a3c6e9fd817b6cdd32a5081980acfd5df501c0f9513ae8b6c1"
+    }
+  ],
+  "originalSources": [
+    {
+      "category": "cs.LG",
+      "path": "rss_data/cs.LG/2026-10-12_cs.LG.xml",
+      "status": 200,
+      "bytes": 881708,
+      "sha256": "6126e57eddc6bf49d82556579cd4ec52ed658dfa22833e2201752d6fb9edc9bc",
+      "gitBlob": "61322a77c1a93784df3955967ce82a055d8d1db8",
+      "channelPubDate": "Mon, 12 Oct 2026 00:00:00 -0400",
+      "itemCount": 413
+    },
+    {
+      "category": "cs.LG",
+      "path": "rss_data/cs.LG/2026-10-13_cs.LG.xml",
+      "status": 200,
+      "bytes": 892,
+      "sha256": "522f3832ab8274a4806ee7164cf35820fad3ef89f56f920c14d2b076919972ea",
+      "gitBlob": "2a2a37b662fea84ffaee3f8de0572c9665acdba3",
+      "channelPubDate": "Tue, 13 Oct 2026 00:00:00 -0400",
+      "itemCount": 0
+    },
+    {
+      "category": "cs.LG",
+      "path": "rss_data/cs.LG/2026-10-14_cs.LG.xml",
+      "status": 200,
+      "bytes": 2830563,
+      "sha256": "d45c821384ffbfb97251035fd725d3734e0fc6ea51445fa9cbd66da7f13c246b",
+      "gitBlob": "e45012c59c9dac5c7cbf74ad7dc7c76823ef451a",
+      "channelPubDate": "Wed, 14 Oct 2026 00:00:00 -0400",
+      "itemCount": 1344
+    },
+    {
+      "category": "cs.LG",
+      "path": "rss_data/cs.LG/2026-10-15_cs.LG.xml",
+      "status": 200,
+      "bytes": 1026390,
+      "sha256": "3f2ad234d8dc837ef8a0be9bf19977135ae8f02bfbd44d393a688966f9487583",
+      "gitBlob": "49b96ee5fd9f5cab7922acb0048ff63d28a8c894",
+      "channelPubDate": "Thu, 15 Oct 2026 00:00:00 -0400",
+      "itemCount": 486
+    },
+    {
+      "category": "cs.LG",
+      "path": "rss_data/cs.LG/2026-10-16_cs.LG.xml",
+      "status": 200,
+      "bytes": 892,
+      "sha256": "97df2cff9287d8756b2e69d4938dc7cd9b5e8e09e99bb8c17509170f5b8520d7",
+      "gitBlob": "b9db9047e3fa487b47c6d9bae69f41fb2bd2f656",
+      "channelPubDate": "Sat, 17 Oct 2026 00:00:00 -0400",
+      "itemCount": 0
+    },
+    {
+      "category": "cs.AI",
+      "path": "rss_data/cs.AI/2026-10-12_cs.AI.xml",
+      "status": 200,
+      "bytes": 691395,
+      "sha256": "a184354f2a3819af1576f92bfbd22f48ac4e233a52a947673b9de45426f2b629",
+      "gitBlob": "1ee4c82f3d7acc01577076f33ae6f827f763ac45",
+      "channelPubDate": "Mon, 12 Oct 2026 00:00:00 -0400",
+      "itemCount": 313
+    },
+    {
+      "category": "cs.AI",
+      "path": "rss_data/cs.AI/2026-10-13_cs.AI.xml",
+      "status": 200,
+      "bytes": 892,
+      "sha256": "82f58327ebf0a0c0c5a8be16f2d4ce7d79745c132896092ed30b1ecc9e6b62c6",
+      "gitBlob": "b5271279a63aeeed8d56d3225cc7ac5e4969b241",
+      "channelPubDate": "Tue, 13 Oct 2026 00:00:00 -0400",
+      "itemCount": 0
+    },
+    {
+      "category": "cs.AI",
+      "path": "rss_data/cs.AI/2026-10-14_cs.AI.xml",
+      "status": 200,
+      "bytes": 2923572,
+      "sha256": "65b22bf7267fad5272e4a275a6225475a920acc6ed3f4c5db832e1d31d41af6c",
+      "gitBlob": "cd81d955f5929b77eda65da09602f70916767e46",
+      "channelPubDate": "Wed, 14 Oct 2026 00:00:00 -0400",
+      "itemCount": 1353
+    },
+    {
+      "category": "cs.AI",
+      "path": "rss_data/cs.AI/2026-10-15_cs.AI.xml",
+      "status": 200,
+      "bytes": 2924134,
+      "sha256": "f901774f179913bdce42bcfbfa8c795acaf0c7121f88e20db4cd25d015f7e1af",
+      "gitBlob": "442dfd0f2505ce18982723def107881704fbae9a",
+      "channelPubDate": "Thu, 15 Oct 2026 00:00:00 -0400",
+      "itemCount": 1353
+    },
+    {
+      "category": "cs.AI",
+      "path": "rss_data/cs.AI/2026-10-16_cs.AI.xml",
+      "status": 200,
+      "bytes": 970707,
+      "sha256": "4845615ac7d1d7c9b382ec93f6c835480fd08dc0e2a2db219a34ccd8a1e472be",
+      "gitBlob": "7c326415340c338bca5a8e7ca22ee6b98b4f8ff3",
+      "channelPubDate": "Sat, 17 Oct 2026 00:00:00 -0400",
+      "itemCount": 453
+    },
+    {
+      "category": "math.CO",
+      "path": "rss_data/math.CO/2026-10-12_math.CO.xml",
+      "status": 200,
+      "bytes": 143007,
+      "sha256": "f8930499c8e82a5713642eef4e7cfdac078d296a55312960503abbed04db0319",
+      "gitBlob": "4fb8f5bdccf81deac81762c9e5ba39027daf2f96",
+      "channelPubDate": "Mon, 12 Oct 2026 00:00:00 -0400",
+      "itemCount": 89
+    },
+    {
+      "category": "math.CO",
+      "path": "rss_data/math.CO/2026-10-13_math.CO.xml",
+      "status": 200,
+      "bytes": 900,
+      "sha256": "f94748b86730dfa93bc2ef7017e7de436a5c9eacf3887079b7dce5a9d837013f",
+      "gitBlob": "3e014bec88112468723d7dc90f627f4fcdabca72",
+      "channelPubDate": "Tue, 13 Oct 2026 00:00:00 -0400",
+      "itemCount": 0
+    },
+    {
+      "category": "math.CO",
+      "path": "rss_data/math.CO/2026-10-14_math.CO.xml",
+      "status": 200,
+      "bytes": 433553,
+      "sha256": "55625454674701419ebbd8fbc4aa52e01d6fdce2d3b989fa0a9b4383fb08f4f0",
+      "gitBlob": "673263d8ee63705a9321dc0d45abb2fee42fbe5d",
+      "channelPubDate": "Wed, 14 Oct 2026 00:00:00 -0400",
+      "itemCount": 269
+    },
+    {
+      "category": "math.CO",
+      "path": "rss_data/math.CO/2026-10-15_math.CO.xml",
+      "status": 200,
+      "bytes": 139886,
+      "sha256": "1d8a6bbd54efe2e701cc8204d3e489081decd77dbd63aac20982012467c164da",
+      "gitBlob": "bbb3f1f30697804d612a3e94ae0f7720e72b08c8",
+      "channelPubDate": "Thu, 15 Oct 2026 00:00:00 -0400",
+      "itemCount": 88
+    },
+    {
+      "category": "math.CO",
+      "path": "rss_data/math.CO/2026-10-16_math.CO.xml",
+      "status": 200,
+      "bytes": 900,
+      "sha256": "09dccd8efd73f9da990363529fde97767e500db88caf255eea95cb70e3baa9ea",
+      "gitBlob": "c4ca5aaeeb07aad1ecf26f0604b58ac64389a81b",
+      "channelPubDate": "Sat, 17 Oct 2026 00:00:00 -0400",
+      "itemCount": 0
+    }
+  ],
+  "note": "Selected source metadata only; full capture artifacts and immutable URLs retain source bytes. Candidate matching is not editorial acceptance. Conflicting dates are never resolved by min(date)."
+}
