@@ -2,11 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 const root = new URL("../", import.meta.url);
-const news = readFileSync(new URL("portable/content/selected.jsonl", root), "utf8").trim().split(/\\r?\\n/).map(line=>JSON.parse(line));
+const news = readFileSync(new URL("portable/content/selected.jsonl", root), "utf8").trim().split(/\r?\n/).map(line=>JSON.parse(line));
 const r = JSON.parse(readFileSync(new URL("docs/audits/evidence/arxiv-clocked-batch42.json", root), "utf8"));
 const item = (id:string) => { const a=news.filter((x: {id:string})=>x.id===id); assert.equal(a.length,1); return a[0]!; };
 test("Batch42 fixed five identities follow immutable Issue151 rows 17-21", () => {
- const rows=readFileSync(new URL("docs/audits/evidence/issue151-clocked-arxiv-baseline.tsv",root),"utf8").trim().split(/\\r?\\n/).slice(1).map(line=>line.split("\\t"));
+ const rows=readFileSync(new URL("docs/audits/evidence/issue151-clocked-arxiv-baseline.tsv",root),"utf8").trim().split(/\r?\n/).slice(1).map(line=>line.split("\t"));
  assert.equal(rows.length,98); assert.deepEqual(rows.slice(16,21).map(x=>x[0]),r.rows.map((x:{id:string})=>x.id));
  assert.equal(new Set(news.map((x:{id:string})=>x.id)).size,news.length);
 });
