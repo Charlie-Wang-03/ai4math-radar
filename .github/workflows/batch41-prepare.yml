@@ -1,0 +1,78 @@
+name: Batch41 guarded catalog blob
+on:
+  push:
+    branches: [audit/arxiv-clocked-batch41]
+    paths: [.github/workflows/batch41-prepare.yml]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Validate frozen evidence and store unattached blob only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os,json,base64,hashlib,urllib.request
+          repo='Charlie-Wang-03/ai4math-radar';base='b5734eb5b282cf110165fe7490d0870c88b0dddd'
+          oldsha='ab23fb10e8e764f7f5657d6c4a98806ac57e2b3a';receiptsha='631d75d3d288b92869a89663f58c30417bcf8562'
+          expected='cb3e37ab60c1cb537ad1271ed30be9b4aa7a3787'
+          assert os.environ['GITHUB_REPOSITORY']==repo
+          assert os.environ['GITHUB_REF']=='refs/heads/audit/arxiv-clocked-batch41'
+          assert os.environ['GITHUB_EVENT_NAME']=='push'
+          prefix='/repos/'+repo
+          reads={prefix+'/contents/portable/content/selected.jsonl?ref='+base,prefix+'/git/blobs/'+receiptsha}
+          write=prefix+'/git/blobs'
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self,*a,**k):return None
+          def api(path,body=None):
+              assert (body is None and path in reads) or (body is not None and path==write)
+              req=urllib.request.Request('https://api.github.com'+path,data=None if body is None else json.dumps(body).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})
+              with urllib.request.build_opener(NoRedirect).open(req,timeout=20) as response:
+                  data=response.read(2000001)
+              assert len(data)<=2000000
+              return json.loads(data)
+          gitsha=lambda x:hashlib.sha1(('blob '+str(len(x))+'\0').encode()+x).hexdigest()
+          src=api(prefix+'/contents/portable/content/selected.jsonl?ref='+base);assert src['sha']==oldsha and src['encoding']=='base64'
+          raw=base64.b64decode(src['content']);assert gitsha(raw)==oldsha and len(raw)<1000000
+          rb=api(prefix+'/git/blobs/'+receiptsha);rr=base64.b64decode(rb['content']);assert gitsha(rr)==receiptsha
+          receipt=json.loads(rr);rows={r['id']:r for r in receipt['items']};assert len(rows)==8
+          lines=raw.decode('utf-8').splitlines(keepends=True);before=[json.loads(l) for l in lines];assert len(before)==334 and len({x['id'] for x in before})==334
+          changed=0
+          for i,line in enumerate(lines):
+              x=json.loads(line)
+              if x['id'] not in rows:continue
+              r=rows[x['id']];assert 'chronology' not in x and x['publishedAt']==r['storedAt'] and x['links']['original']==r['sourceUrl'] and x['originalTitle']==r['originalTitle']
+              aid=r['arxivId'];day=r['adoptedDate'];cat=r['primaryCategory']
+              stamp=r['storedAt'].replace('T',' ').replace('.000Z',' UTC')
+              note='\n\n时间核验：兼容字段 '+stamp+' 对应 arXiv v1 提交时刻，不是已核实的公开公告时刻。'
+              if day:
+                  ms=[m for m in receipt['originalMatches'] if m['arxivId']==aid and m['sourceCategory']==cat and m['announceType']=='new']
+                  assert {m['utcDate'] for m in ms}=={day} and all(m['version']=='1' and m['guid']=='oai:arXiv.org:'+aid+'v1' and m['title']==r['originalTitle'] for m in ms)
+                  y,mo,da=map(int,day.split('-'))
+                  note+=f'已保存的原始 {cat} RSS 条目匹配论文编号、标题与 v1/new，补记 {y} 年 {mo} 月 {da} 日的 arXiv 论文公告里程碑，仅核实日期，不据 RSS 标准化零时值推断实际发布时刻。'
+                  x['chronology']={'eventKind':'paper-release','milestone':{'date':day,'precision':'day','evidenceKind':'arxiv-announcement','evidenceUrl':'https://rss.arxiv.org/rss/'+cat}}
+              elif aid=='2610.05701':note+='同一 v1/new 在已保存的原始 RSS 副本中分别标记 10 月 6 日和 10 月 7 日，日期冲突尚未解决；不取较早日期，也不以 v2 修订公告替代。首次 arXiv 公告日期仍待核。'
+              else:
+                  assert aid=='2610.08319'
+                  note+='本次检查的固定历史快照尚未找到匹配的 v1/new 原始公告；后续 v2/replace 记录不能替代 v1 首次公告，首次 arXiv 公告日期仍待核。'
+              if aid=='2610.15483':
+                  old='William D. Banks 于 10 月 11 日发布对 OpenAI';assert x['summary'].startswith(old)
+                  x['summary']='William D. Banks 在 10 月 11 日提交的预印本中，给出对 OpenAI'+x['summary'][len(old):]
+                  note+='该论文公告不用于确定 OpenAI 原始证明主张的首次公开时间。'
+              if aid=='2610.12234':note+='本条研究标题与数值对应 v1，不借用后续 v2 修订日期或结果。'
+              if aid=='2610.05367':note+='跨分类公告与主分类首次公告分开记录，不用 cross 日期覆盖 new 日期。'
+              x['summary']+=note+'原有 ID 与兼容时间保持不变。'
+              lines[i]=json.dumps(x,ensure_ascii=False,separators=(',',':'))+('\n' if line.endswith('\n') else '');changed+=1
+          updated=''.join(lines).encode();assert changed==8 and gitsha(updated)==expected
+          after=[json.loads(l) for l in lines]
+          assert sum(a!=b for a,b in zip(lines,raw.decode().splitlines(keepends=True)))==8
+          for old,new in zip(before,after):
+              fields={k for k in set(old)|set(new) if old.get(k)!=new.get(k)}
+              assert fields==({'summary','chronology'} if old['id'] in rows and rows[old['id']]['adoptedDate'] else {'summary'} if old['id'] in rows else set())
+          result=api(write,{'content':base64.b64encode(updated).decode(),'encoding':'base64'});assert result['sha']==expected
+          print('BATCH41_BLOB='+json.dumps({'base':base,'oldBlob':oldsha,'newBlob':result['sha'],'sha256':hashlib.sha256(updated).hexdigest(),'bytes':len(updated),'records':len(after),'changedRecords':8,'unchangedOtherRecords':326,'refWritten':False}))
+          PY
