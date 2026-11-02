@@ -1,0 +1,126 @@
+{
+  "batch": 42,
+  "checkedUtc": "2026-11-02",
+  "issue": 151,
+  "frozenBaseline": "docs/audits/evidence/issue151-clocked-arxiv-baseline.tsv",
+  "scope": "frozen rows 17-21 inclusive",
+  "baselineShaCommit": "8c285145474f78cdca8f14cf4c264385f8f08abe",
+  "sourceArchive": {
+    "repository": "ehijano/rss_fetch",
+    "commit": "e597e5120c034115fda2049d72812f2da7f99f3a",
+    "kind": "third-party immutable replay of original arXiv RSS (not publisher live response)",
+    "collectionMetadataDoesNotEstablishPublication": true
+  },
+  "adopted": {
+    "id": "2026-09-27-riemann-zeros-distinct",
+    "arxivId": "2609.33043",
+    "originalTitle": "More than 83.69% of the zeros of the Riemann zeta function are distinct",
+    "submittedAt": "2026-09-27T00:19:21.000Z",
+    "submittedSource": "https://arxiv.org/abs/2609.33043",
+    "primaryCategory": "math.NT",
+    "v1Guid": "oai:arXiv.org:2609.33043v1",
+    "descriptionStarts": "arXiv:2609.33043v1 Announce Type: new",
+    "announceType": "new",
+    "pubDate": "Tue, 29 Sep 2026 00:00:00 -0400",
+    "adoptedAnnouncementDay": "2026-09-29",
+    "precision": "day",
+    "exactClockConfirmed": false,
+    "milestoneEvidence": "https://rss.arxiv.org/rss/math.NT",
+    "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.NT/2026-09-29_math.NT.xml#L236-L249",
+    "sourceLines": [
+      236,
+      249
+    ]
+  },
+  "sourceReceipts": [
+    {
+      "path": "rss_data/math.NT/2026-09-28_math.NT.xml",
+      "gitBlobSha1": "99fb62708f686816f3e16e4a1bc0cad9aeda9768",
+      "characters": 57022,
+      "matchingIdCount": 0
+    },
+    {
+      "path": "rss_data/math.NT/2026-09-29_math.NT.xml",
+      "gitBlobSha1": "fb45a07c6457dbef3eb88550290d0f817a2fc2dc",
+      "characters": 151541,
+      "matchingIdCount": 1
+    },
+    {
+      "path": "rss_data/math.NT/2026-09-30_math.NT.xml",
+      "gitBlobSha1": "b14765246c77b822915aeb5b662513133ed9d359",
+      "characters": 91475,
+      "matchingIdCount": 0
+    }
+  ],
+  "rows": [
+    {
+      "id": "2026-09-28-mathagent",
+      "arxivId": "2609.34460",
+      "primaryCategory": "cs.AI",
+      "status": "BLOCKED_SOURCE_FETCH_SIZE_LIMIT",
+      "attempted": [
+        "rss_data/cs.AI/2026-09-28_cs.AI.xml",
+        "rss_data/cs.AI/2026-09-29_cs.AI.xml",
+        "rss_data/cs.AI/2026-09-30_cs.AI.xml"
+      ],
+      "heldReason": "Sep28 fetched, matching item absent; Sep29/30 original mirrored files exceeded connector fetch bound; no trusted v1/new day identified"
+    },
+    {
+      "id": "2026-09-27-break-judges",
+      "arxivId": "2609.33773",
+      "primaryCategory": "cs.AI",
+      "status": "BLOCKED_SOURCE_FETCH_SIZE_LIMIT",
+      "attempted": [
+        "rss_data/cs.AI/2026-09-28_cs.AI.xml",
+        "rss_data/cs.AI/2026-09-29_cs.AI.xml",
+        "rss_data/cs.AI/2026-09-30_cs.AI.xml"
+      ],
+      "heldReason": "Sep28 fetched, matching item absent; Sep29/30 source too large for direct source fetch"
+    },
+    {
+      "id": "2026-09-27-riemann-zeros-distinct",
+      "arxivId": "2609.33043",
+      "primaryCategory": "math.NT",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-29"
+    },
+    {
+      "id": "2026-09-26-jepa-lean-search",
+      "arxivId": "2609.32908",
+      "primaryCategory": "cs.LG",
+      "status": "BLOCKED_SOURCE_FETCH_SIZE_LIMIT",
+      "attempted": [
+        "rss_data/cs.LG/2026-09-28_cs.LG.xml",
+        "rss_data/cs.LG/2026-09-29_cs.LG.xml",
+        "rss_data/cs.LG/2026-09-30_cs.LG.xml"
+      ],
+      "heldReason": "Sep28 fetched, matching item absent; Sep29/30 source too large for direct source fetch"
+    },
+    {
+      "id": "2026-09-26-oracleladder",
+      "arxivId": "2609.32235",
+      "primaryCategory": "cs.CL",
+      "status": "BLOCKED_SOURCE_FETCH_SIZE_LIMIT",
+      "attempted": [
+        "rss_data/cs.CL/2026-09-28_cs.CL.xml",
+        "rss_data/cs.CL/2026-09-29_cs.CL.xml",
+        "rss_data/cs.CL/2026-09-30_cs.CL.xml"
+      ],
+      "heldReason": "Sep28 fetched, matching item absent; Sep29/30 source too large for direct source fetch"
+    }
+  ],
+  "counts": {
+    "baselineCandidates": 98,
+    "previousReviewed": 16,
+    "newlyAttempted": 5,
+    "newlyAdopted": 1,
+    "newlyTechnicalBlocked": 4,
+    "totalAdopted": 8,
+    "priorReviewedHeld": 9,
+    "totalTechnicalBlocked": 4,
+    "notYetReviewed": 77,
+    "withoutSupplementalChronology": 90
+  },
+  "nextUnreviewed": "2026-09-26-compassplay",
+  "limits": "Technical blocks are not evidence of publication or nonpublication. This batch does not certify mathematical proofs or full independent source provenance for blocked entries."
+}
