@@ -1,0 +1,97 @@
+name: Batch40 guarded blob preparation
+on:
+  push:
+    branches: [audit/arxiv-clocked-batch40]
+    paths: [.github/workflows/batch40-prepare.yml]
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: fcea9ce8f277d0caf5f79733d842408740dcd781
+          persist-credentials: false
+      - name: Download exactly the two reviewed same-repository evidence artifacts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api repos/Charlie-Wang-03/ai4math-radar/actions/artifacts/13115632347/zip > "$RUNNER_TEMP/b40-raw.zip"
+          gh api repos/Charlie-Wang-03/ai4math-radar/actions/artifacts/13115663962/zip > "$RUNNER_TEMP/b40-cross.zip"
+      - name: Verify exact bytes, prepare limited changes and store unattached blobs only
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import os,json,hashlib,re,zipfile,base64
+          from pathlib import Path
+          from urllib.parse import urlparse
+          from urllib.request import Request,build_opener,HTTPRedirectHandler
+          assert os.environ['GITHUB_REPOSITORY']=='Charlie-Wang-03/ai4math-radar'
+          assert os.environ['GITHUB_REF']=='refs/heads/audit/arxiv-clocked-batch40'
+          assert os.environ['GITHUB_EVENT_NAME']=='push'
+          gitsha=lambda b:hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
+          def artifact(name,expected,member):
+            raw=Path(os.environ['RUNNER_TEMP'],name).read_bytes()
+            assert hashlib.sha256(raw).hexdigest()==expected
+            return json.loads(zipfile.ZipFile(__import__('io').BytesIO(raw)).read(member))
+          r=artifact('b40-raw.zip','f7b425ae6caf04f178613d91b5d1eaabc9ffe661bef02153b71a2e02b26b1112','source-report.json')
+          c=artifact('b40-cross.zip','f7ccc11a9e4e57e63bc66fd8b3bf485b59c1c944058db8681a82a5174dc2ca29','crosscheck-report.json')
+          base=Path('portable/content/selected.jsonl').read_bytes();assert gitsha(base)=='dde56d03c262a590a63fbffe9b7ccfaafeb9462d'
+          entries=[json.loads(s) for s in base.splitlines()]
+          candidates=sorted([x for x in entries if urlparse(x['links']['original']).hostname in {'arxiv.org','www.arxiv.org','export.arxiv.org'} and x.get('publishedAt') and not re.search(r'T00:00:00(?:\.000)?Z$',x['publishedAt']) and not x.get('chronology')],key=lambda x:x['publishedAt'],reverse=True)
+          assert len(entries)==334 and len(candidates)==98
+          targets=candidates[:8]
+          assert [x['links']['original'].split('/')[-1] for x in targets]==['2610.22339','2610.21881','2610.20681','2610.19864','2610.19470','2610.19223','2610.18301','2610.17331']
+          manifest='id\tpublishedAt\tsourceUrl\n'+''.join(t['id']+'\t'+t['publishedAt']+'\t'+t['links']['original']+'\n' for t in candidates)
+          fields=['arxivId','title','link','guid','announceType','descriptionVersion','descriptionType','sourcePubDate','utcDate','categories','sourceCategory','archivePath','sourceSha256']
+          original=[{k:m[k] for k in fields} for m in r['matches']]
+          rendered=[{'arxivId':m['arxivId'],'path':m['path'],'publishedText':re.search(r'\*\*Published:\*\*\s*([^\n]+)',m['entry'])[1].strip(),'announceType':re.search(r'Announce Type:\s*(\S+)',m['entry'])[1],'version':re.search(r'arXiv:(\S+)',m['entry'])[1],'sourceSha256':m['sourceSha256']} for m in c['matches']]
+          rows=[];notes={}
+          for t in targets:
+            aid=t['links']['original'].split('/')[-1];stamp=t['publishedAt'].replace('T',' ').replace('.000Z',' UTC')
+            status='HELD_RENDERED_ONLY_NO_ORIGINAL_UTC_DATE'
+            conclusion='当前取得了经再加工的 RSS 归档线索，但尚未补齐可独立复核的原始公告日期依据；首次 arXiv 公告日期仍待核。'
+            if aid in {'2610.17331','2610.18301'}:
+              status='HELD_CONFLICTING_NEW_DATES';conclusion='同一 v1 的归档公告条目同时出现 10 月 14 日和 10 月 15 日，日期冲突尚未解决，因此不回填首次 arXiv 公告日期。'
+            if aid=='2610.20681':
+              status='HELD_CONFLICTING_NEW_DATES';conclusion='同一 v1 的两份归档分别指向 10 月 16 日和 10 月 17 日，日期冲突尚未解决，因此不回填首次 arXiv 公告日期。'
+            if aid=='2610.19470':
+              status='ADOPTED_ORIGINAL_NEW_DAY';conclusion='已保存的 math.CO 原始 RSS 条目以 new 标记该论文 v1，公告日期为 2026 年 10 月 15 日（UTC 日精度）；不从 RSS 的标准化零时时刻推断实际发布时间，也不将该论文公告视为 Aristotle 原始发现或证明工件首次公开。'
+            notes[t['id']]='\n\n时间核验：兼容字段中的 '+stamp+' 对应 arXiv v1 提交时刻，不是已核实的公开公告时刻。'+conclusion+'原有 ID 与兼容时间保持不变。'
+            rows.append({'id':t['id'],'arxivId':aid,'sourceUrl':t['links']['original'],'storedAt':t['publishedAt'],'observedV1SubmittedAt':t['publishedAt'],'observedLabel':'Submission history [v1]','status':status,'adoptedDate':'2026-10-15' if aid=='2610.19470' else None})
+          receipt={'checkedAt':r['checkedAt'],'baselineCommit':'fcea9ce8f277d0caf5f79733d842408740dcd781','catalogBlob':'dde56d03c262a590a63fbffe9b7ccfaafeb9462d','catalogSha256':hashlib.sha256(base).hexdigest(),'inventorySha256':hashlib.sha256(manifest.encode()).hexdigest(),'counts':{'baselineCandidates':98,'reviewed':8,'adopted':1,'held':7,'notYetReviewed':90,'remainingWithoutChronology':97},'rawArchive':{'repository':'ehijano/rss_fetch','commit':'e597e5120c034115fda2049d72812f2da7f99f3a','runId':41387622863,'artifactId':13115632347,'zipSha256':'f7b425ae6caf04f178613d91b5d1eaabc9ffe661bef02153b71a2e02b26b1112'},'renderedArchive':{'repository':'sifted-network/sifted-awesome-ai-agents','commit':c['archiveCommit'],'runId':41387806992,'artifactId':13115663962,'zipSha256':'f7ccc11a9e4e57e63bc66fd8b3bf485b59c1c944058db8681a82a5174dc2ca29','limitation':'Published text omits a timezone; collector conversion code not established. Not promoted alone.'},'items':rows,'originalMatches':original,'renderedMatches':rendered,'originalSources':[{k:v for k,v in s.items() if k not in {'url','archiveCommit','matches'}} for s in r['sources']],'note':'Selected source metadata only; full capture artifacts and immutable URLs retain source bytes. Candidate matching is not editorial acceptance. Conflicting dates are never resolved by min(date).'}
+          lines=base.decode().splitlines(keepends=True)
+          for i,line in enumerate(lines):
+            t=json.loads(line)
+            if t['id'] not in notes:continue
+            assert not t.get('chronology');old=t['summary']
+            if t['id']=='2026-10-14-aristotle-postage-stamp-h-bases':
+              assert '于 10 月 14 日发布' in old
+              t['summary']=old.replace('于 10 月 14 日发布','在 10 月 14 日提交的论文中报告',1)
+              t['chronology']={'eventKind':'paper-release','milestone':{'date':'2026-10-15','precision':'day','evidenceKind':'arxiv-announcement','evidenceUrl':'https://rss.arxiv.org/rss/math.CO'}}
+            elif t['id']=='2026-10-13-definition-grounding-reusebench':t['summary']=old.replace('于 10 月 13 日提出','在 10 月 13 日提交的预印本中提出',1)
+            elif t['id']=='2026-10-13-annalschallenge':t['summary']=old.replace('于 10 月 13 日发布','于 10 月 13 日提交',1)
+            t['summary']+=notes[t['id']];lines[i]=json.dumps(t,ensure_ascii=False,separators=(',',':'))+'\n'
+          updated=''.join(lines).encode();after=[json.loads(s) for s in updated.splitlines()]
+          assert sum(a!=b for a,b in zip(lines,base.decode().splitlines(keepends=True)))==8
+          for before,a in zip(entries,after):
+            changed=[k for k in a if a.get(k)!=before.get(k)]
+            expected=['summary','chronology'] if a['id']=='2026-10-14-aristotle-postage-stamp-h-bases' else ['summary'] if a['id'] in notes else []
+            assert changed==expected
+          files=[('portable/content/selected.jsonl',updated,'ab23fb10e8e764f7f5657d6c4a98806ac57e2b3a'),('docs/audits/evidence/issue151-clocked-arxiv-baseline.tsv',manifest.encode(),'65307e4b5bd6f5ec73c0d8ec393bb75edd58f6ef'),('docs/audits/evidence/arxiv-clocked-batch40.json',(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n').encode(),'cb353aa1b7113a41fd8e86fc69f11bb137f9f250')]
+          class NoRedirect(HTTPRedirectHandler):
+            def redirect_request(self,*args,**kwargs):return None
+          for path,data,expected in files:
+            assert gitsha(data)==expected,(path,gitsha(data))
+            req=Request('https://api.github.com/repos/Charlie-Wang-03/ai4math-radar/git/blobs',method='POST',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},data=json.dumps({'content':base64.b64encode(data).decode(),'encoding':'base64'}).encode())
+            with build_opener(NoRedirect()).open(req,timeout=20) as resp:result=json.load(resp)
+            assert result['sha']==expected
+            print('BATCH40_BLOB='+json.dumps({'path':path,'sha':expected,'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data),'refWritten':False}))
+          print('BATCH40_INTEGRITY=334 records; 8 changed; 326 byte-identical; one day-only milestone; 7 held; 90 not yet reviewed')
+          PY
