@@ -1,0 +1,52 @@
+name: Batch41 five-snapshot followup
+on:
+  push:
+    branches: [audit/arxiv-clocked-batch41]
+    paths: [.github/workflows/batch41-followup.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Read only five new fixed archive paths
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import datetime,hashlib,json,pathlib,re,urllib.request,urllib.error,xml.etree.ElementTree as ET
+          out=pathlib.Path('evidence');out.mkdir()
+          ids={'2610.15483','2610.12234','2610.08319','2610.05701','2610.05367','2610.05322','2610.01799','2610.00885'}
+          ref='e597e5120c034115fda2049d72812f2da7f99f3a'
+          paths=[('math.NT','10'),('math.NT','14'),('math.NT','15'),('cs.LO','07'),('cs.LO','08')]
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self,*a,**k):return None
+          results=[]
+          for cat,day in paths:
+              path=f'rss_data/{cat}/2026-10-{day}_{cat}.xml'
+              url=f'https://raw.githubusercontent.com/ehijano/rss_fetch/{ref}/{path}'
+              r={'kind':'xml','category':cat,'url':url,'sourceUrl':f'https://github.com/ehijano/rss_fetch/blob/{ref}/{path}','matches':[]}
+              try:
+                  with urllib.request.build_opener(NoRedirect).open(url,timeout=15) as response:
+                      data=response.read(2*1024*1024+1);r['httpStatus']=response.status
+                  if len(data)>2*1024*1024:raise ValueError('response cap exceeded')
+                  root=ET.fromstring(data);ch=root.find('channel')
+                  if root.tag!='rss' or ch is None:raise ValueError('not RSS channel')
+                  r['channelTitle']=ch.findtext('title');r['channelLink']=ch.findtext('link');r['channelPubDate']=ch.findtext('pubDate')
+                  if r['channelLink'] not in [f'http://rss.arxiv.org/rss/{cat}',f'https://rss.arxiv.org/rss/{cat}']:raise ValueError('channel mismatch')
+                  name=f'{cat}-{day}.xml';(out/name).write_bytes(data)
+                  r.update(bytes=len(data),sha256=hashlib.sha256(data).hexdigest(),file=name,itemCount=len(ch.findall('item')))
+                  for it in ch.findall('item'):
+                      link=(it.findtext('link') or '').strip();m=re.fullmatch(r'https?://arxiv.org/abs/(\d{4}\.\d{4,5})(v\d+)?',link)
+                      if m and m[1] in ids:r['matches'].append({'arxivId':m[1],'title':it.findtext('title'),'link':link,'guid':it.findtext('guid'),'pubDate':it.findtext('pubDate'),'announceType':it.findtext('{http://arxiv.org/schemas/atom}announce_type'),'descriptionPrefix':(it.findtext('description') or '')[:110],'categories':[x.text for x in it.findall('category')]})
+                  r['complete']=True
+              except urllib.error.HTTPError as e:r.update(httpStatus=e.code,complete=False,error='HTTP error')
+              except Exception as e:r.update(complete=False,error=str(e)[:200])
+              results.append(r);print('BATCH41_FOLLOWUP='+json.dumps(r,ensure_ascii=False))
+          (out/'report.json').write_text(json.dumps({'checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'results':results},ensure_ascii=False,indent=2)+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: batch41-followup
+          path: evidence/
+          retention-days: 30
