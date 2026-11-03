@@ -1,0 +1,382 @@
+{
+  "batch": 43,
+  "checkedUtc": "2026-11-03",
+  "issue": 151,
+  "frozenBaseline": "docs/audits/evidence/issue151-clocked-arxiv-baseline.tsv",
+  "frozenNewRows": "22–26",
+  "revisitedBatch42Rows": "17/18/20/21",
+  "dailyPrecedingMerge": "64b3d58ca8dd5f69a62346f68cd28761888c0aab",
+  "sourceArchive": {
+    "repository": "ehijano/rss_fetch",
+    "commit": "e597e5120c034115fda2049d72812f2da7f99f3a",
+    "kind": "third-party immutable replay of original arXiv RSS XML publisher item fields; not live arXiv endpoint",
+    "githubCommitNotPublication": true,
+    "rssMidnightNotExactTime": true
+  },
+  "readMethod": "Read contents API SHA then complete Git blob by SHA for large XML; no persistent service, read-only source",
+  "sources": [
+    {
+      "path": "rss_data/cs.AI/2026-09-28_cs.AI.xml",
+      "gitBlobSha1": "9b511e5b0f16c1b7394725e212c899aa9389665c",
+      "characters": 717546,
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-28_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-09-29_cs.AI.xml",
+      "gitBlobSha1": "87cfa32a9b2cef8c0e601dab3a3e9884fb918e50",
+      "characters": 3143241,
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-29_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-09-30_cs.AI.xml",
+      "gitBlobSha1": "44f4ae072b4fb61c3322f39e7a1286937b873dd4",
+      "characters": 1573382,
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-30_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-09-24_cs.LG.xml",
+      "gitBlobSha1": "ea6babfa260b270bf195f87eeb793a9d808d0df5",
+      "characters": 653141,
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-24_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-09-25_cs.LG.xml",
+      "gitBlobSha1": "e0ccb56afe1cfb2526a1a3e311dd44be0d91fd25",
+      "characters": 706417,
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-25_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-09-28_cs.LG.xml",
+      "gitBlobSha1": "ebc48fa95c171fbef72305b41a68b3133315cfc7",
+      "characters": 700771,
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-28_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-09-29_cs.LG.xml",
+      "gitBlobSha1": "e3e90f27fd35ac703938593a17938e01f439e85c",
+      "characters": 3257766,
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-29_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-09-30_cs.LG.xml",
+      "gitBlobSha1": "0fccab5747c052cff6f1232202f2e91683da2381",
+      "characters": 3258084,
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-30_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.PL/2026-09-25_cs.PL.xml",
+      "gitBlobSha1": "a247471222485c84c28ecdb00c05059ef1b67a75",
+      "characters": 25247,
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.PL/2026-09-25_cs.PL.xml"
+    },
+    {
+      "path": "rss_data/cs.CL/2026-09-28_cs.CL.xml",
+      "gitBlobSha1": "b6ab5a2d2be0906edf096e219d19cc7dece4a54e",
+      "characters": 277433,
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.CL/2026-09-28_cs.CL.xml"
+    },
+    {
+      "path": "rss_data/cs.CL/2026-09-29_cs.CL.xml",
+      "gitBlobSha1": "bb79574e03df719e8b4d1c9249836f1ba98a66e4",
+      "characters": 1337900,
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.CL/2026-09-29_cs.CL.xml"
+    },
+    {
+      "path": "rss_data/cs.CL/2026-09-30_cs.CL.xml",
+      "gitBlobSha1": "4eee0e03920e6b4199d639308ced660bbdd87bda",
+      "characters": 1338097,
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.CL/2026-09-30_cs.CL.xml"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "2026-09-28-mathagent",
+      "arxivId": "2609.34460",
+      "primaryCategory": "cs.AI",
+      "scope": "revisited",
+      "legacyPublishedAt": "2026-09-28T07:17:43.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-29",
+      "observedDates": [
+        "2026-09-29"
+      ],
+      "observations": [
+        {
+          "gitBlobSha1": "87cfa32a9b2cef8c0e601dab3a3e9884fb918e50",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-29_cs.AI.xml",
+          "primaryCategory": "cs.AI",
+          "publisherTitle": "When Does Structured Knowledge Help Neural Theorem Proving?",
+          "url": "https://arxiv.org/abs/2609.34460",
+          "versionGuid": "oai:arXiv.org:2609.34460v1",
+          "announceType": "new",
+          "pubDate": "Tue, 29 Sep 2026 00:00:00 -0400",
+          "utcDay": "2026-09-29"
+        }
+      ]
+    },
+    {
+      "id": "2026-09-27-break-judges",
+      "arxivId": "2609.33773",
+      "primaryCategory": "cs.AI",
+      "scope": "revisited",
+      "legacyPublishedAt": "2026-09-27T17:13:52.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-29",
+      "observedDates": [
+        "2026-09-29"
+      ],
+      "observations": [
+        {
+          "gitBlobSha1": "87cfa32a9b2cef8c0e601dab3a3e9884fb918e50",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-29_cs.AI.xml",
+          "primaryCategory": "cs.AI",
+          "publisherTitle": "Learning Strategies to Break Judges",
+          "url": "https://arxiv.org/abs/2609.33773",
+          "versionGuid": "oai:arXiv.org:2609.33773v1",
+          "announceType": "new",
+          "pubDate": "Tue, 29 Sep 2026 00:00:00 -0400",
+          "utcDay": "2026-09-29"
+        }
+      ]
+    },
+    {
+      "id": "2026-09-26-jepa-lean-search",
+      "arxivId": "2609.32908",
+      "primaryCategory": "cs.LG",
+      "scope": "revisited",
+      "legacyPublishedAt": "2026-09-26T19:59:26.000Z",
+      "status": "UNRESOLVED_CONFLICT_ORIGINAL_RSS",
+      "adoptedDate": null,
+      "observedDates": [
+        "2026-09-29",
+        "2026-09-30"
+      ],
+      "observations": [
+        {
+          "gitBlobSha1": "e3e90f27fd35ac703938593a17938e01f439e85c",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-29_cs.LG.xml",
+          "primaryCategory": "cs.LG",
+          "publisherTitle": "Predicting the Next State Is Not Enough: JEPA Representations for Lean Theorem Proving",
+          "url": "https://arxiv.org/abs/2609.32908",
+          "versionGuid": "oai:arXiv.org:2609.32908v1",
+          "announceType": "new",
+          "pubDate": "Tue, 29 Sep 2026 00:00:00 -0400",
+          "utcDay": "2026-09-29"
+        },
+        {
+          "gitBlobSha1": "0fccab5747c052cff6f1232202f2e91683da2381",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-30_cs.LG.xml",
+          "primaryCategory": "cs.LG",
+          "publisherTitle": "Predicting the Next State Is Not Enough: JEPA Representations for Lean Theorem Proving",
+          "url": "https://arxiv.org/abs/2609.32908",
+          "versionGuid": "oai:arXiv.org:2609.32908v1",
+          "announceType": "new",
+          "pubDate": "Wed, 30 Sep 2026 00:00:00 -0400",
+          "utcDay": "2026-09-30"
+        }
+      ]
+    },
+    {
+      "id": "2026-09-26-oracleladder",
+      "arxivId": "2609.32235",
+      "primaryCategory": "cs.CL",
+      "scope": "revisited",
+      "legacyPublishedAt": "2026-09-26T04:51:33.000Z",
+      "status": "UNRESOLVED_CONFLICT_ORIGINAL_RSS",
+      "adoptedDate": null,
+      "observedDates": [
+        "2026-09-29",
+        "2026-09-30"
+      ],
+      "observations": [
+        {
+          "gitBlobSha1": "bb79574e03df719e8b4d1c9249836f1ba98a66e4",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.CL/2026-09-29_cs.CL.xml",
+          "primaryCategory": "cs.CL",
+          "publisherTitle": "Solving Every Step Is Not Enough: Milestone Oracles Reveal a Composition Gap in LLM Math Reasoning",
+          "url": "https://arxiv.org/abs/2609.32235",
+          "versionGuid": "oai:arXiv.org:2609.32235v1",
+          "announceType": "new",
+          "pubDate": "Tue, 29 Sep 2026 00:00:00 -0400",
+          "utcDay": "2026-09-29"
+        },
+        {
+          "gitBlobSha1": "4eee0e03920e6b4199d639308ced660bbdd87bda",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.CL/2026-09-30_cs.CL.xml",
+          "primaryCategory": "cs.CL",
+          "publisherTitle": "Solving Every Step Is Not Enough: Milestone Oracles Reveal a Composition Gap in LLM Math Reasoning",
+          "url": "https://arxiv.org/abs/2609.32235",
+          "versionGuid": "oai:arXiv.org:2609.32235v1",
+          "announceType": "new",
+          "pubDate": "Wed, 30 Sep 2026 00:00:00 -0400",
+          "utcDay": "2026-09-30"
+        }
+      ]
+    },
+    {
+      "id": "2026-09-26-compassplay",
+      "arxivId": "2609.32228",
+      "primaryCategory": "cs.LG",
+      "scope": "new",
+      "legacyPublishedAt": "2026-09-26T04:42:56.000Z",
+      "status": "UNRESOLVED_CONFLICT_ORIGINAL_RSS",
+      "adoptedDate": null,
+      "observedDates": [
+        "2026-09-29",
+        "2026-09-30"
+      ],
+      "observations": [
+        {
+          "gitBlobSha1": "e3e90f27fd35ac703938593a17938e01f439e85c",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-29_cs.LG.xml",
+          "primaryCategory": "cs.LG",
+          "publisherTitle": "CompassPlay: Rewarding the Proposer for Where It Moves the Solver",
+          "url": "https://arxiv.org/abs/2609.32228",
+          "versionGuid": "oai:arXiv.org:2609.32228v1",
+          "announceType": "new",
+          "pubDate": "Tue, 29 Sep 2026 00:00:00 -0400",
+          "utcDay": "2026-09-29"
+        },
+        {
+          "gitBlobSha1": "0fccab5747c052cff6f1232202f2e91683da2381",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-30_cs.LG.xml",
+          "primaryCategory": "cs.LG",
+          "publisherTitle": "CompassPlay: Rewarding the Proposer for Where It Moves the Solver",
+          "url": "https://arxiv.org/abs/2609.32228",
+          "versionGuid": "oai:arXiv.org:2609.32228v1",
+          "announceType": "new",
+          "pubDate": "Wed, 30 Sep 2026 00:00:00 -0400",
+          "utcDay": "2026-09-30"
+        }
+      ]
+    },
+    {
+      "id": "2026-09-25-choir",
+      "arxivId": "2609.31903",
+      "primaryCategory": "cs.AI",
+      "scope": "new",
+      "legacyPublishedAt": "2026-09-25T18:44:53.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-29",
+      "observedDates": [
+        "2026-09-29"
+      ],
+      "observations": [
+        {
+          "gitBlobSha1": "87cfa32a9b2cef8c0e601dab3a3e9884fb918e50",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-29_cs.AI.xml",
+          "primaryCategory": "cs.AI",
+          "publisherTitle": "Choir: An Open Protocol for Distributed Multi-Agent Autoformalization",
+          "url": "https://arxiv.org/abs/2609.31903",
+          "versionGuid": "oai:arXiv.org:2609.31903v1",
+          "announceType": "new",
+          "pubDate": "Tue, 29 Sep 2026 00:00:00 -0400",
+          "utcDay": "2026-09-29"
+        }
+      ]
+    },
+    {
+      "id": "2026-09-24-proofgap",
+      "arxivId": "2609.29296",
+      "primaryCategory": "cs.PL",
+      "scope": "new",
+      "legacyPublishedAt": "2026-09-24T09:30:22.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-25",
+      "observedDates": [
+        "2026-09-25"
+      ],
+      "observations": [
+        {
+          "gitBlobSha1": "a247471222485c84c28ecdb00c05059ef1b67a75",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.PL/2026-09-25_cs.PL.xml",
+          "primaryCategory": "cs.PL",
+          "publisherTitle": "ProofGap: Benchmarking Step-Level Formal Reasoning with Local Obligations Derived from Natural-Language Solutions",
+          "url": "https://arxiv.org/abs/2609.29296",
+          "versionGuid": "oai:arXiv.org:2609.29296v1",
+          "announceType": "new",
+          "pubDate": "Fri, 25 Sep 2026 00:00:00 -0400",
+          "utcDay": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "id": "2026-09-23-order-sensitive-representations",
+      "arxivId": "2609.28442",
+      "primaryCategory": "cs.LG",
+      "scope": "new",
+      "legacyPublishedAt": "2026-09-23T17:40:57.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-24",
+      "observedDates": [
+        "2026-09-24"
+      ],
+      "observations": [
+        {
+          "gitBlobSha1": "ea6babfa260b270bf195f87eeb793a9d808d0df5",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-24_cs.LG.xml",
+          "primaryCategory": "cs.LG",
+          "publisherTitle": "Order-Invariant Answers, Order-Sensitive Representations in Mathematical Reasoning",
+          "url": "https://arxiv.org/abs/2609.28442",
+          "versionGuid": "oai:arXiv.org:2609.28442v1",
+          "announceType": "new",
+          "pubDate": "Thu, 24 Sep 2026 00:00:00 -0400",
+          "utcDay": "2026-09-24"
+        }
+      ]
+    },
+    {
+      "id": "2026-09-23-interesting-mathematics",
+      "arxivId": "2609.28603",
+      "primaryCategory": "cs.LG",
+      "scope": "new",
+      "legacyPublishedAt": "2026-09-23T16:06:29.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-25",
+      "observedDates": [
+        "2026-09-25"
+      ],
+      "observations": [
+        {
+          "gitBlobSha1": "e0ccb56afe1cfb2526a1a3e311dd44be0d91fd25",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-25_cs.LG.xml",
+          "primaryCategory": "cs.LG",
+          "publisherTitle": "Learning to Discover Interesting Mathematics",
+          "url": "https://arxiv.org/abs/2609.28603",
+          "versionGuid": "oai:arXiv.org:2609.28603v1",
+          "announceType": "new",
+          "pubDate": "Fri, 25 Sep 2026 00:00:00 -0400",
+          "utcDay": "2026-09-25"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "frozenCandidates": 98,
+    "previousUniqueReviewed": 21,
+    "newFirstTimeChecked": 5,
+    "revisitedPreviousTechnicalBlocks": 4,
+    "thisRunExamined": 9,
+    "newlyAdopted": 6,
+    "newlyHeldConflict": 3,
+    "totalAdopted": 14,
+    "totalReviewedHeld": 12,
+    "totalTechnicalBlocked": 0,
+    "notYetReviewed": 72,
+    "withoutSupplementalChronology": 84
+  },
+  "nextUnreviewed": "2026-09-21-permuformer",
+  "limits": "Three conflicting source dates are retained; no min-date guessing; no at/earliestVerifiedPublic; mathematical claims not independently checked."
+}
