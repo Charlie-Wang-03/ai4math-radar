@@ -1,0 +1,224 @@
+{
+  "batch": 44,
+  "checkedUtc": "2026-11-04",
+  "issue": 151,
+  "frozenBaseline": "docs/audits/evidence/issue151-clocked-arxiv-baseline.tsv",
+  "frozenNewRows": "27–31",
+  "dailyPrecedingMerge": "401db9549864651ab66af5c948ff963a0ca535ed",
+  "sourceArchive": {
+    "repository": "ehijano/rss_fetch",
+    "commit": "e597e5120c034115fda2049d72812f2da7f99f3a",
+    "kind": "Third-party immutable replay of original arXiv RSS XML publisher item fields, not a live historical arXiv API",
+    "githubCommitNotPublication": true,
+    "rssMidnightNotExactTime": true
+  },
+  "readMethod": "Read-only GitHub connector, verified complete XML and SHA on limited files; absence conclusions restricted to inspected snapshots",
+  "sources": [
+    {
+      "path": "rss_data/cs.AI/2026-09-22_cs.AI.xml",
+      "gitBlobSha1": "5296b14bb65e8f4cd9f7a8975cfd06758e696e79",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-22_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-09-23_cs.AI.xml",
+      "gitBlobSha1": "5e298457fd4effd4028917be568f73f78e3e7de3",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-23_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-09-24_cs.AI.xml",
+      "gitBlobSha1": "5e298457fd4effd4028917be568f73f78e3e7de3",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-24_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-09-25_cs.AI.xml",
+      "gitBlobSha1": "b6783e9cbae16582803009f056b99b0b287927c2",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-25_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-09-29_cs.AI.xml",
+      "gitBlobSha1": "87cfa32a9b2cef8c0e601dab3a3e9884fb918e50",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-29_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.DS/2026-09-17_cs.DS.xml",
+      "gitBlobSha1": "536273e3e2779fb9382024a78bbf67e33c1723cb",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.DS/2026-09-17_cs.DS.xml"
+    },
+    {
+      "path": "rss_data/cs.DS/2026-09-18_cs.DS.xml",
+      "gitBlobSha1": "536273e3e2779fb9382024a78bbf67e33c1723cb",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.DS/2026-09-18_cs.DS.xml"
+    },
+    {
+      "path": "rss_data/cs.DS/2026-09-21_cs.DS.xml",
+      "gitBlobSha1": "5ab9256a12907e1e71ab0824b966cc7454ddf98f",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.DS/2026-09-21_cs.DS.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-09-22_cs.LG.xml",
+      "gitBlobSha1": "98e6b6cf4aede2acbc07eac921bed2dd552701a4",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-22_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-09-23_cs.LG.xml",
+      "gitBlobSha1": "ea6babfa260b270bf195f87eeb793a9d808d0df5",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-23_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-09-24_cs.LG.xml",
+      "gitBlobSha1": "ea6babfa260b270bf195f87eeb793a9d808d0df5",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-24_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-09-25_cs.LG.xml",
+      "gitBlobSha1": "e0ccb56afe1cfb2526a1a3e311dd44be0d91fd25",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-25_cs.LG.xml"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "2026-09-21-permuformer",
+      "arxivId": "2609.25438",
+      "primaryCategory": "cs.LG",
+      "legacyPublishedAt": "2026-09-21T21:48:39.000Z",
+      "status": "UNRESOLVED_NO_MATCHING_V1_NEW",
+      "adoptedDate": null,
+      "observedDates": [],
+      "observations": [],
+      "reason": "No source-matched primary v1/new in bounded immutable RSS review; mirror absence cannot certify publication absence, v2 replacement does not date v1."
+    },
+    {
+      "id": "2026-09-21-lean-pool",
+      "arxivId": "2609.25199",
+      "primaryCategory": "cs.AI",
+      "legacyPublishedAt": "2026-09-21T17:57:30.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-24",
+      "observedDates": [
+        "2026-09-24"
+      ],
+      "observations": [
+        {
+          "arxivId": "2609.25199",
+          "versionGuid": "oai:arXiv.org:2609.25199v1",
+          "url": "https://arxiv.org/abs/2609.25199",
+          "category": "cs.AI",
+          "announceType": "new",
+          "pubDate": "Thu, 24 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/cs.AI/2026-09-23_cs.AI.xml",
+          "gitBlobSha1": "5e298457fd4effd4028917be568f73f78e3e7de3",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-23_cs.AI.xml"
+        },
+        {
+          "arxivId": "2609.25199",
+          "versionGuid": "oai:arXiv.org:2609.25199v1",
+          "url": "https://arxiv.org/abs/2609.25199",
+          "category": "cs.AI",
+          "announceType": "new",
+          "pubDate": "Thu, 24 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/cs.AI/2026-09-24_cs.AI.xml",
+          "gitBlobSha1": "5e298457fd4effd4028917be568f73f78e3e7de3",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-24_cs.AI.xml"
+        }
+      ],
+      "reason": "Original RSS publisher item matching v1 GUID / new / primary category / article; day-only public announcement"
+    },
+    {
+      "id": "2026-09-21-endless-exam",
+      "arxivId": "2609.24555",
+      "primaryCategory": "cs.AI",
+      "legacyPublishedAt": "2026-09-21T13:19:36.000Z",
+      "status": "UNRESOLVED_NO_MATCHING_V1_NEW",
+      "adoptedDate": null,
+      "observedDates": [],
+      "observations": [
+        {
+          "arxivId": "2609.24555",
+          "versionGuid": "oai:arXiv.org:2609.24555v2",
+          "url": "https://arxiv.org/abs/2609.24555",
+          "category": "cs.AI",
+          "announceType": "replace",
+          "pubDate": "Tue, 29 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/cs.AI/2026-09-29_cs.AI.xml",
+          "gitBlobSha1": "87cfa32a9b2cef8c0e601dab3a3e9884fb918e50",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-29_cs.AI.xml"
+        }
+      ],
+      "reason": "No source-matched primary v1/new in bounded immutable RSS review; mirror absence cannot certify publication absence, v2 replacement does not date v1."
+    },
+    {
+      "id": "2026-09-19-self-organizing-agent-teams",
+      "arxivId": "2609.22682",
+      "primaryCategory": "cs.AI",
+      "legacyPublishedAt": "2026-09-19T01:27:40.000Z",
+      "status": "UNRESOLVED_NO_MATCHING_V1_NEW",
+      "adoptedDate": null,
+      "observedDates": [],
+      "observations": [],
+      "reason": "No source-matched primary v1/new in bounded immutable RSS review; mirror absence cannot certify publication absence, v2 replacement does not date v1."
+    },
+    {
+      "id": "2026-09-17-strong-secretary-linear-matroids",
+      "arxivId": "2609.20797",
+      "primaryCategory": "cs.DS",
+      "legacyPublishedAt": "2026-09-17T17:54:37.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-18",
+      "observedDates": [
+        "2026-09-18"
+      ],
+      "observations": [
+        {
+          "arxivId": "2609.20797",
+          "versionGuid": "oai:arXiv.org:2609.20797v1",
+          "url": "https://arxiv.org/abs/2609.20797",
+          "category": "cs.DS",
+          "announceType": "new",
+          "pubDate": "Fri, 18 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/cs.DS/2026-09-17_cs.DS.xml",
+          "gitBlobSha1": "536273e3e2779fb9382024a78bbf67e33c1723cb",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.DS/2026-09-17_cs.DS.xml"
+        },
+        {
+          "arxivId": "2609.20797",
+          "versionGuid": "oai:arXiv.org:2609.20797v1",
+          "url": "https://arxiv.org/abs/2609.20797",
+          "category": "cs.DS",
+          "announceType": "new",
+          "pubDate": "Fri, 18 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/cs.DS/2026-09-18_cs.DS.xml",
+          "gitBlobSha1": "536273e3e2779fb9382024a78bbf67e33c1723cb",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.DS/2026-09-18_cs.DS.xml"
+        }
+      ],
+      "reason": "Original RSS publisher item matching v1 GUID / new / primary category / article; day-only public announcement"
+    }
+  ],
+  "counts": {
+    "frozenCandidates": 98,
+    "priorAdopted": 14,
+    "priorReviewedHeld": 12,
+    "priorUnreviewed": 72,
+    "newFirstTimeChecked": 5,
+    "newlyAdopted": 2,
+    "newlyHeldNoV1": 3,
+    "totalAdopted": 16,
+    "totalReviewedHeld": 15,
+    "totalTechnicalBlocked": 0,
+    "notYetReviewed": 67,
+    "withoutSupplementalChronology": 82
+  },
+  "nextUnreviewed": "2026-09-17-hjo-conjecture-axiomprover"
+}
