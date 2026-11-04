@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 const root=new URL("../",import.meta.url);
-const news=readFileSync(new URL("portable/content/selected.jsonl",root),"utf8").trim().split(/\r?\n/).map(JSON.parse);
+const news=readFileSync(new URL("portable/content/selected.jsonl",root),"utf8").trim().split(/\r?\n/).map(x=>JSON.parse(x));
 const receipt=JSON.parse(readFileSync(new URL("docs/audits/evidence/arxiv-clocked-batch44.json",root),"utf8"));
 const get=(id:string)=>{const xs=news.filter((x:{id:string})=>x.id===id);assert.equal(xs.length,1);return xs[0]!;};
 test("Batch44 frozen 5 IDs and original compatibility",()=>{
