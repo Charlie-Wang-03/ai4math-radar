@@ -1,0 +1,340 @@
+{
+  "batch": 45,
+  "checkedUtc": "2026-11-05",
+  "issue": 151,
+  "frozenBaseline": "docs/audits/evidence/issue151-clocked-arxiv-baseline.tsv",
+  "frozenNewRows": "32–36",
+  "dailyPrecedingMerge": "d8621558c2cce359c70129288cf3d1165e2ad297",
+  "sourceArchive": {
+    "repository": "ehijano/rss_fetch",
+    "commit": "e597e5120c034115fda2049d72812f2da7f99f3a",
+    "kind": "Third-party pinned replay of arXiv publisher RSS XML, not first-party live historical endpoint",
+    "githubCommitNotPublication": true,
+    "rssMidnightNotExactTime": true
+  },
+  "readMethod": "Read-only GitHub connector: full XML on normal files; >1MB cs.AI 2026-09-15/16 content read fully by exact Git blob SHA (GitHub fetch_blob). Absence is scoped to exact inspected source files.",
+  "sources": [
+    {
+      "path": "rss_data/math.NT/2026-09-17_math.NT.xml",
+      "gitBlobSha1": "0a7f873078e87fae76d7edbf476fd92d867ddc54",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.NT/2026-09-17_math.NT.xml"
+    },
+    {
+      "path": "rss_data/math.NT/2026-09-18_math.NT.xml",
+      "gitBlobSha1": "0a7f873078e87fae76d7edbf476fd92d867ddc54",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.NT/2026-09-18_math.NT.xml"
+    },
+    {
+      "path": "rss_data/math.NT/2026-09-21_math.NT.xml",
+      "gitBlobSha1": "086523a1e18e3fb95f269d87884b42eee3014b2e",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.NT/2026-09-21_math.NT.xml"
+    },
+    {
+      "path": "rss_data/math.NT/2026-09-22_math.NT.xml",
+      "gitBlobSha1": "086523a1e18e3fb95f269d87884b42eee3014b2e",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.NT/2026-09-22_math.NT.xml"
+    },
+    {
+      "path": "rss_data/quant-ph/2026-09-17_quant-ph.xml",
+      "gitBlobSha1": "d85bcdb6c6cd4edcd74831696efc104a5dbb2c7c",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/quant-ph/2026-09-17_quant-ph.xml"
+    },
+    {
+      "path": "rss_data/quant-ph/2026-09-18_quant-ph.xml",
+      "gitBlobSha1": "d85bcdb6c6cd4edcd74831696efc104a5dbb2c7c",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/quant-ph/2026-09-18_quant-ph.xml"
+    },
+    {
+      "path": "rss_data/math.PR/2026-09-17_math.PR.xml",
+      "gitBlobSha1": "b926c4276a99460239f5b3bcb8e474a1a57074e1",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-09-17_math.PR.xml"
+    },
+    {
+      "path": "rss_data/math.PR/2026-09-18_math.PR.xml",
+      "gitBlobSha1": "b926c4276a99460239f5b3bcb8e474a1a57074e1",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-09-18_math.PR.xml"
+    },
+    {
+      "path": "rss_data/math.AG/2026-09-17_math.AG.xml",
+      "gitBlobSha1": "916b589608013e57d3815dab8a8be476f617f525",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.AG/2026-09-17_math.AG.xml"
+    },
+    {
+      "path": "rss_data/math.AG/2026-09-18_math.AG.xml",
+      "gitBlobSha1": "916b589608013e57d3815dab8a8be476f617f525",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.AG/2026-09-18_math.AG.xml"
+    },
+    {
+      "path": "rss_data/math.AG/2026-09-22_math.AG.xml",
+      "gitBlobSha1": "13a454dc5a524ef78e5383d33de01fb99a018993",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.AG/2026-09-22_math.AG.xml"
+    },
+    {
+      "path": "rss_data/math.AG/2026-09-23_math.AG.xml",
+      "gitBlobSha1": "94e85fd473891ac407e383f38ce5fa410488b8d4",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.AG/2026-09-23_math.AG.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-09-15_cs.AI.xml",
+      "gitBlobSha1": "00de42a5149718d84e2c917b1904292014bba583",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-15_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-09-16_cs.AI.xml",
+      "gitBlobSha1": "e8276fc3fae1f33bdf65e40e9fcf2f29c378c13a",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-16_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.CL/2026-09-15_cs.CL.xml",
+      "gitBlobSha1": "03035823e6d20c17e0bee149e3fec9c8d0120240",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.CL/2026-09-15_cs.CL.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-09-16_cs.LG.xml",
+      "gitBlobSha1": "b9a018728bd6c25d8498620c68f37d656af934e0",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-09-16_cs.LG.xml"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "2026-09-17-hjo-conjecture-axiomprover",
+      "arxivId": "2609.20567",
+      "primaryCategory": "math.NT",
+      "legacyPublishedAt": "2026-09-17T15:28:54.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-18",
+      "observedDates": [
+        "2026-09-18"
+      ],
+      "observations": [
+        {
+          "arxivId": "2609.20567",
+          "title": "Rogers--Ramanujan identities from the geometry of $X^a=Y^b$",
+          "versionGuid": "oai:arXiv.org:2609.20567v1",
+          "url": "https://arxiv.org/abs/2609.20567",
+          "category": "math.NT",
+          "announceType": "new",
+          "pubDate": "Fri, 18 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/math.NT/2026-09-17_math.NT.xml",
+          "gitBlobSha1": "0a7f873078e87fae76d7edbf476fd92d867ddc54",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.NT/2026-09-17_math.NT.xml"
+        },
+        {
+          "arxivId": "2609.20567",
+          "title": "Rogers--Ramanujan identities from the geometry of $X^a=Y^b$",
+          "versionGuid": "oai:arXiv.org:2609.20567v1",
+          "url": "https://arxiv.org/abs/2609.20567",
+          "category": "math.NT",
+          "announceType": "new",
+          "pubDate": "Fri, 18 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/math.NT/2026-09-18_math.NT.xml",
+          "gitBlobSha1": "0a7f873078e87fae76d7edbf476fd92d867ddc54",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.NT/2026-09-18_math.NT.xml"
+        }
+      ],
+      "reason": "Original publisher RSS item fields match exact paper, title, v1 GUID, primary category and new; publisher pubDate supports day precision only."
+    },
+    {
+      "id": "2026-09-17-formalflow-mipstar",
+      "arxivId": "2609.19814",
+      "primaryCategory": "quant-ph",
+      "legacyPublishedAt": "2026-09-17T07:26:49.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-18",
+      "observedDates": [
+        "2026-09-18"
+      ],
+      "observations": [
+        {
+          "arxivId": "2609.19814",
+          "title": "Long-horizon autoformalization of a core theorem underlying MIP* = RE",
+          "versionGuid": "oai:arXiv.org:2609.19814v1",
+          "url": "https://arxiv.org/abs/2609.19814",
+          "category": "quant-ph",
+          "announceType": "new",
+          "pubDate": "Fri, 18 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/quant-ph/2026-09-17_quant-ph.xml",
+          "gitBlobSha1": "d85bcdb6c6cd4edcd74831696efc104a5dbb2c7c",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/quant-ph/2026-09-17_quant-ph.xml"
+        },
+        {
+          "arxivId": "2609.19814",
+          "title": "Long-horizon autoformalization of a core theorem underlying MIP* = RE",
+          "versionGuid": "oai:arXiv.org:2609.19814v1",
+          "url": "https://arxiv.org/abs/2609.19814",
+          "category": "quant-ph",
+          "announceType": "new",
+          "pubDate": "Fri, 18 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/quant-ph/2026-09-18_quant-ph.xml",
+          "gitBlobSha1": "d85bcdb6c6cd4edcd74831696efc104a5dbb2c7c",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/quant-ph/2026-09-18_quant-ph.xml"
+        }
+      ],
+      "reason": "Original publisher RSS item fields match exact paper, title, v1 GUID, primary category and new; publisher pubDate supports day precision only."
+    },
+    {
+      "id": "2026-09-17-talagrand-operator-cotype",
+      "arxivId": "2609.19731",
+      "primaryCategory": "math.PR",
+      "legacyPublishedAt": "2026-09-17T05:42:08.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-18",
+      "observedDates": [
+        "2026-09-18"
+      ],
+      "observations": [
+        {
+          "arxivId": "2609.19731",
+          "title": "A Counterexample to Talagrand's Operator Cotype Problem",
+          "versionGuid": "oai:arXiv.org:2609.19731v1",
+          "url": "https://arxiv.org/abs/2609.19731",
+          "category": "math.PR",
+          "announceType": "new",
+          "pubDate": "Fri, 18 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/math.PR/2026-09-17_math.PR.xml",
+          "gitBlobSha1": "b926c4276a99460239f5b3bcb8e474a1a57074e1",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-09-17_math.PR.xml"
+        },
+        {
+          "arxivId": "2609.19731",
+          "title": "A Counterexample to Talagrand's Operator Cotype Problem",
+          "versionGuid": "oai:arXiv.org:2609.19731v1",
+          "url": "https://arxiv.org/abs/2609.19731",
+          "category": "math.PR",
+          "announceType": "new",
+          "pubDate": "Fri, 18 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/math.PR/2026-09-18_math.PR.xml",
+          "gitBlobSha1": "b926c4276a99460239f5b3bcb8e474a1a57074e1",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-09-18_math.PR.xml"
+        }
+      ],
+      "reason": "Original publisher RSS item fields match exact paper, title, v1 GUID, primary category and new; publisher pubDate supports day precision only."
+    },
+    {
+      "id": "2026-09-16-browning-sawin",
+      "arxivId": "2609.18879",
+      "primaryCategory": "math.NT",
+      "legacyPublishedAt": "2026-09-16T16:14:25.000Z",
+      "status": "UNRESOLVED_NO_MATCHING_V1_NEW",
+      "adoptedDate": null,
+      "observedDates": [],
+      "observations": [],
+      "reason": "Bounded math.NT/math.AG Sept 16–23 preserved XML snapshots did not return primary v1/new. Negative evidence is non-exhaustive; do not infer first-public day."
+    },
+    {
+      "id": "2026-09-14-stellar-colosseum",
+      "arxivId": "2609.15983",
+      "primaryCategory": "cs.AI",
+      "legacyPublishedAt": "2026-09-14T17:58:55.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-15",
+      "observedDates": [
+        "2026-09-15"
+      ],
+      "observations": [
+        {
+          "arxivId": "2609.15983",
+          "title": "Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science",
+          "versionGuid": "oai:arXiv.org:2609.15983v1",
+          "url": "https://arxiv.org/abs/2609.15983",
+          "category": "cs.AI",
+          "announceType": "new",
+          "pubDate": "Tue, 15 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/cs.AI/2026-09-15_cs.AI.xml",
+          "gitBlobSha1": "00de42a5149718d84e2c917b1904292014bba583",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-15_cs.AI.xml"
+        }
+      ],
+      "reason": "Original publisher RSS item fields match exact paper, title, v1 GUID, primary category and new; publisher pubDate supports day precision only."
+    }
+  ],
+  "additionalObservations": [
+    {
+      "arxivId": "2609.20567",
+      "category": "math.AG",
+      "date": "2026-09-18",
+      "announceType": "cross",
+      "treatment": "Cross-list is not primary v1/new."
+    },
+    {
+      "arxivId": "2609.19731",
+      "category": "math.FA",
+      "date": "2026-09-18",
+      "announceType": "cross",
+      "treatment": "Cross-list is not primary v1/new."
+    },
+    {
+      "arxivId": "2609.15983",
+      "category": "cs.CL",
+      "date": "2026-09-15",
+      "versionGuid": "oai:arXiv.org:2609.15983v1",
+      "announceType": "cross",
+      "treatment": "Cross-list is not primary v1/new."
+    },
+    {
+      "arxivId": "2609.15983",
+      "category": "cs.AI",
+      "date": "2026-09-16",
+      "versionGuid": "oai:arXiv.org:2609.15983v2",
+      "announceType": "new",
+      "treatment": "Later v2/new entry does not substitute matched primary v1/new Sep15."
+    },
+    {
+      "arxivId": "2609.15983",
+      "category": "cs.LG",
+      "date": "2026-09-16",
+      "versionGuid": "oai:arXiv.org:2609.15983v2",
+      "announceType": "replace-cross",
+      "treatment": "Replace-cross is not v1/new."
+    }
+  ],
+  "negativeCoverage": {
+    "id": "2026-09-16-browning-sawin",
+    "arxivId": "2609.18879",
+    "primaryCategory": "math.NT",
+    "checkedPrimarySnapshots": [
+      "math.NT/2026-09-17",
+      "math.NT/2026-09-18",
+      "math.NT/2026-09-21",
+      "math.NT/2026-09-22"
+    ],
+    "checkedSecondarySnapshots": [
+      "math.AG/2026-09-17",
+      "math.AG/2026-09-18",
+      "math.AG/2026-09-22",
+      "math.AG/2026-09-23"
+    ],
+    "result": "UNRESOLVED; no matching publisher new was observed in these bounded paths. Does not establish absence of publication."
+  },
+  "counts": {
+    "frozenCandidates": 98,
+    "priorAdopted": 16,
+    "priorReviewedHeld": 15,
+    "priorUnreviewed": 67,
+    "newFirstTimeChecked": 5,
+    "newlyAdopted": 4,
+    "newlyHeldNoV1": 1,
+    "totalAdopted": 20,
+    "totalReviewedHeld": 16,
+    "totalTechnicalBlocked": 0,
+    "notYetReviewed": 62,
+    "withoutSupplementalChronology": 78
+  },
+  "nextUnreviewed": "2026-09-13-quantum-olympiad-geometry"
+}
