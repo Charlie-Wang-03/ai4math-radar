@@ -1,0 +1,279 @@
+{
+  "batch": 46,
+  "checkedUtc": "2026-11-06",
+  "issue": 151,
+  "frozenBaseline": "docs/audits/evidence/issue151-clocked-arxiv-baseline.tsv",
+  "frozenNewRows": "37–41",
+  "dailyPrecedingMerge": "27df485da33ef7a710968c10a34713a337a342f6",
+  "sourceArchive": {
+    "repository": "ehijano/rss_fetch",
+    "commit": "e597e5120c034115fda2049d72812f2da7f99f3a",
+    "kind": "Pinned third-party replay preserving original arXiv RSS publisher item fields, not live first-party historical HTTP",
+    "githubCommitNotPublication": true,
+    "rssMidnightNotExactTime": true
+  },
+  "readMethod": "GitHub connector read-only fixed source files; large cs.AI XMLs read fully by exact SHA using fetch_blob, not partial search snippets.",
+  "sources": [
+    {
+      "path": "rss_data/quant-ph/2026-09-14_quant-ph.xml",
+      "category": "quant-ph",
+      "gitBlobSha1": "410ca0ff8f150fb7c7ef0dd3f140efdc932160c4",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/quant-ph/2026-09-14_quant-ph.xml"
+    },
+    {
+      "path": "rss_data/quant-ph/2026-09-15_quant-ph.xml",
+      "category": "quant-ph",
+      "gitBlobSha1": "ee58bc112b1f677cb6f63d1b98706153fff01110",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/quant-ph/2026-09-15_quant-ph.xml"
+    },
+    {
+      "path": "rss_data/quant-ph/2026-09-16_quant-ph.xml",
+      "category": "quant-ph",
+      "gitBlobSha1": "57551d75727968905171e157b253c0989893bffb",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/quant-ph/2026-09-16_quant-ph.xml"
+    },
+    {
+      "path": "rss_data/math.NT/2026-09-14_math.NT.xml",
+      "category": "math.NT",
+      "gitBlobSha1": "a21bd797a520d930154aa761091578fbd04fc72e",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.NT/2026-09-14_math.NT.xml"
+    },
+    {
+      "path": "rss_data/math.NT/2026-09-15_math.NT.xml",
+      "category": "math.NT",
+      "gitBlobSha1": "06a2a96d1208e71716f4137d4f68e8d3e6f96a5d",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.NT/2026-09-15_math.NT.xml"
+    },
+    {
+      "path": "rss_data/math.NT/2026-09-16_math.NT.xml",
+      "category": "math.NT",
+      "gitBlobSha1": "57f09980061e7d64f181f27aa07be4257aef9ee0",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.NT/2026-09-16_math.NT.xml"
+    },
+    {
+      "path": "rss_data/math.CO/2026-09-14_math.CO.xml",
+      "category": "math.CO",
+      "gitBlobSha1": "d1372346ab8885810bf4f618fc6ff058bc0824c1",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.CO/2026-09-14_math.CO.xml"
+    },
+    {
+      "path": "rss_data/math.CO/2026-09-15_math.CO.xml",
+      "category": "math.CO",
+      "gitBlobSha1": "85af49428aa69911bf54a7e84a1ddb31468f4124",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.CO/2026-09-15_math.CO.xml"
+    },
+    {
+      "path": "rss_data/math.CO/2026-09-16_math.CO.xml",
+      "category": "math.CO",
+      "gitBlobSha1": "185ccdbecd9e59ee4000f9684be03bcdd6cfabb2",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.CO/2026-09-16_math.CO.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-09-14_cs.AI.xml",
+      "category": "cs.AI",
+      "gitBlobSha1": "da7782e14c1da7a3d26ff1a54a19b85b0b4c94",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-14_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-09-15_cs.AI.xml",
+      "category": "cs.AI",
+      "gitBlobSha1": "00de42a5149718d84e2c917b1904292014bba583",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-15_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-09-16_cs.AI.xml",
+      "category": "cs.AI",
+      "gitBlobSha1": "e8276fc3fae1f33bdf65e40e9fcf2f29c378c13a",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-16_cs.AI.xml"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "2026-09-13-quantum-olympiad-geometry",
+      "arxivId": "2609.14533",
+      "cat": "quant-ph",
+      "legacy": "2026-09-13T14:10:44.000Z",
+      "title": "Proving olympiad geometry theorems on a superconducting quantum processor",
+      "status": "ADOPTED_DAY_ONLY",
+      "observedDates": [
+        "2026-09-15"
+      ],
+      "adoptedDate": "2026-09-15",
+      "observations": [
+        {
+          "arxivId": "2609.14533",
+          "title": "Proving olympiad geometry theorems on a superconducting quantum processor",
+          "versionGuid": "oai:arXiv.org:2609.14533v1",
+          "url": "https://arxiv.org/abs/2609.14533",
+          "category": "quant-ph",
+          "announceType": "new",
+          "pubDate": "Tue, 15 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/quant-ph/2026-09-15_quant-ph.xml",
+          "gitBlobSha1": "ee58bc112b1f677cb6f63d1b98706153fff01110",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/quant-ph/2026-09-15_quant-ph.xml"
+        }
+      ],
+      "reason": "Publisher item matches arXiv ID, title, v1 GUID, primary category and announce_type=new; source pubDate is day-only announcement evidence, not public seconds."
+    },
+    {
+      "id": "2026-09-12-conway-subprime-golden-ratio",
+      "arxivId": "2609.14188",
+      "cat": "math.NT",
+      "legacy": "2026-09-12T23:38:17.000Z",
+      "title": "Golden-ratio growth of Conway's subprime closure",
+      "status": "ADOPTED_DAY_ONLY",
+      "observedDates": [
+        "2026-09-15"
+      ],
+      "adoptedDate": "2026-09-15",
+      "observations": [
+        {
+          "arxivId": "2609.14188",
+          "title": "Golden-ratio growth of Conway's subprime closure",
+          "versionGuid": "oai:arXiv.org:2609.14188v1",
+          "url": "https://arxiv.org/abs/2609.14188",
+          "category": "math.NT",
+          "announceType": "new",
+          "pubDate": "Tue, 15 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/math.NT/2026-09-15_math.NT.xml",
+          "gitBlobSha1": "06a2a96d1208e71716f4137d4f68e8d3e6f96a5d",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.NT/2026-09-15_math.NT.xml"
+        }
+      ],
+      "reason": "Publisher item matches arXiv ID, title, v1 GUID, primary category and announce_type=new; source pubDate is day-only announcement evidence, not public seconds."
+    },
+    {
+      "id": "2026-09-12-isogeny-equidistribution-astra",
+      "arxivId": "2609.13735",
+      "cat": "math.NT",
+      "legacy": "2026-09-12T06:09:30.000Z",
+      "title": "Finiteness of an Isogeny Class via Equidistribution",
+      "status": "ADOPTED_DAY_ONLY",
+      "observedDates": [
+        "2026-09-15"
+      ],
+      "adoptedDate": "2026-09-15",
+      "observations": [
+        {
+          "arxivId": "2609.13735",
+          "title": "Finiteness of an Isogeny Class via Equidistribution",
+          "versionGuid": "oai:arXiv.org:2609.13735v1",
+          "url": "https://arxiv.org/abs/2609.13735",
+          "category": "math.NT",
+          "announceType": "new",
+          "pubDate": "Tue, 15 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/math.NT/2026-09-15_math.NT.xml",
+          "gitBlobSha1": "06a2a96d1208e71716f4137d4f68e8d3e6f96a5d",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.NT/2026-09-15_math.NT.xml"
+        }
+      ],
+      "reason": "Publisher item matches arXiv ID, title, v1 GUID, primary category and announce_type=new; source pubDate is day-only announcement evidence, not public seconds."
+    },
+    {
+      "id": "2026-09-12-four-arm-polyominoes-lean",
+      "arxivId": "2609.13641",
+      "cat": "math.CO",
+      "legacy": "2026-09-12T01:31:02.000Z",
+      "title": "Four-arm polyominoes in Golomb's hierarchy: A complete classification with Lean verification",
+      "status": "ADOPTED_DAY_ONLY",
+      "observedDates": [
+        "2026-09-15"
+      ],
+      "adoptedDate": "2026-09-15",
+      "observations": [
+        {
+          "arxivId": "2609.13641",
+          "title": "Four-arm polyominoes in Golomb's hierarchy: A complete classification with Lean verification",
+          "versionGuid": "oai:arXiv.org:2609.13641v1",
+          "url": "https://arxiv.org/abs/2609.13641",
+          "category": "math.CO",
+          "announceType": "new",
+          "pubDate": "Tue, 15 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/math.CO/2026-09-15_math.CO.xml",
+          "gitBlobSha1": "85af49428aa69911bf54a7e84a1ddb31468f4124",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.CO/2026-09-15_math.CO.xml"
+        }
+      ],
+      "reason": "Publisher item matches arXiv ID, title, v1 GUID, primary category and announce_type=new; source pubDate is day-only announcement evidence, not public seconds."
+    },
+    {
+      "id": "2026-09-11-zgcm-1",
+      "arxivId": "2609.13356",
+      "cat": "cs.AI",
+      "legacy": "2026-09-11T17:18:04.000Z",
+      "title": "ZGCM-1: A Fully Open and Extremely Efficient Foundation Model for Math and Agentic Search",
+      "status": "UNRESOLVED_CONFLICTING_PRIMARY_V1_NEW",
+      "observedDates": [
+        "2026-09-15",
+        "2026-09-16"
+      ],
+      "adoptedDate": null,
+      "observations": [
+        {
+          "arxivId": "2609.13356",
+          "title": "ZGCM-1: A Fully Open and Extremely Efficient Foundation Model for Math and Agentic Search",
+          "versionGuid": "oai:arXiv.org:2609.13356v1",
+          "url": "https://arxiv.org/abs/2609.13356",
+          "category": "cs.AI",
+          "announceType": "new",
+          "pubDate": "Tue, 15 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/cs.AI/2026-09-15_cs.AI.xml",
+          "gitBlobSha1": "00de42a5149718d84e2c917b1904292014bba583",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-15_cs.AI.xml"
+        },
+        {
+          "arxivId": "2609.13356",
+          "title": "ZGCM-1: A Fully Open and Extremely Efficient Foundation Model for Math and Agentic Search",
+          "versionGuid": "oai:arXiv.org:2609.13356v1",
+          "url": "https://arxiv.org/abs/2609.13356",
+          "category": "cs.AI",
+          "announceType": "new",
+          "pubDate": "Wed, 16 Sep 2026 00:00:00 -0400",
+          "sourceFile": "rss_data/cs.AI/2026-09-16_cs.AI.xml",
+          "gitBlobSha1": "e8276fc3fae1f33bdf65e40e9fcf2f29c378c13a",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-16_cs.AI.xml"
+        }
+      ],
+      "reason": "Pinned publisher-item replay has conflicting pubDate day labels for the same cs.AI v1/new item on Sep15 and Sep16; cannot choose min(date) or treat arXiv v1 submit clock as public."
+    }
+  ],
+  "additionalObservations": [
+    {
+      "id": "2026-09-13-quantum-olympiad-geometry",
+      "arxivId": "2609.14533",
+      "title": "Proving olympiad geometry theorems on a superconducting quantum processor",
+      "versionGuid": "oai:arXiv.org:2609.14533v1",
+      "category": "cs.AI",
+      "announceType": "cross",
+      "pubDate": "Wed, 16 Sep 2026 00:00:00 -0400",
+      "sourceFile": "rss_data/cs.AI/2026-09-16_cs.AI.xml",
+      "gitBlobSha1": "e8276fc3fae1f33bdf65e40e9fcf2f29c378c13a",
+      "reason": "cs.AI cross-list does not supplant quantum paper's quant-ph v1/new primary date"
+    }
+  ],
+  "counts": {
+    "frozenCandidates": 98,
+    "newFirstTimeChecked": 5,
+    "newlyAdopted": 4,
+    "newlyHeldConflicting": 1,
+    "totalAdopted": 24,
+    "totalReviewedHeld": 17,
+    "totalTechnicalBlocked": 0,
+    "notYetReviewed": 57,
+    "withoutSupplementalChronology": 74
+  },
+  "nextUnreviewed": "2026-09-10-sullivan-no-wandering-domains-lean",
+  "scopeLimitation": "Announce date provenance only; no mathematical proof or Lean kernel re-execution. Public RSS pubDate is nominally midnight and supports UTC day only. Conflicting cs.AI dates remain UNRESOLVED."
+}
