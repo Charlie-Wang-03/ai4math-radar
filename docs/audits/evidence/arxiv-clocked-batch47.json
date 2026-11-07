@@ -28,7 +28,7 @@
         "versionGuid": "oai:arXiv.org:2609.16027v1",
         "primaryCategory": "math.HO",
         "announceType": "new",
-        "pubDate": "Wed, 16 Sept 2026 00:00:00 -0400",
+        "pubDate": "Wed, 16 Sep 2026 00:00:00 -0400",
         "sourceFile": "rss_data/math.HO/2026-09-16_math.HO.xml",
         "gitBlobSha1": "9959fc06366bf62dbf84ba0e12c3729ffe7168b4",
         "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.HO/2026-09-16_math.HO.xml"
@@ -49,7 +49,7 @@
         "versionGuid": "oai:arXiv.org:2609.11319v1",
         "primaryCategory": "cs.AI",
         "announceType": "new",
-        "pubDate": "Sat, 12 Sept 2026 00:00:00 -0400",
+        "pubDate": "Sat, 12 Sep 2026 00:00:00 -0400",
         "sourceFile": "rss_data/cs.AI/2026-09-12_cs.AI.xml",
         "gitBlobSha1": "1ad25699f026283cccdd3f053036e5f706e9b24f",
         "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-12_cs.AI.xml"
@@ -70,7 +70,7 @@
         "versionGuid": "oai:arXiv.org:2609.10461v1",
         "primaryCategory": "math.GR",
         "announceType": "new",
-        "pubDate": "Thu, 10 Sept 2026 00:00:00 -0400",
+        "pubDate": "Thu, 10 Sep 2026 00:00:00 -0400",
         "sourceFile": "rss_data/math.GR/2026-09-10_math.GR.xml",
         "gitBlobSha1": "71cdd4222417846aca28c342fc1d04476760b182",
         "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.GR/2026-09-10_math.GR.xml"
@@ -91,7 +91,7 @@
         "versionGuid": "oai:arXiv.org:2609.09264v1",
         "primaryCategory": "cs.CL",
         "announceType": "new",
-        "pubDate": "Thu, 10 Sept 2026 00:00:00 -0400",
+        "pubDate": "Thu, 10 Sep 2026 00:00:00 -0400",
         "sourceFile": "rss_data/cs.CL/2026-09-10_cs.CL.xml",
         "gitBlobSha1": "217bed2d236372376a17fb410006a449639ee2de",
         "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.CL/2026-09-10_cs.CL.xml"
@@ -112,7 +112,7 @@
         "versionGuid": "oai:arXiv.org:2609.07996v1",
         "primaryCategory": "math.RA",
         "announceType": "new",
-        "pubDate": "Wed, 09 Sept 2026 00:00:00 -0400",
+        "pubDate": "Wed, 09 Sep 2026 00:00:00 -0400",
         "sourceFile": "rss_data/math.RA/2026-09-09_math.RA.xml",
         "gitBlobSha1": "b1e604755dd4623ff5fc2b0d56926a74c50bfcbb",
         "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.RA/2026-09-09_math.RA.xml"
