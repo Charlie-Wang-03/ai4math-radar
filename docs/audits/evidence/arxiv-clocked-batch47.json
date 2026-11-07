@@ -1,0 +1,140 @@
+{
+  "batch": 47,
+  "checkedUtc": "2026-11-07",
+  "issue": 151,
+  "frozenBaseline": "docs/audits/evidence/issue151-clocked-arxiv-baseline.tsv",
+  "frozenNewRows": "42–46",
+  "dailyPrecedingMerge": "8f15559f8103adbcbba84cd75956633849d486b0",
+  "sourceArchive": {
+    "repository": "ehijano/rss_fetch",
+    "commit": "e597e5120c034115fda2049d72812f2da7f99f3a",
+    "kind": "Pinned third-party replay preserving original arXiv publisher RSS item fields; no claim of original HTTP capture",
+    "githubCommitNotPublication": true,
+    "rssMidnightNotExactTime": true
+  },
+  "readMethod": "GitHub connector read-only fetch_file for fixed source XML and full fetch_blob for cs.AI 2026-09-15/16; matched link, full title, v1 GUID, primary category, new announcement and pubDate.",
+  "decisions": [
+    {
+      "id": "2026-09-10-sullivan-no-wandering-domains-lean",
+      "arxivId": "2609.16027",
+      "cat": "math.HO",
+      "legacyPublishedAt": "2026-09-10T20:23:10.000Z",
+      "title": "Formalization of Sullivan's No Wandering Domains Theorem in Lean",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-16",
+      "observation": {
+        "link": "https://arxiv.org/abs/2609.16027",
+        "title": "Formalization of Sullivan's No Wandering Domains Theorem in Lean",
+        "versionGuid": "oai:arXiv.org:2609.16027v1",
+        "primaryCategory": "math.HO",
+        "announceType": "new",
+        "pubDate": "Wed, 16 Sep 2026 00:00:00 -0400",
+        "sourceFile": "rss_data/math.HO/2026-09-16_math.HO.xml",
+        "gitBlobSha1": "9959fc06366bf62dbf84ba0e12c3729ffe7168b4",
+        "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.HO/2026-09-16_math.HO.xml"
+      },
+      "reason": "Same ID/title/version/category/announce_type=new source; adopt publisher RSS day only; legacy clock is arXiv v1 submission time, not public second."
+    },
+    {
+      "id": "2026-09-10-magenta-lean-verification-loop",
+      "arxivId": "2609.11319",
+      "cat": "cs.AI",
+      "legacyPublishedAt": "2026-09-10T09:48:07.000Z",
+      "title": "Magenta: Closing the Loop Between Mathematical Reasoning and Lean Verification",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-12",
+      "observation": {
+        "link": "https://arxiv.org/abs/2609.11319",
+        "title": "Magenta: Closing the Loop Between Mathematical Reasoning and Lean Verification",
+        "versionGuid": "oai:arXiv.org:2609.11319v1",
+        "primaryCategory": "cs.AI",
+        "announceType": "new",
+        "pubDate": "Sat, 12 Sep 2026 00:00:00 -0400",
+        "sourceFile": "rss_data/cs.AI/2026-09-12_cs.AI.xml",
+        "gitBlobSha1": "1ad25699f026283cccdd3f053036e5f706e9b24f",
+        "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-09-12_cs.AI.xml"
+      },
+      "reason": "Same ID/title/version/category/announce_type=new source; adopt publisher RSS day only; legacy clock is arXiv v1 submission time, not public second."
+    },
+    {
+      "id": "2026-09-09-small-undecidable-groups-chatgpt",
+      "arxivId": "2609.10461",
+      "cat": "math.GR",
+      "legacyPublishedAt": "2026-09-09T17:07:46.000Z",
+      "title": "Small undecidable groups and unrecognizable 4-manifolds",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-10",
+      "observation": {
+        "link": "https://arxiv.org/abs/2609.10461",
+        "title": "Small undecidable groups and unrecognizable 4-manifolds",
+        "versionGuid": "oai:arXiv.org:2609.10461v1",
+        "primaryCategory": "math.GR",
+        "announceType": "new",
+        "pubDate": "Thu, 10 Sep 2026 00:00:00 -0400",
+        "sourceFile": "rss_data/math.GR/2026-09-10_math.GR.xml",
+        "gitBlobSha1": "71cdd4222417846aca28c342fc1d04476760b182",
+        "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.GR/2026-09-10_math.GR.xml"
+      },
+      "reason": "Same ID/title/version/category/announce_type=new source; adopt publisher RSS day only; legacy clock is arXiv v1 submission time, not public second."
+    },
+    {
+      "id": "2026-09-08-stochbench",
+      "arxivId": "2609.09264",
+      "cat": "cs.CL",
+      "legacyPublishedAt": "2026-09-08T17:59:46.000Z",
+      "title": "StochBench: A Domain-Specific Benchmark for Stochastic Processes in Lean",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-10",
+      "observation": {
+        "link": "https://arxiv.org/abs/2609.09264",
+        "title": "StochBench: A Domain-Specific Benchmark for Stochastic Processes in Lean",
+        "versionGuid": "oai:arXiv.org:2609.09264v1",
+        "primaryCategory": "cs.CL",
+        "announceType": "new",
+        "pubDate": "Thu, 10 Sep 2026 00:00:00 -0400",
+        "sourceFile": "rss_data/cs.CL/2026-09-10_cs.CL.xml",
+        "gitBlobSha1": "217bed2d236372376a17fb410006a449639ee2de",
+        "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.CL/2026-09-10_cs.CL.xml"
+      },
+      "reason": "Same ID/title/version/category/announce_type=new source; adopt publisher RSS day only; legacy clock is arXiv v1 submission time, not public second."
+    },
+    {
+      "id": "2026-09-07-kothe-conjecture-paper",
+      "arxivId": "2609.07996",
+      "cat": "math.RA",
+      "legacyPublishedAt": "2026-09-07T21:31:38.000Z",
+      "title": "A counterexample to Köthe's conjecture and a question of Rowen",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDate": "2026-09-09",
+      "observation": {
+        "link": "https://arxiv.org/abs/2609.07996",
+        "title": "A counterexample to K\\\"othe's conjecture and a question of Rowen",
+        "versionGuid": "oai:arXiv.org:2609.07996v1",
+        "primaryCategory": "math.RA",
+        "announceType": "new",
+        "pubDate": "Wed, 09 Sep 2026 00:00:00 -0400",
+        "sourceFile": "rss_data/math.RA/2026-09-09_math.RA.xml",
+        "gitBlobSha1": "b1e604755dd4623ff5fc2b0d56926a74c50bfcbb",
+        "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.RA/2026-09-09_math.RA.xml"
+      },
+      "reason": "Same ID/title/version/category/announce_type=new source; adopt publisher RSS day only; legacy clock is arXiv v1 submission time, not public second."
+    }
+  ],
+  "validation": {
+    "targetRowsChanged": 5,
+    "untargetedRowsByteIdentical": 383,
+    "idsUnique": 388,
+    "noIdOrLinkChanged": true,
+    "noLegacyDateChanged": true,
+    "noSecondPrecisionManufactured": true
+  },
+  "cumulative": {
+    "frozenTotal": 98,
+    "withChronology": 29,
+    "reviewedUnresolved": 17,
+    "technicalBlocked": 0,
+    "unreviewed": 52,
+    "withoutChronology": 69,
+    "nextId": "2026-09-07-complex-grothendieck-odin"
+  }
+}
