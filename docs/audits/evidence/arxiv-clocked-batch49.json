@@ -1,0 +1,297 @@
+{
+  "batch": 49,
+  "checkedUtc": "2026-11-09",
+  "issue": 151,
+  "frozenBaseline": "docs/audits/evidence/issue151-clocked-arxiv-baseline.tsv",
+  "frozenNewRows": "52–56",
+  "dailyPrecedingMerge": "7ef10968152ac54a2381c7695f13b2bb298fa215",
+  "sourceArchive": {
+    "repository": "ehijano/rss_fetch",
+    "commit": "e597e5120c034115fda2049d72812f2da7f99f3a",
+    "kind": "Pinned third-party replay of original arXiv publisher RSS fields, not a direct HTTP capture",
+    "gitCommitIsNotPublication": true,
+    "pubDateMidnightNotExactReleaseSecond": true
+  },
+  "readMethod": "Read bounded category/date GitHub connector XML snapshots and check full item arXiv ID, original v1 title, v1 GUID, primary category, announce_type=new, publisher pubDate. File name capture date differs from publisher-declared pubDate in some cases.",
+  "decisions": [
+    {
+      "id": "2026-09-02-qma2-qma-chatgpt",
+      "arxivId": "2609.02865",
+      "cat": "quant-ph",
+      "publishedAt": "2026-09-02T17:50:05.000Z",
+      "title": "A quantum oracle separation between QMA(2) and QMA",
+      "adoptedDate": "2026-09-03",
+      "sourceDate": "2026-09-03",
+      "sha": "6b55fb4458cc458eeeb17efe8e9b9f7b9d40c3cc",
+      "pubDate": "Thu, 03 Sep 2026 00:00:00 -0400",
+      "status": "ADOPTED_DAY_ONLY",
+      "observation": {
+        "sourcePath": "rss_data/quant-ph/2026-09-03_quant-ph.xml",
+        "gitBlobSha1": "6b55fb4458cc458eeeb17efe8e9b9f7b9d40c3cc",
+        "link": "https://arxiv.org/abs/2609.02865",
+        "title": "A quantum oracle separation between QMA(2) and QMA",
+        "versionGuid": "oai:arXiv.org:2609.02865v1",
+        "primaryCategory": "quant-ph",
+        "announceType": "new",
+        "pubDate": "Thu, 03 Sep 2026 00:00:00 -0400"
+      },
+      "note": "Matched v1/new; adopted only publisher source-declared calendar day."
+    },
+    {
+      "id": "2026-08-19-ytd-disproof-generative-ai",
+      "arxivId": "2608.19301",
+      "cat": "math.DG",
+      "publishedAt": "2026-08-19T17:19:43.000Z",
+      "title": "Disproof of the Yau--Tian--Donaldson conjecture",
+      "adoptedDate": "2026-08-21",
+      "sourceDate": "2026-08-20",
+      "sha": "3e1032f8e063bd19e761b6cb259a4c5229e4d657",
+      "pubDate": "Fri, 21 Aug 2026 00:00:00 -0400",
+      "status": "ADOPTED_DAY_ONLY",
+      "observation": {
+        "sourcePath": "rss_data/math.DG/2026-08-20_math.DG.xml",
+        "gitBlobSha1": "3e1032f8e063bd19e761b6cb259a4c5229e4d657",
+        "link": "https://arxiv.org/abs/2608.19301",
+        "title": "Disproof of the Yau--Tian--Donaldson conjecture",
+        "versionGuid": "oai:arXiv.org:2608.19301v1",
+        "primaryCategory": "math.DG",
+        "announceType": "new",
+        "pubDate": "Fri, 21 Aug 2026 00:00:00 -0400"
+      },
+      "note": "Archived snapshot path's capture date differs from original RSS publisher pubDate; publisher pubDate is the adopted day."
+    },
+    {
+      "id": "2026-08-08-petersen-coloring-counterexample",
+      "arxivId": "2608.10012",
+      "cat": "math.CO",
+      "publishedAt": "2026-08-08T07:32:39.000Z",
+      "title": "A 112-Vertex Counterexample to the Petersen Coloring Conjecture",
+      "adoptedDate": "2026-08-12",
+      "sourceDate": "2026-08-11",
+      "sha": "17ca2f2b917d1467bd314498a4e757a0254b6bd0",
+      "pubDate": "Wed, 12 Aug 2026 00:00:00 -0400",
+      "status": "ADOPTED_DAY_ONLY",
+      "observation": {
+        "sourcePath": "rss_data/math.CO/2026-08-11_math.CO.xml",
+        "gitBlobSha1": "17ca2f2b917d1467bd314498a4e757a0254b6bd0",
+        "link": "https://arxiv.org/abs/2608.10012",
+        "title": "A 112-Vertex Counterexample to the Petersen Coloring Conjecture",
+        "versionGuid": "oai:arXiv.org:2608.10012v1",
+        "primaryCategory": "math.CO",
+        "announceType": "new",
+        "pubDate": "Wed, 12 Aug 2026 00:00:00 -0400"
+      },
+      "note": "Archived snapshot path's capture date differs from original RSS publisher pubDate; publisher pubDate is the adopted day."
+    },
+    {
+      "id": "2026-08-06-inverse-generator-kreiss-ai",
+      "arxivId": "2608.06272",
+      "cat": "math.FA",
+      "publishedAt": "2026-08-06T17:01:43.000Z",
+      "title": "A counterexample to the inverse generator problem and related questions",
+      "adoptedDate": "2026-08-07",
+      "sourceDate": "2026-08-06",
+      "sha": "eb4b5ba47e09e8feaf60cf4467f5705ce39549ec",
+      "pubDate": "Fri, 07 Aug 2026 00:00:00 -0400",
+      "status": "ADOPTED_DAY_ONLY",
+      "observation": {
+        "sourcePath": "rss_data/math.FA/2026-08-06_math.FA.xml",
+        "gitBlobSha1": "eb4b5ba47e09e8feaf60cf4467f5705ce39549ec",
+        "link": "https://arxiv.org/abs/2608.06272",
+        "title": "A counterexample to the inverse generator problem and related questions",
+        "versionGuid": "oai:arXiv.org:2608.06272v1",
+        "primaryCategory": "math.FA",
+        "announceType": "new",
+        "pubDate": "Fri, 07 Aug 2026 00:00:00 -0400"
+      },
+      "note": "Matched original v1 RSS title; current arXiv display title changed in later revisions."
+    },
+    {
+      "id": "2026-08-05-schiffer-pompeiu-ai",
+      "arxivId": "2608.05114",
+      "cat": "math.AP",
+      "publishedAt": "2026-08-05T17:46:17.000Z",
+      "status": "UNRESOLVED_NOT_FOUND_IN_BOUNDED_PRIMARY_CATEGORY_SNAPSHOTS",
+      "checkedDates": [
+        "2026-08-05",
+        "2026-08-06",
+        "2026-08-07",
+        "2026-08-08",
+        "2026-08-10",
+        "2026-08-11",
+        "2026-08-12",
+        "2026-08-13",
+        "2026-08-14"
+      ],
+      "reason": "Nine bounded math.AP historical RSS snapshots examined without a matching 2608.05114 v1/new; absence in archive is not evidence of non-publication or permission to infer announcement day. Revisit only with a new primary contemporaneous source or alternative original category archive."
+    }
+  ],
+  "sources": [
+    {
+      "path": "rss_data/quant-ph/2026-09-02_quant-ph.xml",
+      "gitBlobSha1": "3e245ee08bad192adc5f904b8b4f0130b1e7e215",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/quant-ph/2026-09-02_quant-ph.xml"
+    },
+    {
+      "path": "rss_data/quant-ph/2026-09-03_quant-ph.xml",
+      "gitBlobSha1": "6b55fb4458cc458eeeb17efe8e9b9f7b9d40c3cc",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/quant-ph/2026-09-03_quant-ph.xml"
+    },
+    {
+      "path": "rss_data/quant-ph/2026-09-04_quant-ph.xml",
+      "gitBlobSha1": "146d0613bf263b7f96bd7541856262aee1ec4341",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/quant-ph/2026-09-04_quant-ph.xml"
+    },
+    {
+      "path": "rss_data/quant-ph/2026-09-05_quant-ph.xml",
+      "gitBlobSha1": "51fcac4e1c86a38de73b308b1616268a3375d9a2",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/quant-ph/2026-09-05_quant-ph.xml"
+    },
+    {
+      "path": "rss_data/math.DG/2026-08-19_math.DG.xml",
+      "gitBlobSha1": "72323423fef9f3842b682acdff50f70d62650186",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.DG/2026-08-19_math.DG.xml"
+    },
+    {
+      "path": "rss_data/math.DG/2026-08-20_math.DG.xml",
+      "gitBlobSha1": "3e1032f8e063bd19e761b6cb259a4c5229e4d657",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.DG/2026-08-20_math.DG.xml"
+    },
+    {
+      "path": "rss_data/math.DG/2026-08-21_math.DG.xml",
+      "gitBlobSha1": "97ba50a8c075e9bd0debc8a08e33a12a76bbaf34",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.DG/2026-08-21_math.DG.xml"
+    },
+    {
+      "path": "rss_data/math.CO/2026-08-10_math.CO.xml",
+      "gitBlobSha1": "6a2c82b18c3d9253b6e702f86dd581b3f7d907b7",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.CO/2026-08-10_math.CO.xml"
+    },
+    {
+      "path": "rss_data/math.CO/2026-08-11_math.CO.xml",
+      "gitBlobSha1": "17ca2f2b917d1467bd314498a4e757a0254b6bd0",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.CO/2026-08-11_math.CO.xml"
+    },
+    {
+      "path": "rss_data/math.CO/2026-08-12_math.CO.xml",
+      "gitBlobSha1": "448ea6865b8daed5f64c353683b986ae580760f9",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.CO/2026-08-12_math.CO.xml"
+    },
+    {
+      "path": "rss_data/math.CO/2026-08-13_math.CO.xml",
+      "gitBlobSha1": "4047e69dfd05f91ad52048e4fdc0a0530ddeb64e",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.CO/2026-08-13_math.CO.xml"
+    },
+    {
+      "path": "rss_data/math.FA/2026-08-06_math.FA.xml",
+      "gitBlobSha1": "eb4b5ba47e09e8feaf60cf4467f5705ce39549ec",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.FA/2026-08-06_math.FA.xml"
+    },
+    {
+      "path": "rss_data/math.FA/2026-08-07_math.FA.xml",
+      "gitBlobSha1": "0d146dcc72802f2611232bcf7ea1859b07749ce9",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.FA/2026-08-07_math.FA.xml"
+    },
+    {
+      "path": "rss_data/math.FA/2026-08-08_math.FA.xml",
+      "gitBlobSha1": "050cff85848f23bd976531dae0671047aed5bba3",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.FA/2026-08-08_math.FA.xml"
+    },
+    {
+      "path": "rss_data/math.FA/2026-08-10_math.FA.xml",
+      "gitBlobSha1": "19d0111de24eb7821e0f13f65468ea0406da27dd",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.FA/2026-08-10_math.FA.xml"
+    },
+    {
+      "path": "rss_data/math.FA/2026-08-11_math.FA.xml",
+      "gitBlobSha1": "1dd24101a759c90c7ce5c7afa187261994faeb64",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.FA/2026-08-11_math.FA.xml"
+    },
+    {
+      "path": "rss_data/math.AP/2026-08-05_math.AP.xml",
+      "gitBlobSha1": "e11aebfbcbc45a9f0860ba68ab5fdc029e6f9330",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.AP/2026-08-05_math.AP.xml"
+    },
+    {
+      "path": "rss_data/math.AP/2026-08-06_math.AP.xml",
+      "gitBlobSha1": "fa5da479c170c4248c636aefce48d2b2c7dceeba",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.AP/2026-08-06_math.AP.xml"
+    },
+    {
+      "path": "rss_data/math.AP/2026-08-07_math.AP.xml",
+      "gitBlobSha1": "f0832aa5b07766aa953e07543719810cf28b1616",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.AP/2026-08-07_math.AP.xml"
+    },
+    {
+      "path": "rss_data/math.AP/2026-08-08_math.AP.xml",
+      "gitBlobSha1": "a44d9a8e8bdefc8c6a70e7abde52e56c2d1e99c2",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.AP/2026-08-08_math.AP.xml"
+    },
+    {
+      "path": "rss_data/math.AP/2026-08-10_math.AP.xml",
+      "gitBlobSha1": "df5f25247db70c77351cf244c3c28dd8f06ae5f9",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.AP/2026-08-10_math.AP.xml"
+    },
+    {
+      "path": "rss_data/math.AP/2026-08-11_math.AP.xml",
+      "gitBlobSha1": "112def48376000fdfdf366ea622c5a9f30149435",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.AP/2026-08-11_math.AP.xml"
+    },
+    {
+      "path": "rss_data/math.AP/2026-08-12_math.AP.xml",
+      "gitBlobSha1": "a9143961b02bdaa6d562271eab601329d26cdf7c",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.AP/2026-08-12_math.AP.xml"
+    },
+    {
+      "path": "rss_data/math.AP/2026-08-13_math.AP.xml",
+      "gitBlobSha1": "3a9506692077c655f71148614d7fa64d8d900484",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.AP/2026-08-13_math.AP.xml"
+    },
+    {
+      "path": "rss_data/math.AP/2026-08-14_math.AP.xml",
+      "gitBlobSha1": "21713a4efdabdeeb22720b10fa009fd062f02ef8",
+      "completeRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.AP/2026-08-14_math.AP.xml"
+    }
+  ],
+  "counts": {
+    "frozenCandidates": 98,
+    "newFirstTimeChecked": 5,
+    "newlyAdopted": 4,
+    "newlyHeld": 1,
+    "totalAdopted": 38,
+    "totalReviewedHeld": 18,
+    "totalTechnicalBlocked": 0,
+    "notYetReviewed": 42,
+    "withoutSupplementalChronology": 60
+  },
+  "nextUnreviewed": "2026-08-04-degree-diameter-gpt56",
+  "issue127Independent": [
+    "GenLimitLib cs.LG first new",
+    "Zenodo Arad–Herzog v3 first public availability"
+  ]
+}
