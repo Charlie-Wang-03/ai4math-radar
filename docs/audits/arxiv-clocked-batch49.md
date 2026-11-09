@@ -24,7 +24,7 @@
 
 ## 数据兼容、进度与验收
 
-仅四条确认记录各追加日级 `chronology.milestone` 和一条简短日期澄清；旧 `id`、`publishedAt`、链接、评分、分类、permalink 等保留。没有填写没有证据的 `at` 或 `earliestVerifiedPublic`；Schiffer 行及另外 **405 条记录字节不变**，409 条唯一 ID 不变。未改变 UI、API、schema、Secrets、调度或运行时。
+仅四条确认记录各追加日级 `chronology.milestone` 和一条简短日期澄清；旧 `id`、`publishedAt`、链接、评分、分类、permalink 等保留。没有填写没有证据的 `at` 或 `earliestVerifiedPublic`；包含 Schiffer 行在内的其余 **405 条记录字节不变**，409 条唯一 ID 不变。未改变 UI、API、schema、Secrets、调度或运行时。
 
 冻结 98 条的累计状态：**38** 已补 chronology、**18** 已核查但未决、**0** 技术受阻、**42** 尚未检查；**60** 仍缺 chronology。下一条未检查：`2026-08-04-degree-diameter-gpt56`。Issue #127 的 GenLimitLib 和 Zenodo Arad–Herzog v3 是独立历史疑难项，不纳入本基准。
 
