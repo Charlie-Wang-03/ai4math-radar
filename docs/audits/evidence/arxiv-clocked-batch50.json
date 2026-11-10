@@ -1,0 +1,244 @@
+{
+  "batch": 50,
+  "checkedUtc": "2026-11-10",
+  "issue": 151,
+  "freezeRows": "57–61",
+  "dailyPrecedingMerge": "ff9a047833a4fbc88c5e8c232a2f31f889b67b99",
+  "sourceArchive": {
+    "repository": "ehijano/rss_fetch",
+    "commit": "e597e5120c034115fda2049d72812f2da7f99f3a",
+    "kind": "Pinned third-party replay of original arXiv RSS publisher fields; Git time is not original announcement",
+    "pubDateMidnightNotExactReleaseSecond": true
+  },
+  "readMethod": "Complete bounded GitHub connector UTF-8 XML reads; full item ID, v1 GUID, original title, primary category, announce_type=new, pubDate; adjacent snapshots inspected.",
+  "decisions": [
+    {
+      "id": "2026-08-04-degree-diameter-gpt56",
+      "arxivId": "2608.03965",
+      "primaryCategory": "math.CO",
+      "originalTitle": "Asymptotically attaining the Moore bound",
+      "adoptedDay": "2026-08-05",
+      "status": "ADOPTED_DAY_ONLY",
+      "observation": {
+        "sourcePath": "rss_data/math.CO/2026-08-05_math.CO.xml",
+        "gitBlobSha1": "14a04c8f8beec5e7de8c257cc360b0a2582eb76c",
+        "link": "https://arxiv.org/abs/2608.03965",
+        "title": "Asymptotically attaining the Moore bound",
+        "versionGuid": "oai:arXiv.org:2608.03965v1",
+        "primaryCategory": "math.CO",
+        "announceType": "new",
+        "pubDate": "Wed, 05 Aug 2026 00:00:00 -0400"
+      },
+      "note": "Publisher-declared RSS v1/new day, not submission clock, Git commit time or actual announcement seconds."
+    },
+    {
+      "id": "2026-07-28-kemeny-three-voters-gpt56",
+      "arxivId": "2607.25540",
+      "primaryCategory": "cs.GT",
+      "originalTitle": "Kemeny Rank Aggregation is NP-Hard for Three Voters",
+      "adoptedDay": "2026-07-29",
+      "status": "ADOPTED_DAY_ONLY",
+      "observation": {
+        "sourcePath": "rss_data/cs.GT/2026-07-29_cs.GT.xml",
+        "gitBlobSha1": "7e6616639e5b085a276a1f153972777325d32598",
+        "link": "https://arxiv.org/abs/2607.25540",
+        "title": "Kemeny Rank Aggregation is NP-Hard for Three Voters",
+        "versionGuid": "oai:arXiv.org:2607.25540v1",
+        "primaryCategory": "cs.GT",
+        "announceType": "new",
+        "pubDate": "Wed, 29 Jul 2026 00:00:00 -0400"
+      },
+      "note": "Publisher-declared RSS v1/new day, not submission clock, Git commit time or actual announcement seconds."
+    },
+    {
+      "id": "2026-07-27-feige-conjecture-gpt56",
+      "arxivId": "2607.24528",
+      "primaryCategory": "math.PR",
+      "originalTitle": "On Feige's conjecture",
+      "adoptedDay": "2026-07-28",
+      "status": "ADOPTED_DAY_ONLY",
+      "observation": {
+        "sourcePath": "rss_data/math.PR/2026-07-28_math.PR.xml",
+        "gitBlobSha1": "c204f74c08294a89afe913e86f4b957ea7dfcec7",
+        "link": "https://arxiv.org/abs/2607.24528",
+        "title": "On Feige's conjecture",
+        "versionGuid": "oai:arXiv.org:2607.24528v1",
+        "primaryCategory": "math.PR",
+        "announceType": "new",
+        "pubDate": "Tue, 28 Jul 2026 00:00:00 -0400"
+      },
+      "note": "Publisher-declared RSS v1/new day, not submission clock, Git commit time or actual announcement seconds."
+    },
+    {
+      "id": "2026-07-22-cerny-one-cluster-codex",
+      "arxivId": "2607.19675",
+      "primaryCategory": "cs.FL",
+      "originalTitle": "The \\v{C}ern\\'y Conjecture for One-Cluster Automata via Annular Spectral Descent",
+      "adoptedDay": "2026-07-23",
+      "status": "ADOPTED_DAY_ONLY",
+      "observation": {
+        "sourcePath": "rss_data/cs.FL/2026-07-22_cs.FL.xml",
+        "gitBlobSha1": "90745a725ee983be50d4a084ec518e89a5012adb",
+        "link": "https://arxiv.org/abs/2607.19675",
+        "title": "The \\v{C}ern\\'y Conjecture for One-Cluster Automata via Annular Spectral Descent",
+        "versionGuid": "oai:arXiv.org:2607.19675v1",
+        "primaryCategory": "cs.FL",
+        "announceType": "new",
+        "pubDate": "Thu, 23 Jul 2026 00:00:00 -0400"
+      },
+      "note": "Publisher-declared RSS v1/new day, not submission clock, Git commit time or actual announcement seconds."
+    },
+    {
+      "id": "2026-07-21-chernoff-density-gpt56",
+      "arxivId": "2607.18619",
+      "primaryCategory": "math.PR",
+      "legacySubmission": "2026-07-21T01:39:27.000Z",
+      "status": "UNRESOLVED_PRIMARY_NEW_NOT_FOUND_IN_BOUNDED_ARCHIVE",
+      "checkedSnapshots": [
+        "2026-07-21",
+        "2026-07-22",
+        "2026-07-23",
+        "2026-07-24",
+        "2026-07-25",
+        "2026-07-26",
+        "2026-07-27",
+        "2026-07-28",
+        "2026-07-29",
+        "2026-07-30"
+      ],
+      "note": "No matching first-public v1/new item in the ten bounded math.PR RSS snapshots; not evidence that the announcement never occurred. Leave chronology unset pending independent first-party contemporaneous article announcement or a new original archive."
+    }
+  ],
+  "sources": [
+    {
+      "path": "rss_data/math.CO/2026-08-04_math.CO.xml",
+      "gitBlobSha1": "3bcca9f3a92da4c2fe20d493aae8588d19edf144",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.CO/2026-08-04_math.CO.xml"
+    },
+    {
+      "path": "rss_data/math.CO/2026-08-05_math.CO.xml",
+      "gitBlobSha1": "14a04c8f8beec5e7de8c257cc360b0a2582eb76c",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.CO/2026-08-05_math.CO.xml"
+    },
+    {
+      "path": "rss_data/math.CO/2026-08-06_math.CO.xml",
+      "gitBlobSha1": "8d6733cb35b689e36e60ae531d9719729ac6e812",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.CO/2026-08-06_math.CO.xml"
+    },
+    {
+      "path": "rss_data/cs.GT/2026-07-28_cs.GT.xml",
+      "gitBlobSha1": "8313c896e332f090ba445142995ac7b3be135fad",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.GT/2026-07-28_cs.GT.xml"
+    },
+    {
+      "path": "rss_data/cs.GT/2026-07-29_cs.GT.xml",
+      "gitBlobSha1": "7e6616639e5b085a276a1f153972777325d32598",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.GT/2026-07-29_cs.GT.xml"
+    },
+    {
+      "path": "rss_data/cs.GT/2026-07-30_cs.GT.xml",
+      "gitBlobSha1": "2d87e4b49530bd65fde10a482b7cbb868b39b3bb",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.GT/2026-07-30_cs.GT.xml"
+    },
+    {
+      "path": "rss_data/math.PR/2026-07-27_math.PR.xml",
+      "gitBlobSha1": "67928516d8092a923317aca655896fa6187ac5d0",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-07-27_math.PR.xml"
+    },
+    {
+      "path": "rss_data/math.PR/2026-07-28_math.PR.xml",
+      "gitBlobSha1": "c204f74c08294a89afe913e86f4b957ea7dfcec7",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-07-28_math.PR.xml"
+    },
+    {
+      "path": "rss_data/math.PR/2026-07-29_math.PR.xml",
+      "gitBlobSha1": "2b8b62e06c1e656baacc98fa6f5e94d03902c78f",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-07-29_math.PR.xml"
+    },
+    {
+      "path": "rss_data/cs.FL/2026-07-22_cs.FL.xml",
+      "gitBlobSha1": "90745a725ee983be50d4a084ec518e89a5012adb",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.FL/2026-07-22_cs.FL.xml"
+    },
+    {
+      "path": "rss_data/cs.FL/2026-07-23_cs.FL.xml",
+      "gitBlobSha1": "1c64e20e8ff0b679c34e0afc543bd5b216d12d0f",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.FL/2026-07-23_cs.FL.xml"
+    },
+    {
+      "path": "rss_data/cs.FL/2026-07-24_cs.FL.xml",
+      "gitBlobSha1": "57bcd5d9c9db0f189233e42f333e2fde87b5d1c4",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.FL/2026-07-24_cs.FL.xml"
+    },
+    {
+      "path": "rss_data/math.PR/2026-07-21_math.PR.xml",
+      "gitBlobSha1": "2fe86dd57c2365d9c1097232985e00ef00c539ac",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-07-21_math.PR.xml"
+    },
+    {
+      "path": "rss_data/math.PR/2026-07-22_math.PR.xml",
+      "gitBlobSha1": "fa04315c157f17072a2b1a5a474a2134488a4d95",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-07-22_math.PR.xml"
+    },
+    {
+      "path": "rss_data/math.PR/2026-07-23_math.PR.xml",
+      "gitBlobSha1": "2f9d41c3da4281602cd581ea35caecb81fae9609",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-07-23_math.PR.xml"
+    },
+    {
+      "path": "rss_data/math.PR/2026-07-24_math.PR.xml",
+      "gitBlobSha1": "3331f1d172bce1a7bcbc7abef94b33eeb9b5a0b3",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-07-24_math.PR.xml"
+    },
+    {
+      "path": "rss_data/math.PR/2026-07-25_math.PR.xml",
+      "gitBlobSha1": "72426f1f5d3614097433d83fb1a25ae18ad997a8",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-07-25_math.PR.xml"
+    },
+    {
+      "path": "rss_data/math.PR/2026-07-26_math.PR.xml",
+      "gitBlobSha1": "4313a92f7a93dbeb6835dfedf89ef32167684309",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-07-26_math.PR.xml"
+    },
+    {
+      "path": "rss_data/math.PR/2026-07-30_math.PR.xml",
+      "gitBlobSha1": "08b756a2e9385ea94f34f1e30959a1703a4da3c6",
+      "fullRead": true,
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.PR/2026-07-30_math.PR.xml"
+    }
+  ],
+  "counts": {
+    "frozenCandidates": 98,
+    "newFirstTimeChecked": 5,
+    "newlyAdopted": 4,
+    "newlyHeld": 1,
+    "totalAdopted": 42,
+    "totalReviewedHeld": 19,
+    "totalTechnicalBlocked": 0,
+    "notYetReviewed": 37,
+    "withoutSupplementalChronology": 56
+  },
+  "nextUnreviewed": "2026-06-09-moonshine-conjecture-agent",
+  "issue127Independent": [
+    "GenLimitLib cs.LG primary new",
+    "Zenodo Arad–Herzog v3 first public availability"
+  ]
+}
