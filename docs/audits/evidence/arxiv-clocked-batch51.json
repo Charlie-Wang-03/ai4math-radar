@@ -1,0 +1,257 @@
+{
+  "batch": 51,
+  "checkedUtc": "2026-11-11",
+  "issue": 151,
+  "freezeRows": "62–66",
+  "dailyPrecedingMerge": "1e20d56d26d5e6d4ddc0d53562145c39a7a76acc",
+  "sourceArchive": {
+    "repository": "ehijano/rss_fetch",
+    "commit": "e597e5120c034115fda2049d72812f2da7f99f3a",
+    "kind": "Pinned third-party replay of original arXiv RSS publisher fields; mirror file timestamp/commit do not establish original announcement timing",
+    "rssPubDateMidnightNotVerifiedSecond": true
+  },
+  "readMethod": "GitHub connector read of complete bounded cs.AI XML snapshots; exact link, original title, v1 GUID, primary category, announce_type=new, pubDate; overlap and contradicting snapshots examined.",
+  "decisions": [
+    {
+      "id": "2026-06-09-moonshine-conjecture-agent",
+      "arxivId": "2606.10806",
+      "legacySubmission": "2026-06-09T12:50:56.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDay": "2026-06-10",
+      "observation": {
+        "sourcePath": "rss_data/cs.AI/2026-06-09_cs.AI.xml",
+        "gitBlobSha1": "ed0e3e1ebe28d37b9e89418a1c9d1e8ffaf56bdb",
+        "link": "https://arxiv.org/abs/2606.10806",
+        "title": "Moonshine: An Autonomous Mathematical Research Agent Centered on Conjecture Generation",
+        "versionGuid": "oai:arXiv.org:2606.10806v1",
+        "primaryCategory": "cs.AI",
+        "announceType": "new",
+        "pubDate": "Wed, 10 Jun 2026 00:00:00 -0400"
+      },
+      "confirmation": "2026-06-10 mirror snapshot same Git blob, matching original publisher pubDate"
+    },
+    {
+      "id": "2026-06-04-llm-lean-formalization-eval",
+      "arxivId": "2606.05632",
+      "legacySubmission": "2026-06-04T02:59:39.000Z",
+      "status": "UNRESOLVED_CONFLICTING_PRIMARY_RSS_PUBDATES",
+      "observations": [
+        {
+          "sourcePath": "rss_data/cs.AI/2026-06-04_cs.AI.xml",
+          "gitBlobSha1": "ba5bb1441fc2d249d6edeada8d474517b0710997",
+          "title": "Evaluation of LLMs for Mathematical Formalization in Lean",
+          "versionGuid": "oai:arXiv.org:2606.05632v1",
+          "primaryCategory": "cs.AI",
+          "announceType": "new",
+          "pubDate": "Fri, 05 Jun 2026 00:00:00 -0400"
+        },
+        {
+          "sourcePath": "rss_data/cs.AI/2026-06-06_cs.AI.xml",
+          "gitBlobSha1": "c658d521e5289d9752ed09672e3f3863b04fd271",
+          "title": "Evaluation of LLMs for Mathematical Formalization in Lean",
+          "versionGuid": "oai:arXiv.org:2606.05632v1",
+          "primaryCategory": "cs.AI",
+          "announceType": "new",
+          "pubDate": "Sat, 06 Jun 2026 00:00:00 -0400"
+        }
+      ],
+      "note": "Two publisher-formatted v1/new RSS snapshots disagree by one day. Never select earlier via min(). Need independent, fixed original issue-level announcement archive or source explanation of redistribution."
+    },
+    {
+      "id": "2026-05-21-alphaproof-nexus-open-research",
+      "arxivId": "2605.22763",
+      "legacySubmission": "2026-05-21T17:24:57.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDay": "2026-05-23",
+      "observation": {
+        "sourcePath": "rss_data/cs.AI/2026-05-22_cs.AI.xml",
+        "gitBlobSha1": "c1d5e093af09c10004763ddfa8d98bdd1018a71c",
+        "link": "https://arxiv.org/abs/2605.22763",
+        "title": "Advancing Mathematics Research with AI-Driven Formal Proof Search",
+        "versionGuid": "oai:arXiv.org:2605.22763v1",
+        "primaryCategory": "cs.AI",
+        "announceType": "new",
+        "pubDate": "Sat, 23 May 2026 00:00:00 -0400"
+      },
+      "confirmation": "Same publisher fields and SHA in 2026-05-23 snapshot."
+    },
+    {
+      "id": "2026-05-07-deepmind-ai-co-mathematician",
+      "arxivId": "2605.06651",
+      "legacySubmission": "2026-05-07T17:56:32.000Z",
+      "status": "UNRESOLVED_V1_NEW_NOT_FOUND",
+      "checkedSnapshots": [
+        "2026-05-07",
+        "2026-05-08",
+        "2026-05-09",
+        "2026-05-10",
+        "2026-05-11",
+        "2026-05-12",
+        "2026-05-13"
+      ],
+      "otherItem": {
+        "sourcePath": "rss_data/cs.AI/2026-05-13_cs.AI.xml",
+        "gitBlobSha1": "394b9484dfea57365b4a50d63def0cb820b5990e",
+        "versionGuid": "oai:arXiv.org:2605.06651v2",
+        "announceType": "replace",
+        "pubDate": "Thu, 14 May 2026 00:00:00 -0400"
+      },
+      "note": "A v2/replace record does not establish first v1/new date; empty archive snapshots are not negative evidence of availability."
+    },
+    {
+      "id": "2026-04-27-qed-open-problems-multiagent",
+      "arxivId": "2604.24021",
+      "legacySubmission": "2026-04-27T04:10:02.000Z",
+      "status": "UNRESOLVED_V1_NEW_NOT_FOUND",
+      "checkedSnapshots": [
+        "2026-04-26",
+        "2026-04-27",
+        "2026-04-28",
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-02"
+      ],
+      "otherItem": {
+        "sourcePath": "rss_data/cs.AI/2026-04-30_cs.AI.xml",
+        "gitBlobSha1": "c82bbe842157b8b8e4cf44d7041114bd26ad6240",
+        "versionGuid": "oai:arXiv.org:2604.24021v2",
+        "announceType": "replace",
+        "pubDate": "Fri, 01 May 2026 00:00:00 -0400"
+      },
+      "note": "Only v2/replace found; do not borrow its pubDate as original article announcement."
+    }
+  ],
+  "sources": [
+    {
+      "path": "rss_data/cs.AI/2026-06-09_cs.AI.xml",
+      "gitBlobSha1": "ed0e3e1ebe28d37b9e89418a1c9d1e8ffaf56bdb",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-06-09_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-06-10_cs.AI.xml",
+      "gitBlobSha1": "ed0e3e1ebe28d37b9e89418a1c9d1e8ffaf56bdb",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-06-10_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-06-11_cs.AI.xml",
+      "gitBlobSha1": "b68bcb626d7e595f1bb074767617eea59a3dae9f",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-06-11_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-06-12_cs.AI.xml",
+      "gitBlobSha1": "a1cc3a5ae2c0cc420330fa8da7687692c2948692",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-06-12_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-06-04_cs.AI.xml",
+      "gitBlobSha1": "ba5bb1441fc2d249d6edeada8d474517b0710997",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-06-04_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-06-05_cs.AI.xml",
+      "gitBlobSha1": "ba5bb1441fc2d249d6edeada8d474517b0710997",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-06-05_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-06-06_cs.AI.xml",
+      "gitBlobSha1": "c658d521e5289d9752ed09672e3f3863b04fd271",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-06-06_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-06-07_cs.AI.xml",
+      "gitBlobSha1": "02b7202bd0ffe5704f36386dd9738fcdd26ab14d",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-06-07_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-05-21_cs.AI.xml",
+      "gitBlobSha1": "e4a1e5c036726259a35382ba93878735603f9081",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-05-21_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-05-22_cs.AI.xml",
+      "gitBlobSha1": "c1d5e093af09c10004763ddfa8d98bdd1018a71c",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-05-22_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-05-23_cs.AI.xml",
+      "gitBlobSha1": "c1d5e093af09c10004763ddfa8d98bdd1018a71c",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-05-23_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-05-24_cs.AI.xml",
+      "gitBlobSha1": "c4ceaa4b465fbaf47a160c29a10f0eda14bcb8d6",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-05-24_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-05-07_cs.AI.xml",
+      "gitBlobSha1": "fa7623a222a4a397ab2282cc4262fb946ce2d1bc",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-05-07_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-05-08_cs.AI.xml",
+      "gitBlobSha1": "67155e47ca5102007df8fbea26e663095acfcb6c",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-05-08_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-05-09_cs.AI.xml",
+      "gitBlobSha1": "98b25aa6840559327608657ecd12b52a60cf693b",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-05-09_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-05-10_cs.AI.xml",
+      "gitBlobSha1": "fa8a234a24e5ab12fae1b50aec374b1f7d393496",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-05-10_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-05-11_cs.AI.xml",
+      "gitBlobSha1": "601b841fa147cd4a33c5a707a11dbde3b4240a3e",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-05-11_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-05-12_cs.AI.xml",
+      "gitBlobSha1": "601b841fa147cd4a33c5a707a11dbde3b4240a3e",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-05-12_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-05-13_cs.AI.xml",
+      "gitBlobSha1": "394b9484dfea57365b4a50d63def0cb820b5990e",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-05-13_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-26_cs.AI.xml",
+      "gitBlobSha1": "85710e3ca9b0e2e4ff941033959f20bfc6c1741d",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-26_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-27_cs.AI.xml",
+      "gitBlobSha1": "d4e141d48426a2a5676057a22448577829babb9d",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-27_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-28_cs.AI.xml",
+      "gitBlobSha1": "e96ad54563369d94cabe4ac88d76c0e108d55415",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-28_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-29_cs.AI.xml",
+      "gitBlobSha1": "3649c2bfe9afcb5676289603a0d38c2437cbef2b",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-29_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-30_cs.AI.xml",
+      "gitBlobSha1": "c82bbe842157b8b8e4cf44d7041114bd26ad6240",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-30_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-05-01_cs.AI.xml",
+      "gitBlobSha1": "c82bbe842157b8b8e4cf44d7041114bd26ad6240",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-05-01_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-05-02_cs.AI.xml",
+      "gitBlobSha1": "4b6c232d3693fc365649b436e647bfdbadffe6db",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-05-02_cs.AI.xml"
+    }
+  ]
+}
