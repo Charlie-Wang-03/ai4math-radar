@@ -1,0 +1,272 @@
+{
+  "batch": 52,
+  "checkedUtc": "2026-11-12",
+  "issue": 151,
+  "freezeRows": "67–71",
+  "dailyPrecedingMerge": "030aca52a5b59163828f91bd9f94cb594bc8ba28",
+  "sourceArchive": {
+    "repository": "ehijano/rss_fetch",
+    "commit": "e597e5120c034115fda2049d72812f2da7f99f3a",
+    "kind": "Pinned Git-hosted replay of original publisher RSS fields; not original capture timestamp. Git commit, mirror filename and normalized RSS midnight do not establish exact public instant.",
+    "trustedPublisherSpecification": "https://info.arxiv.org/help/rss_specifications.html"
+  },
+  "readMethod": "Complete bounded archived XML snapshot reads through GitHub connector. Inspect original article link, v1 title, version GUID, primary category, announce_type=new, and publisher pubDate; inspect neighboring snapshots and later replace when present.",
+  "decisions": [
+    {
+      "id": "2026-04-25-e8-sphere-packing-gauss",
+      "arxivId": "2604.23468",
+      "legacySubmission": "2026-04-25T23:27:10.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDay": "2026-04-28",
+      "observation": {
+        "sourcePath": "rss_data/math.MG/2026-04-27_math.MG.xml",
+        "gitBlobSha1": "4284ec808030464d7346304d000e031ed5737cb9",
+        "link": "https://arxiv.org/abs/2604.23468",
+        "title": "A Milestone in Formalization: The Sphere Packing Problem in Dimension 8",
+        "versionGuid": "oai:arXiv.org:2604.23468v1",
+        "primaryCategory": "math.MG",
+        "announceType": "new",
+        "pubDate": "Tue, 28 Apr 2026 00:00:00 -0400"
+      },
+      "note": "Original v1 title differs from later v3 title Progress in Formalizing Sphere Packing in Dimension 8. The 2026-04-28 snapshot has a v2/replace dated Apr 29; it is not reused for initial date. Existing publishedAt retained."
+    },
+    {
+      "id": "2026-04-17-discover-prove-hard-mode",
+      "arxivId": "2604.15839",
+      "legacySubmission": "2026-04-17T08:40:48.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDay": "2026-04-20",
+      "observation": {
+        "sourcePath": "rss_data/cs.AI/2026-04-20_cs.AI.xml",
+        "gitBlobSha1": "6639a6caaa03a6aafacf440f875849a01b00a0e6",
+        "link": "https://arxiv.org/abs/2604.15839",
+        "title": "Discover and Prove: An Open-source Agentic Framework for Hard Mode Automated Theorem Proving in Lean 4",
+        "versionGuid": "oai:arXiv.org:2604.15839v1",
+        "primaryCategory": "cs.AI",
+        "announceType": "new",
+        "pubDate": "Mon, 20 Apr 2026 00:00:00 -0400"
+      },
+      "note": "Read 2026-04-17 through 2026-04-22 snapshots, matching v1/new only in Apr20 file. Not evidence of an exact announcement second."
+    },
+    {
+      "id": "2026-03-27-formalproofbench",
+      "arxivId": "2603.26996",
+      "legacySubmission": "2026-03-27T21:14:53.000Z",
+      "status": "UNRESOLVED_V1_NEW_NOT_FOUND",
+      "checkedRange": "cs.AI 2026-03-27 to 2026-04-04 inclusive (9 fixed snapshots)",
+      "note": "No article-ID-matched v1/new found in searched category snapshot range, including nonempty March 27/March 30/April 01/02; missing archive result is not negative evidence that original announcement did not exist. Do not infer a date from Friday submission or expected schedule.",
+      "nextEvidencePath": "Original first-party arXiv past-weeks cs.AI / announcement archival issue or separately fixed contemporaneous author announcement identifying the first public paper version."
+    },
+    {
+      "id": "2026-03-20-opus46-rocq-putnam",
+      "arxivId": "2603.20405",
+      "legacySubmission": "2026-03-20T18:25:42.000Z",
+      "status": "UNRESOLVED_V1_NEW_NOT_FOUND",
+      "checkedRange": "cs.LG 2026-03-20 to 2026-03-28 inclusive (9 fixed snapshots)",
+      "note": "No matching article v1/new in scanned files; some are empty or only RSS envelope. Cross-list in cs.LO would not alone prove primary cs.LG new. No new chronology.",
+      "nextEvidencePath": "Locate original first-party cs.LG new dated arXiv listing or contemporaneous fixed per-version announcement, and inspect cs.LO cross-list separately without borrowing the cross date."
+    },
+    {
+      "id": "2026-03-05-gemini-cosmic-string-discovery",
+      "arxivId": "2603.04735",
+      "legacySubmission": "2026-03-05T02:15:04.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDay": "2026-03-06",
+      "observation": {
+        "sourcePath": "rss_data/cs.AI/2026-03-06_cs.AI.xml",
+        "gitBlobSha1": "fc7e6ed2fd1608949cde7e7752802d216b9e4446",
+        "link": "https://arxiv.org/abs/2603.04735",
+        "title": "Solving an Open Problem in Theoretical Physics using AI-Assisted Discovery",
+        "versionGuid": "oai:arXiv.org:2603.04735v1",
+        "primaryCategory": "cs.AI",
+        "announceType": "new",
+        "pubDate": "Fri, 06 Mar 2026 00:00:00 -0500"
+      },
+      "note": "Read Mar04–07 snapshots; Mar06 v1/new publisher day only. Not mathematical verification of cosmic-string derivation."
+    }
+  ],
+  "sources": [
+    {
+      "path": "rss_data/math.MG/2026-04-25_math.MG.xml",
+      "gitBlobSha1": "b2df8b19addc6950f2b21b8faccbf611690993e4",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.MG/2026-04-25_math.MG.xml"
+    },
+    {
+      "path": "rss_data/math.MG/2026-04-26_math.MG.xml",
+      "gitBlobSha1": "3fe2cc738ff45be9eee6f5c6a84203db3f250051",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.MG/2026-04-26_math.MG.xml"
+    },
+    {
+      "path": "rss_data/math.MG/2026-04-27_math.MG.xml",
+      "gitBlobSha1": "4284ec808030464d7346304d000e031ed5737cb9",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.MG/2026-04-27_math.MG.xml"
+    },
+    {
+      "path": "rss_data/math.MG/2026-04-28_math.MG.xml",
+      "gitBlobSha1": "c0635599420ca05f0c2ab2198b6c6dfed2623dc2",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.MG/2026-04-28_math.MG.xml"
+    },
+    {
+      "path": "rss_data/math.MG/2026-04-29_math.MG.xml",
+      "gitBlobSha1": "cff93d25611249deadbc24d17c2c109d5498d66e",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.MG/2026-04-29_math.MG.xml"
+    },
+    {
+      "path": "rss_data/math.MG/2026-04-30_math.MG.xml",
+      "gitBlobSha1": "e2a34d5d3c36f15fbfeecb75a54df9e3b15b07c4",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/math.MG/2026-04-30_math.MG.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-17_cs.AI.xml",
+      "gitBlobSha1": "53fc0bc332948fbd3b53e3cb6eea7104277d3592",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-17_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-18_cs.AI.xml",
+      "gitBlobSha1": "d5d49af8a75e89f8ffa63b4bd2f970f1415bf66c",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-18_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-19_cs.AI.xml",
+      "gitBlobSha1": "a6f49b1f8e62d6df1d4bc80dd7a996d68464098f",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-19_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-20_cs.AI.xml",
+      "gitBlobSha1": "6639a6caaa03a6aafacf440f875849a01b00a0e6",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-20_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-21_cs.AI.xml",
+      "gitBlobSha1": "e074dffefe33404bfde276368c4e22bdd7425b74",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-21_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-22_cs.AI.xml",
+      "gitBlobSha1": "14cb0e31d44929779e4b65d0ba368b52de6f8f47",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-22_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-03-27_cs.AI.xml",
+      "gitBlobSha1": "23607c96d6963335e784ad6cfe7d2aa015904324",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-03-27_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-03-28_cs.AI.xml",
+      "gitBlobSha1": "ee15455660d16fa8b026ecf5badc83a9916f5e0e",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-03-28_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-03-29_cs.AI.xml",
+      "gitBlobSha1": "ea071fcb3863b60d593ab34037698a28b168563b",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-03-29_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-03-30_cs.AI.xml",
+      "gitBlobSha1": "9e671c7d2421f2e5f0c78844d55e2d9c21f31045",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-03-30_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-03-31_cs.AI.xml",
+      "gitBlobSha1": "5475261c515177a9a177389c94c8f9be66aa554d",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-03-31_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-01_cs.AI.xml",
+      "gitBlobSha1": "f884b2954c05b23683fc2c9db6556bd55dabedcc",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-01_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-02_cs.AI.xml",
+      "gitBlobSha1": "70d39c2fa31563fbadddf135df84cd4fa38ec223",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-02_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-03_cs.AI.xml",
+      "gitBlobSha1": "ae9405e6715479d286b1db196b8fe281fa15b66f",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-03_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-04-04_cs.AI.xml",
+      "gitBlobSha1": "39d5d6016ea197f36517a8a696bae3b330bc2580",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-04-04_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-03-20_cs.LG.xml",
+      "gitBlobSha1": "e407f7088b6d1dfd8c7b248195d252381cc82420",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-03-20_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-03-21_cs.LG.xml",
+      "gitBlobSha1": "e407f7088b6d1dfd8c7b248195d252381cc82420",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-03-21_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-03-22_cs.LG.xml",
+      "gitBlobSha1": "331a595036ecf2e5bc8cf9598b10d562b86913a0",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-03-22_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-03-23_cs.LG.xml",
+      "gitBlobSha1": "1340ddad69dc79482203b433019f3290059d7a29",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-03-23_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-03-24_cs.LG.xml",
+      "gitBlobSha1": "4dc06404ce149d2d3df952f6b56aa9ce8453ba8a",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-03-24_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-03-25_cs.LG.xml",
+      "gitBlobSha1": "bd224b79e2a79a33e73a642eca6fad3276f31412",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-03-25_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-03-26_cs.LG.xml",
+      "gitBlobSha1": "844f167e83f48347e971872c2e12617f3a99ea86",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-03-26_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-03-27_cs.LG.xml",
+      "gitBlobSha1": "f3ef46677aadb823307f9a777d3c35482c3b8a08",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-03-27_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.LG/2026-03-28_cs.LG.xml",
+      "gitBlobSha1": "a33bd6abad61fedd592946bda4ff5075b541f310",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-03-28_cs.LG.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-03-04_cs.AI.xml",
+      "gitBlobSha1": "dcc5bd3dba4a4ff806df6133637f67b5e9617d68",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-03-04_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-03-05_cs.AI.xml",
+      "gitBlobSha1": "6ec6d9964ac837ea8a0362a4a102a354efa384ec",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-03-05_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-03-06_cs.AI.xml",
+      "gitBlobSha1": "fc7e6ed2fd1608949cde7e7752802d216b9e4446",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-03-06_cs.AI.xml"
+    },
+    {
+      "path": "rss_data/cs.AI/2026-03-07_cs.AI.xml",
+      "gitBlobSha1": "da8bfb85598aeed7a1f2882832542d8276d1346f",
+      "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-03-07_cs.AI.xml"
+    }
+  ],
+  "result": {
+    "checkedCandidates": 5,
+    "adopted": 3,
+    "unresolved": 2,
+    "technicalBlocked": 0,
+    "freezeTotal": 98,
+    "chronologyAfter": 47,
+    "checkedUnresolvedAfter": 24,
+    "uncheckedAfter": 27,
+    "missingChronologyAfter": 51,
+    "nextId": "2026-03-04-math-concepts-multiagent"
+  }
+}
