@@ -1,0 +1,173 @@
+{
+  "batch": 53,
+  "checkedUtc": "2026-11-13",
+  "issue": 151,
+  "freezeRows": "72–76",
+  "dailyPrecedingMerge": "d00e9d46994c53b7067b6f3b7225ec7913e1013d",
+  "sourceArchive": {
+    "repository": "ehijano/rss_fetch",
+    "commit": "e597e5120c034115fda2049d72812f2da7f99f3a",
+    "description": "Pinned GitHub replay of original arXiv publisher RSS fields, not proof of mirror capture time or real public seconds.",
+    "arxivRssSpec": "https://info.arxiv.org/help/rss_specifications.html"
+  },
+  "method": "GitHub connector: complete read of 49 distinct category-date XML files, bounded to target categories and surrounding days; match exact arXiv ID, v1 title, GUID, primary category, announce_type=new and publisher pubDate; do not infer from submission, cross, replace or mirror filename.",
+  "checkedPaths": [
+    "rss_data/cs.AI/2026-03-04_cs.AI.xml",
+    "rss_data/cs.AI/2026-03-05_cs.AI.xml",
+    "rss_data/cs.AI/2026-03-06_cs.AI.xml",
+    "rss_data/cs.AI/2026-03-07_cs.AI.xml",
+    "rss_data/cs.AI/2026-03-08_cs.AI.xml",
+    "rss_data/cs.AI/2026-03-09_cs.AI.xml",
+    "rss_data/cs.AI/2026-03-10_cs.AI.xml",
+    "rss_data/cs.AI/2026-02-10_cs.AI.xml",
+    "rss_data/cs.AI/2026-02-11_cs.AI.xml",
+    "rss_data/cs.AI/2026-02-12_cs.AI.xml",
+    "rss_data/cs.AI/2026-02-13_cs.AI.xml",
+    "rss_data/cs.AI/2026-02-14_cs.AI.xml",
+    "rss_data/cs.AI/2026-02-15_cs.AI.xml",
+    "rss_data/cs.AI/2026-02-16_cs.AI.xml",
+    "rss_data/cs.LG/2026-02-10_cs.LG.xml",
+    "rss_data/cs.LG/2026-02-11_cs.LG.xml",
+    "rss_data/cs.LG/2026-02-12_cs.LG.xml",
+    "rss_data/cs.LG/2026-02-13_cs.LG.xml",
+    "rss_data/cs.LG/2026-02-14_cs.LG.xml",
+    "rss_data/cs.LG/2026-02-16_cs.LG.xml",
+    "rss_data/cs.AI/2026-01-20_cs.AI.xml",
+    "rss_data/cs.AI/2026-01-21_cs.AI.xml",
+    "rss_data/cs.AI/2026-01-22_cs.AI.xml",
+    "rss_data/cs.AI/2026-01-23_cs.AI.xml",
+    "rss_data/cs.AI/2026-01-24_cs.AI.xml",
+    "rss_data/cs.AI/2026-01-26_cs.AI.xml",
+    "rss_data/cs.LG/2026-01-20_cs.LG.xml",
+    "rss_data/cs.LG/2026-01-21_cs.LG.xml",
+    "rss_data/cs.LG/2026-01-22_cs.LG.xml",
+    "rss_data/cs.LG/2026-01-23_cs.LG.xml",
+    "rss_data/cs.LG/2026-01-24_cs.LG.xml",
+    "rss_data/cs.LG/2026-01-26_cs.LG.xml",
+    "rss_data/cs.AI/2026-01-25_cs.AI.xml",
+    "rss_data/cs.AI/2026-01-27_cs.AI.xml",
+    "rss_data/cs.AI/2026-01-28_cs.AI.xml",
+    "rss_data/cs.AI/2026-01-29_cs.AI.xml",
+    "rss_data/cs.AI/2026-01-30_cs.AI.xml",
+    "rss_data/cs.LG/2026-01-25_cs.LG.xml",
+    "rss_data/cs.LG/2026-01-27_cs.LG.xml",
+    "rss_data/cs.LG/2026-01-28_cs.LG.xml",
+    "rss_data/cs.LG/2026-01-29_cs.LG.xml",
+    "rss_data/cs.LG/2026-01-30_cs.LG.xml",
+    "rss_data/cs.CL/2025-12-19_cs.CL.xml",
+    "rss_data/cs.CL/2025-12-20_cs.CL.xml",
+    "rss_data/cs.CL/2025-12-21_cs.CL.xml",
+    "rss_data/cs.CL/2025-12-22_cs.CL.xml",
+    "rss_data/cs.CL/2025-12-23_cs.CL.xml",
+    "rss_data/cs.CL/2025-12-24_cs.CL.xml",
+    "rss_data/cs.CL/2025-12-25_cs.CL.xml"
+  ],
+  "decisions": [
+    {
+      "id": "2026-03-04-math-concepts-multiagent",
+      "arxivId": "2603.04528",
+      "legacySubmission": "2026-03-04T19:13:36.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDay": "2026-03-06",
+      "observation": {
+        "path": "rss_data/cs.AI/2026-03-06_cs.AI.xml",
+        "gitBlobSha1": "fc7e6ed2fd1608949cde7e7752802d216b9e4446",
+        "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-03-06_cs.AI.xml",
+        "link": "https://arxiv.org/abs/2603.04528",
+        "title": "Discovering mathematical concepts through a multi-agent system",
+        "versionGuid": "oai:arXiv.org:2603.04528v1",
+        "primaryCategory": "cs.AI",
+        "announceType": "new",
+        "pubDate": "Fri, 06 Mar 2026 00:00:00 -0500"
+      },
+      "note": "March04–10 cs.AI archived sources read, uniquely matched v1/new; this is a day-only publisher date, not an observed release second."
+    },
+    {
+      "id": "2026-02-10-aletheia-autonomous-math-research",
+      "arxivId": "2602.10177",
+      "legacySubmission": "2026-02-10T18:50:15.000Z",
+      "status": "UNRESOLVED_VERSION_MISMATCH",
+      "observations": [
+        {
+          "path": "rss_data/cs.LG/2026-02-12_cs.LG.xml",
+          "gitBlobSha1": "06a4ac4849d61caa54884ba439cc061ccbe06cc1",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2026-02-12_cs.LG.xml",
+          "title": "Towards Autonomous Mathematics Research",
+          "versionGuid": "oai:arXiv.org:2602.10177v2",
+          "primaryCategory": "cs.LG",
+          "announceType": "new",
+          "pubDate": "Thu, 12 Feb 2026 00:00:00 -0500"
+        },
+        {
+          "path": "rss_data/cs.AI/2026-02-12_cs.AI.xml",
+          "gitBlobSha1": "6aed0c7dfe2240bfeb38e73700d9b800ca203a0d",
+          "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-02-12_cs.AI.xml",
+          "versionGuid": "oai:arXiv.org:2602.10177v2",
+          "announceType": "cross",
+          "pubDate": "Thu, 12 Feb 2026 00:00:00 -0500"
+        }
+      ],
+      "note": "cs.LG new is v2, not v1, while cs.AI entry is v2 cross and next-day primary replace; no fixed v1/new proof. Do not promote v2/new to v1-first-public evidence or infer by convention.",
+      "nextEvidencePath": "Original arXiv v1 availability record / independent contemporaneous original v1 announcement, separately from v2/new first index."
+    },
+    {
+      "id": "2026-01-24-theoremforge",
+      "arxivId": "2601.17332",
+      "legacySubmission": "2026-01-24T06:28:11.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDay": "2026-01-27",
+      "observation": {
+        "path": "rss_data/cs.AI/2026-01-27_cs.AI.xml",
+        "gitBlobSha1": "cdff6e4f18b8d1b8d2cefb8d4f70560a2200b464",
+        "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2026-01-27_cs.AI.xml",
+        "link": "https://arxiv.org/abs/2601.17332",
+        "title": "TheoremForge: Scaling up Formal Data Synthesis with Low-Budget Agentic Workflow",
+        "versionGuid": "oai:arXiv.org:2601.17332v1",
+        "primaryCategory": "cs.AI",
+        "announceType": "new",
+        "pubDate": "Tue, 27 Jan 2026 00:00:00 -0500"
+      },
+      "note": "Jan24–30 cs.AI and cs.LG read; canonical primary cs.AI v1/new matched only Jan27."
+    },
+    {
+      "id": "2026-01-20-numina-lean-agent",
+      "arxivId": "2601.14027",
+      "legacySubmission": "2026-01-20T14:51:45.000Z",
+      "status": "UNRESOLVED_V1_NEW_NOT_FOUND",
+      "checkedRange": "cs.AI and cs.LG Jan20–24 and Jan26, including nonempty Jan22/23/26",
+      "note": "No matching v1/new in checked archived primary and adjacent categories; absence in historical replay does not establish nonpublication. Cannot treat v1 submission instant as announcement.",
+      "nextEvidencePath": "Find original first-party arXiv cs.AI dated v1/new list or separately archived contemporaneous authors' public exact-v1 notice."
+    },
+    {
+      "id": "2025-12-19-seed-prover-15",
+      "arxivId": "2512.17260",
+      "legacySubmission": "2025-12-19T06:19:55.000Z",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDay": "2025-12-22",
+      "observation": {
+        "path": "rss_data/cs.CL/2025-12-22_cs.CL.xml",
+        "gitBlobSha1": "e2cc33a29ad173da191fcd95b46ac794642e5fd4",
+        "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.CL/2025-12-22_cs.CL.xml",
+        "link": "https://arxiv.org/abs/2512.17260",
+        "title": "Seed-Prover 1.5: Mastering Undergraduate-Level Theorem Proving via Learning from Experience",
+        "versionGuid": "oai:arXiv.org:2512.17260v1",
+        "primaryCategory": "cs.CL",
+        "announceType": "new",
+        "pubDate": "Mon, 22 Dec 2025 00:00:00 -0500"
+      },
+      "note": "Dec19–25 cs.CL fixed snapshots checked; Dec22 matched v1/new."
+    }
+  ],
+  "result": {
+    "checkedCandidates": 5,
+    "adopted": 3,
+    "unresolved": 2,
+    "technicalBlocked": 0,
+    "freezeTotal": 98,
+    "chronologyAfter": 50,
+    "checkedUnresolvedAfter": 26,
+    "uncheckedAfter": 22,
+    "missingChronologyAfter": 48,
+    "nextId": "2025-10-29-rlmeval"
+  }
+}
