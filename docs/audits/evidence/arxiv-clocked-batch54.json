@@ -1,0 +1,147 @@
+{
+  "batch": 54,
+  "checkedUtc": "2026-11-14",
+  "issue": 151,
+  "freezeRows": "77–81",
+  "dailyPrecedingMerge": "1dcad59633a2a9998efe7ef1d1c351cf51479a38",
+  "sourceArchive": {
+    "repository": "ehijano/rss_fetch",
+    "commit": "e597e5120c034115fda2049d72812f2da7f99f3a",
+    "description": "Third-party pinned replay of original arXiv RSS publisher item fields; neither GitHub capture nor RSS normalized midnight certifies a real release second.",
+    "arxivRssSpec": "https://info.arxiv.org/help/rss_specifications.html"
+  },
+  "method": "Bounded full-text reads of 37 category/date historical XML files; checked primary category, ID, original v1 title, link, version GUID, announce_type=new, publisher pubDate; preserve v1 submitted clocks.",
+  "checkedPaths": [
+    "rss_data/cs.CL/2025-10-29_cs.CL.xml",
+    "rss_data/cs.CL/2025-10-30_cs.CL.xml",
+    "rss_data/cs.CL/2025-10-31_cs.CL.xml",
+    "rss_data/cs.CL/2025-11-01_cs.CL.xml",
+    "rss_data/cs.CL/2025-10-11_cs.CL.xml",
+    "rss_data/cs.CL/2025-10-12_cs.CL.xml",
+    "rss_data/cs.CL/2025-10-13_cs.CL.xml",
+    "rss_data/cs.CL/2025-10-14_cs.CL.xml",
+    "rss_data/cs.CL/2025-10-15_cs.CL.xml",
+    "rss_data/cs.CL/2025-10-16_cs.CL.xml",
+    "rss_data/cs.CL/2025-10-17_cs.CL.xml",
+    "rss_data/cs.CL/2025-10-18_cs.CL.xml",
+    "rss_data/cs.AI/2025-10-01_cs.AI.xml",
+    "rss_data/cs.AI/2025-10-02_cs.AI.xml",
+    "rss_data/cs.AI/2025-10-03_cs.AI.xml",
+    "rss_data/cs.AI/2025-10-04_cs.AI.xml",
+    "rss_data/cs.AI/2025-10-05_cs.AI.xml",
+    "rss_data/cs.AI/2025-10-06_cs.AI.xml",
+    "rss_data/cs.AI/2025-10-07_cs.AI.xml",
+    "rss_data/cs.AI/2025-10-08_cs.AI.xml",
+    "rss_data/cs.AI/2025-10-09_cs.AI.xml",
+    "rss_data/cs.AI/2025-10-10_cs.AI.xml",
+    "rss_data/cs.AI/2025-10-11_cs.AI.xml",
+    "rss_data/cs.AI/2025-10-12_cs.AI.xml",
+    "rss_data/cs.AI/2025-10-13_cs.AI.xml",
+    "rss_data/cs.AI/2025-10-14_cs.AI.xml",
+    "rss_data/cs.LG/2025-09-16_cs.LG.xml",
+    "rss_data/cs.LG/2025-09-17_cs.LG.xml",
+    "rss_data/cs.LG/2025-09-18_cs.LG.xml",
+    "rss_data/cs.LG/2025-09-19_cs.LG.xml",
+    "rss_data/cs.AI/2025-06-24_cs.AI.xml",
+    "rss_data/cs.AI/2025-06-25_cs.AI.xml",
+    "rss_data/cs.AI/2025-06-26_cs.AI.xml",
+    "rss_data/cs.AI/2025-06-27_cs.AI.xml",
+    "rss_data/cs.AI/2025-06-28_cs.AI.xml",
+    "rss_data/cs.AI/2025-06-29_cs.AI.xml",
+    "rss_data/cs.AI/2025-06-30_cs.AI.xml"
+  ],
+  "decisions": [
+    {
+      "id": "2025-10-29-rlmeval",
+      "arxivId": "2510.25427",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDay": "2025-10-30",
+      "observation": {
+        "path": "rss_data/cs.CL/2025-10-29_cs.CL.xml",
+        "gitBlobSha1": "04298303c206d2b26a7056c87fa4b71798bc0993",
+        "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.CL/2025-10-29_cs.CL.xml",
+        "link": "https://arxiv.org/abs/2510.25427",
+        "title": "RLMEval: Evaluating Research-Level Neural Theorem Proving",
+        "versionGuid": "oai:arXiv.org:2510.25427v1",
+        "primaryCategory": "cs.CL",
+        "announceType": "new",
+        "pubDate": "Thu, 30 Oct 2025 00:00:00 -0400"
+      },
+      "note": "Day-only publisher RSS evidence; no at/earliestVerifiedPublic, no math-proof validation."
+    },
+    {
+      "id": "2025-10-11-gpt5-provers-verifiers",
+      "arxivId": "2510.12829",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDay": "2025-10-16",
+      "observation": {
+        "path": "rss_data/cs.CL/2025-10-15_cs.CL.xml",
+        "gitBlobSha1": "c9b1ccdd64f07bd0b927a97fd9ed4af7133856dc",
+        "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.CL/2025-10-15_cs.CL.xml",
+        "link": "https://arxiv.org/abs/2510.12829",
+        "title": "Mathematics with large language models as provers and verifiers",
+        "versionGuid": "oai:arXiv.org:2510.12829v1",
+        "primaryCategory": "cs.CL",
+        "announceType": "new",
+        "pubDate": "Thu, 16 Oct 2025 00:00:00 -0400"
+      },
+      "note": "Day-only publisher RSS evidence; no at/earliestVerifiedPublic, no math-proof validation."
+    },
+    {
+      "id": "2025-10-01-aristotle",
+      "arxivId": "2510.01346",
+      "status": "UNRESOLVED_V1_NEW_NOT_FOUND",
+      "checkedRange": "cs.AI 2025-10-01 through 2025-10-14 inclusive; includes 0-byte and empty snapshots",
+      "note": "No item-matched primary-category v1/new in checked pinned replay. Absence does not establish absence of an arXiv announcement. Keep submission-clock compatibility value and no chronology.",
+      "nextEvidencePath": "Recover original first-party dated cs.AI v1/new announcement list or contemporaneous author/organization exact-v1 disclosure; do not infer from v2, submission or schedule."
+    },
+    {
+      "id": "2025-09-16-conjecturing-proving-loop",
+      "arxivId": "2509.14274",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDay": "2025-09-19",
+      "observation": {
+        "path": "rss_data/cs.LG/2025-09-18_cs.LG.xml",
+        "gitBlobSha1": "656cf8b9ed59b9af3050a6897a6d152ea16e87b4",
+        "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.LG/2025-09-18_cs.LG.xml",
+        "link": "https://arxiv.org/abs/2509.14274",
+        "title": "Discovering New Theorems via LLMs with In-Context Proof Learning in Lean",
+        "versionGuid": "oai:arXiv.org:2509.14274v1",
+        "primaryCategory": "cs.LG",
+        "announceType": "new",
+        "pubDate": "Fri, 19 Sep 2025 00:00:00 -0400"
+      },
+      "note": "Day-only publisher RSS evidence; no at/earliestVerifiedPublic, no math-proof validation."
+    },
+    {
+      "id": "2025-06-24-prover-agent",
+      "arxivId": "2506.19923",
+      "status": "ADOPTED_DAY_ONLY",
+      "adoptedDay": "2025-06-26",
+      "observation": {
+        "path": "rss_data/cs.AI/2025-06-25_cs.AI.xml",
+        "gitBlobSha1": "eb1e561e020a3d608dc4bfc160b38c6a7e08827a",
+        "fixedCopy": "https://github.com/ehijano/rss_fetch/blob/e597e5120c034115fda2049d72812f2da7f99f3a/rss_data/cs.AI/2025-06-25_cs.AI.xml",
+        "link": "https://arxiv.org/abs/2506.19923",
+        "title": "Prover Agent: An Agent-based Framework for Formal Mathematical Proofs",
+        "versionGuid": "oai:arXiv.org:2506.19923v1",
+        "primaryCategory": "cs.AI",
+        "announceType": "new",
+        "pubDate": "Thu, 26 Jun 2025 00:00:00 -0400"
+      },
+      "note": "Day-only publisher RSS evidence; no at/earliestVerifiedPublic, no math-proof validation."
+    }
+  ],
+  "result": {
+    "checkedCandidates": 5,
+    "adopted": 4,
+    "unresolved": 1,
+    "technicalBlocked": 0,
+    "freezeTotal": 98,
+    "chronologyAfter": 54,
+    "checkedUnresolvedAfter": 27,
+    "uncheckedAfter": 17,
+    "missingChronologyAfter": 44,
+    "nextId": "2025-04-30-deepseek-prover-v2"
+  }
+}
